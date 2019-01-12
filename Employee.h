@@ -8,15 +8,18 @@
 #include <string>
 
 using namespace std;
+
 //职工类
 class Employee {
-private:
+protected:
     int id; //编号
     string name; //姓名
     bool sex; //性别
     int age; //年龄
     string address; //家庭住址
     double baseWage; //基本职务工资
+    void calculateRealWage() {
+    }
 };
 
 
