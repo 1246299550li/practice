@@ -22,9 +22,8 @@ private:
         realWage = baseWage + allowance - pension - providentFund - tax - insurance;
     };
 public:
-    RegularEmployee(double allowance, double providentFund, double pension, double tax, double insurance,
-                    double realWage) : allowance(allowance), providentFund(providentFund), pension(pension), tax(tax),
-                                       insurance(insurance), realWage(realWage) {
+    RegularEmployee(double allowance, double providentFund, double pension, double tax, double insurance) : allowance(
+            allowance), providentFund(providentFund), pension(pension), tax(tax), insurance(insurance) {
         calculateRealWage();
     }
 
@@ -48,74 +47,6 @@ public:
         RegularEmployee::insurance = insurance;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    void setRealWage(double realWage) {
-        RegularEmployee::realWage = realWage;
-    }
 };
 
 

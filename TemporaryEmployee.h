@@ -17,6 +17,17 @@ private:
     void calculateRealWage() override {
         realWage = baseWage + bonus - tax;
     };
+public:
+    TemporaryEmployee(double bonus, double tax) : bonus(bonus), tax(tax) {}
+
+    void setBonus(double bonus) {
+        TemporaryEmployee::bonus = bonus;
+    }
+
+    void setTax(double tax) {
+        TemporaryEmployee::tax = tax;
+    }
+
 };
 
 
