@@ -22,7 +22,7 @@ private:
         realWage = baseWage + allowance - pension - providentFund - tax - insurance;
     };
 public:
-    RegularEmployee(double allowance, double providentFund, double pension, double tax, double incsurance,
+    RegularEmployee(double allowance, double providentFund, double pension, double tax, double insurance,
                     double realWage) : allowance(allowance), providentFund(providentFund), pension(pension), tax(tax),
                                        insurance(insurance), realWage(realWage) {
         calculateRealWage();
@@ -44,7 +44,7 @@ public:
         RegularEmployee::tax = tax;
     }
 
-    void setIncsurance(double insurance) {
+    void setInsurance(double insurance) {
         RegularEmployee::insurance = insurance;
     }
 
