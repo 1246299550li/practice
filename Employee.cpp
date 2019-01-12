@@ -55,3 +55,14 @@ const string &Employee::getAddress() const {
 double Employee::getBaseWage() const {
     return baseWage;
 }
+
+Employee::Employee(int id, const string &name, bool sex, int age, const string &address, double baseWage) : id(id),
+                                                                                                            name(name),
+                                                                                                            sex(sex),
+                                                                                                            age(age),
+                                                                                                            address(address),
+                                                                                                            baseWage(
+                                                                                                                    baseWage) {
+
+}
+Employee::Employee() {}
