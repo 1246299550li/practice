@@ -12,8 +12,11 @@ class TemporaryEmployee : public Employee {
 private:
     double bonus; //奖金
     double tax; //所得税
-    //实发工资=基本职务工资+奖金-所得税
     double realWage; //实发工资
+    //计算实发工资=基本职务工资+奖金-所得税
+    void calculateRealWage() override {
+        realWage = baseWage + bonus - tax;
+    };
 };
 
 

@@ -18,8 +18,7 @@ protected:
     int age; //年龄
     string address; //家庭住址
     double baseWage; //基本职务工资
-    void calculateRealWage() {
-    }
+    virtual void calculateRealWage() = 0;
 };
 
 
