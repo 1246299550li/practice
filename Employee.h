@@ -19,6 +19,33 @@ protected:
     string address; //家庭住址
     double baseWage; //基本职务工资
     virtual void calculateRealWage() = 0;
+
+public:
+    void setId(int id);
+
+    void setName(const string &name);
+
+    void setSex(bool sex);
+
+    void setAge(int age);
+
+    void setAddress(const string &address);
+
+    void setBaseWage(double baseWage);
+
+    int getId() const;
+
+    const string &getName() const;
+
+    bool isSex() const;
+
+    int getAge() const;
+
+    const string &getAddress() const;
+
+    double getBaseWage() const;
+
+    virtual ~Employee();
 };
 
 

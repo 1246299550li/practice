@@ -27,6 +27,10 @@ public:
         calculateRealWage();
     }
 
+    virtual ~RegularEmployee() {
+
+    }
+
     void setAllowance(double allowance) {
         RegularEmployee::allowance = allowance;
     }
@@ -47,6 +51,29 @@ public:
         RegularEmployee::insurance = insurance;
     }
 
+    double getAllowance() const {
+        return allowance;
+    }
+
+    double getProvidentFund() const {
+        return providentFund;
+    }
+
+    double getPension() const {
+        return pension;
+    }
+
+    double getTax() const {
+        return tax;
+    }
+
+    double getInsurance() const {
+        return insurance;
+    }
+
+    double getRealWage() const {
+        return realWage;
+    }
 };
 
 

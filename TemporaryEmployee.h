@@ -20,6 +20,10 @@ private:
 public:
     TemporaryEmployee(double bonus, double tax) : bonus(bonus), tax(tax) {}
 
+    virtual ~TemporaryEmployee() {
+
+    }
+
     void setBonus(double bonus) {
         TemporaryEmployee::bonus = bonus;
     }
@@ -28,6 +32,17 @@ public:
         TemporaryEmployee::tax = tax;
     }
 
+    double getBonus() const {
+        return bonus;
+    }
+
+    double getTax() const {
+        return tax;
+    }
+
+    double getRealWage() const {
+        return realWage;
+    }
 };
 
 
