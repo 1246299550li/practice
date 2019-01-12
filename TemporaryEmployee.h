@@ -18,7 +18,9 @@ private:
         realWage = baseWage + bonus - tax;
     };
 public:
-    TemporaryEmployee(double bonus, double tax) : bonus(bonus), tax(tax) {}
+    TemporaryEmployee(int id, const string &name, bool sex, int age, const string &address, double baseWage,
+                      double bonus, double tax) : Employee(id, name, sex, age, address, baseWage), bonus(bonus),
+                                                  tax(tax) {}
 
     virtual ~TemporaryEmployee() {
 

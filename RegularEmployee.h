@@ -22,10 +22,21 @@ private:
         realWage = baseWage + allowance - pension - providentFund - tax - insurance;
     };
 public:
-    RegularEmployee(double allowance, double providentFund, double pension, double tax, double insurance) : allowance(
-            allowance), providentFund(providentFund), pension(pension), tax(tax), insurance(insurance) {
-        calculateRealWage();
-    }
+    RegularEmployee(int id, const string &name, bool sex, int age, const string &address, double baseWage,
+                    double allowance, double providentFund, double pension, double tax, double insurance) : Employee(id,
+                                                                                                                     name,
+                                                                                                                     sex,
+                                                                                                                     age,
+                                                                                                                     address,
+                                                                                                                     baseWage),
+                                                                                                            allowance(
+                                                                                                                    allowance),
+                                                                                                            providentFund(
+                                                                                                                    providentFund),
+                                                                                                            pension(pension),
+                                                                                                            tax(tax),
+                                                                                                            insurance(
+                                                                                                                    insurance) {}
 
     virtual ~RegularEmployee() {
 
