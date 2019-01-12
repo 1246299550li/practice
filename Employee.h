@@ -21,6 +21,10 @@ protected:
     virtual void calculateRealWage() = 0;
 
 public:
+    Employee(int id, const string &name, bool sex, int age, const string &address, double baseWage);
+
+    Employee();
+
     void setId(int id);
 
     void setName(const string &name);
