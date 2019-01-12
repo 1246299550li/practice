@@ -14,7 +14,7 @@ private:
     double allowance; //岗位津贴
     double providentFund; //住房公积金
     double pension; //养老金
-    double tax; //所得税+
+    double tax; //所得税
     double insurance; //医疗保险
     double realWage; //实发工资
     // 计算实发工资=基本职务工资+岗位津贴-养老金-住房公积金-所得税-医疗保险
@@ -36,30 +36,12 @@ public:
                                                                                                             pension(pension),
                                                                                                             tax(tax),
                                                                                                             insurance(
-                                                                                                                    insurance) {}
+                                                                                                                    insurance) {
+        calculateRealWage();
+    }
 
     virtual ~RegularEmployee() {
 
-    }
-
-    void setAllowance(double allowance) {
-        RegularEmployee::allowance = allowance;
-    }
-
-    void setProvidentFund(double providentFund) {
-        RegularEmployee::providentFund = providentFund;
-    }
-
-    void setPension(double pension) {
-        RegularEmployee::pension = pension;
-    }
-
-    void setTax(double tax) {
-        RegularEmployee::tax = tax;
-    }
-
-    void setInsurance(double insurance) {
-        RegularEmployee::insurance = insurance;
     }
 
     double getAllowance() const {

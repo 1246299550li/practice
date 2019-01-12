@@ -20,7 +20,9 @@ private:
 public:
     TemporaryEmployee(int id, const string &name, bool sex, int age, const string &address, double baseWage,
                       double bonus, double tax) : Employee(id, name, sex, age, address, baseWage), bonus(bonus),
-                                                  tax(tax) {}
+                                                  tax(tax) {
+        calculateRealWage();
+    }
 
     virtual ~TemporaryEmployee() {
 
