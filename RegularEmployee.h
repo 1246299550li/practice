@@ -7,6 +7,7 @@
 
 #include "Employee.h"
 
+using namespace std;
 
 //正式职工类
 class RegularEmployee : public Employee {
@@ -22,21 +23,25 @@ private:
         realWage = baseWage + allowance - pension - providentFund - tax - insurance;
     };
 public:
+    void displayInfo() override {
+        cout << "编号：" << id
+             << "姓名：" << name
+             << "性别：" << sex
+             << "年龄：" << age
+             << "家庭住址：" << address
+             << "基本职务工资：" << baseWage
+             << "岗位津贴：" << allowance
+             << "住房公积金：" << providentFund
+             << "养老金：" << pension
+             << "所得税：" << tax
+             << "医疗保险：" << insurance
+             << "实发工资：" << realWage;
+    }
+
     RegularEmployee(int id, const string &name, bool sex, int age, const string &address, double baseWage,
-                    double allowance, double providentFund, double pension, double tax, double insurance) : Employee(id,
-                                                                                                                     name,
-                                                                                                                     sex,
-                                                                                                                     age,
-                                                                                                                     address,
-                                                                                                                     baseWage),
-                                                                                                            allowance(
-                                                                                                                    allowance),
-                                                                                                            providentFund(
-                                                                                                                    providentFund),
-                                                                                                            pension(pension),
-                                                                                                            tax(tax),
-                                                                                                            insurance(
-                                                                                                                    insurance) {
+                    double allowance, double providentFund, double pension, double tax, double insurance) :
+            Employee(id, name, sex, age, address, baseWage),
+            allowance(allowance), providentFund(providentFund), pension(pension), tax(tax), insurance(insurance) {
         calculateRealWage();
     }
 

@@ -6,7 +6,7 @@
 #define NEW_EMPLOYEE_H
 
 #include <string>
-
+#include <iostream>
 using namespace std;
 
 //职工类
@@ -21,6 +21,7 @@ protected:
     virtual void calculateRealWage() = 0;
 
 public:
+    virtual void displayInfo() = 0;
     Employee(int id, const string &name, bool sex, int age, const string &address, double baseWage);
 
     Employee();
