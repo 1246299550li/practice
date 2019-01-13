@@ -19,7 +19,7 @@ private:
 public:
     Table();
     bool readFromFile(string fileName, employeeType type);
-    bool readFromScreen();
+    bool readFromScreen(employeeType type);
     Employee ** searchEmployee(int id = 0, string name = "", double realWage = 0.0);
     bool updateEmployee(Employee* employee);
     bool logicalDeleteEmployee();

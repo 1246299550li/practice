@@ -46,10 +46,11 @@ bool Table::readFromFile(string fileName, employeeType type){
 				p = new RegularEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpAllowance,
 					tmpProvidentFund, tmpPension, tmpTax, tmpInsurance);
 				//内存重新分配
-				if (!memExtension()) {
-					cout << "memory error";
-					return FALSE;
-				}
+				if(i>=size)
+					if (!memExtension()) {
+						cout << "memory error";
+						return FALSE;
+					}
 				tableArr[i] = p;
 			}
 			break;
@@ -89,6 +90,50 @@ bool Table::memExtension(){
 	tableArr = desMem;
 	size += ARR_INCREMENT;
 	return TRUE;
+}
+bool Table::readFromScreen(employeeType type) {
+	int i;
+	switch (type) {
+	case Regular:
+		RegularEmployee * p;
+			double tmpAllowance, tmpProvidentFund, tmpPension,
+				tmpTax, tmpInsurance, tmpBaseWage, tmpRealWage;
+			int tmpId, tmpAge;
+			bool tmpSex;
+			string tmpName, tmpAddress;
+			cin >> tmpId >> tmpName >> tmpSex >> tmpAge >> tmpAddress >> tmpBaseWage >> tmpAllowance >>
+				tmpProvidentFund >> tmpPension >> tmpTax >> tmpInsurance >> tmpRealWage;
+			p = new RegularEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpAllowance,
+				tmpProvidentFund, tmpPension, tmpTax, tmpInsurance);
+			for (i = 0; tableArr[i] != NULL && i < size; i++);
+			if (i == size) {
+				if (!memExtension()) {
+					cout << "memory error";
+					return FALSE;
+				}
+			}
+			tableArr[i] = p;
+			return TRUE;
+	case Temporary:
+		TemporaryEmployee * q;
+		double tmpBaseWage, tmpRealWage, tmpTax, tmpBonus;
+		int tmpId, tmpAge;
+		bool tmpSex;
+		string tmpName, tmpAddress;
+		cin >> tmpId >> tmpName >> tmpSex >> tmpAge >> tmpAddress
+			>> tmpBaseWage >> tmpBonus >> tmpTax >> tmpRealWage;
+		q = new TemporaryEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpBonus, tmpTax);
+		for (i = 0; tableArr[i] != NULL && i < size; i++);
+		if (i == size) {
+			if (!memExtension()) {
+				cout << "memory error";
+				return FALSE;
+			}
+		}
+		tableArr[i] = q;
+		return TRUE;
+	}
+
 }
 
 
