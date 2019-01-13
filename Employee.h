@@ -20,7 +20,7 @@ protected:
     string address; //家庭住址
     double baseWage; //基本职务工资
     virtual void calculateRealWage() = 0;
-    virtual void checkInput() = 0;
+
 public:
     virtual void displayInfo() = 0;
     virtual void readInfo() = 0;

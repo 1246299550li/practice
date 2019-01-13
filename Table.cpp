@@ -35,7 +35,7 @@ Table::Table() {
 		string tmpName, tmpAddress;
 		infile2 >> tmpId >> tmpName >> tmpSex >> tmpAge >> tmpAddress >>
 			tmpBaseWage >> tmpBonus >> tmpTax >> tmpRealWage;
-		q = new TemporaryEmployee(tmpId, tmpName, tmpSex, tmpAddress, tmpBaseWage, tmpBonus, tmpTax);
+		q = new TemporaryEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpBonus, tmpTax);
 		if (i >= ARR_SIZE) {
 			tableArr = (Employee**)realloc((ARR_SIZE * 2) * sizeof(Employee *));
 			if (i >= ARR_SIZE) {

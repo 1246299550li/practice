@@ -18,11 +18,13 @@ private:
     double tax; //所得税
     double insurance; //医疗保险
     double realWage; //实发工资
+
+protected:
     // 计算实发工资=基本职务工资+岗位津贴-养老金-住房公积金-所得税-医疗保险
     void calculateRealWage() override {
         realWage = baseWage + allowance - pension - providentFund - tax - insurance;
     };
-protected:
+
     template<typename T>
     void checkInput(T &target) {
         while (!(cin >> target)) {
