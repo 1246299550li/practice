@@ -22,20 +22,74 @@ private:
     void calculateRealWage() override {
         realWage = baseWage + allowance - pension - providentFund - tax - insurance;
     };
+protected:
+    template<typename T>
+    void checkInput(T &target) {
+        while (!(cin >> target)) {
+            cout << "\n输入错误！请重新输入";
+            cin.clear();
+            while (cin.get() != '\n') {
+            }
+        }
+        cout << "\n输入成功";
+        while (cin.get() != '\n') {
+        }
+    }
+
 public:
     void displayInfo() override {
-        cout << "编号：" << id
-             << "姓名：" << name
-             << "性别：" << sex
-             << "年龄：" << age
-             << "家庭住址：" << address
-             << "基本职务工资：" << baseWage
-             << "岗位津贴：" << allowance
-             << "住房公积金：" << providentFund
-             << "养老金：" << pension
-             << "所得税：" << tax
-             << "医疗保险：" << insurance
-             << "实发工资：" << realWage;
+        cout.precision(2);
+        cout.setf(ios_base::fixed);
+        cout << "--正式职工--\n"
+             << "\n编号：" << id
+             << "\n姓名：" << name
+             << "\n性别：" << sex
+             << "\n年龄：" << age
+             << "\n家庭住址：" << address
+             << "\n基本职务工资：" << baseWage
+             << "\n岗位津贴：" << allowance
+             << "\n住房公积金：" << providentFund
+             << "\n养老金：" << pension
+             << "\n所得税：" << tax
+             << "\n医疗保险：" << insurance
+             << "\n实发工资：" << realWage;
+    }
+
+    void readInfo() override {
+        cout << "\n请输入编号(正整数)：";
+        checkInput(id);
+
+        cout << "\n请输入姓名：";
+        checkInput(name);
+
+        cout << "\n请输入姓别(1表示男, 0表示女)：";
+        checkInput(sex);
+
+        cout << "\n请输入年龄(正整数)：";
+        checkInput(age);
+
+        cout << "\n请输入家庭住址：";
+        checkInput(address);
+
+        cout << "\n请输入基本职务工资：";
+        checkInput(baseWage);
+
+        cout << "\n请输入岗位津贴：";
+        checkInput(allowance);
+
+        cout << "\n请输入住房公积金：";
+        checkInput(providentFund);
+
+        cout << "\n请输入养老金：";
+        checkInput(pension);
+
+        cout << "\n请输入所得税：";
+        checkInput(tax);
+
+        cout << "\n请输入医疗保险：";
+        checkInput(insurance);
+
+
     }
 
     RegularEmployee(int id, const string &name, bool sex, int age, const string &address, double baseWage,
@@ -43,6 +97,7 @@ public:
             Employee(id, name, sex, age, address, baseWage),
             allowance(allowance), providentFund(providentFund), pension(pension), tax(tax), insurance(insurance) {
         calculateRealWage();
+        type = true;
     }
 
     virtual ~RegularEmployee() {

@@ -16,7 +16,7 @@ Table::Table() {
 		string tmpName,tmpAddress;
 		infile1 >> tmpId >> tmpName >> tmpSex >> tmpAge >> tmpAddress >> tmpBaseWage >> tmpAllowance >>
 			tmpProvidentFund >> tmpPension >> tmpTax >> tmpInsurance >> tmpRealWage;
-		p = new RegularEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBasewage, tmpAllowance, 
+		p = new RegularEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpAllowance,
 								tmpProvidentFund, tmpPension, tmpTax, tmpInsurance);
 		if (i >= ARR_SIZE) {
 			tableArr = (Employee**)realloc((ARR_SIZE * 2) * sizeof(Employee *));
