@@ -57,3 +57,6 @@ Table::Table() {
 
 
 }
+bool Table::readFromFile() {
+
+}

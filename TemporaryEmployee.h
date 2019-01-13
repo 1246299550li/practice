@@ -19,6 +19,7 @@ protected:
     void calculateRealWage() override {
         realWage = baseWage + bonus - tax;
     };
+public:
     template<typename T>
     void checkInput(T &target) {
         while (!(cin >> target)) {
@@ -32,7 +33,6 @@ protected:
         }
     }
 
-public:
     //显示信息
     void displayInfo() override {
         cout.precision(2);

@@ -25,6 +25,7 @@ protected:
         realWage = baseWage + allowance - pension - providentFund - tax - insurance;
     };
 
+public:
     template<typename T>
     void checkInput(T &target) {
         while (!(cin >> target)) {
@@ -38,7 +39,6 @@ protected:
         }
     }
 
-public:
     void displayInfo() override {
         cout.precision(2);
         cout.setf(ios_base::fixed);
