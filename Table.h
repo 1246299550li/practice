@@ -8,9 +8,11 @@
 #include "RegularEmployee.h"
 #include "TemporaryEmployee.h"
 const int ARR_SIZE = 100;
+const int ARR_INCREASE = 10;
 class Table {
 private:
     Employee ** tableArr;
+	int size;
 public:
     Table();
     ~Table();

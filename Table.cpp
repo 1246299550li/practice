@@ -6,6 +6,7 @@
 #include<fstream>
 Table::Table() {
     tableArr = new Employee *[ARR_SIZE];    //总表
+	size = ARR_SIZE;
 	int i = 0;
     ifstream infile1("RegStaffInf.txt");    //读取 
     RegularEmployee *p;                     //缓存对象
@@ -37,6 +38,16 @@ Table::Table() {
 		q = new TemporaryEmployee(tmpId, tmpName, tmpSex, tmpAddress, tmpBaseWage, tmpBonus, tmpTax);
 		if (i >= ARR_SIZE) {
 			tableArr = (Employee**)realloc((ARR_SIZE * 2) * sizeof(Employee *));
+			if (i >= ARR_SIZE) {
+				Employee **tmp;
+				tmp = tabelArr;
+				tabelArr = new Empolyee*[ARR_SIZE + INCREASE];
+				size += ARR_INCREASE
+					for (int i = 0; i < size; i++) {
+						tabelArr[i] = tmp[i];
+					}
+				delete[]tmp;
+			}
 		}
 		tableArr[i] = q;
 		i++;
