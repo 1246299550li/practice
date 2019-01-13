@@ -8,23 +8,28 @@
 #include "RegularEmployee.h"
 #include "TemporaryEmployee.h"
 const int ARR_SIZE = 100;
-const int ARR_INCREASE = 10;
+const int ARR_INCREMENT = 10;
+eunm employeeType{ regular,temproary };
+
 class Table {
 private:
     Employee ** tableArr;
 	int size;
+	bool memExtension();
 public:
     Table();
-    bool readFromFile(string fileName);
+    bool readFromFile(string fileName, employeeType type);
     bool readFromScreen();
     Employee ** searchEmployee(int id = 0, string name = "", double realWage = 0.0);
-    bool updataEmployee(Employee* employee);
+    bool updateEmployee(Employee* employee);
     bool logicalDeleteEmployee();
     bool physicalDeleteEmployee();
     bool saveInFile(string fileName);
     void calculateWage(Employee **);
     void sortByRealWage();
-    ~Table();
+	void statData();
+	
+	~Table();
 };
 
 

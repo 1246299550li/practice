@@ -7,56 +7,97 @@
 Table::Table() {
     tableArr = new Employee *[ARR_SIZE];    //总表
 	size = ARR_SIZE;
-	int i = 0;
-    ifstream infile1("RegStaffInf.txt");    //读取 
-    RegularEmployee *p;                     //缓存对象
-    while(!infile1.eof()){
-        double tmpAllowance,tmpProvidentFund,tmpPension,tmpTax,tmpInsurance,tmpBaseWage,tmpRealWage;
-		int tmpId, tmpAge;
-		bool tmpSex;
-		string tmpName,tmpAddress;
-		infile1 >> tmpId >> tmpName >> tmpSex >> tmpAge >> tmpAddress >> tmpBaseWage >> tmpAllowance >>
-			tmpProvidentFund >> tmpPension >> tmpTax >> tmpInsurance >> tmpRealWage;
-		p = new RegularEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpAllowance,
-								tmpProvidentFund, tmpPension, tmpTax, tmpInsurance);
-		if (i >= ARR_SIZE) {
-			tableArr = (Employee**)realloc((ARR_SIZE * 2) * sizeof(Employee *));
-		}
-		tableArr[i] = p;
-		i++;
-    }
-	infile1.close();
-	ifstream infile2("TemStaffInf.txt");
-	TemporaryEmployee *q;
-	while (!infile2.eof()) {
-		double tmpBaseWage, tmpRealWage, tmpTax, tmpBonus;
-		int tmpId, tmpAge;
-		bool tmpSex;
-		string tmpName, tmpAddress;
-		infile2 >> tmpId >> tmpName >> tmpSex >> tmpAge >> tmpAddress >>
-			tmpBaseWage >> tmpBonus >> tmpTax >> tmpRealWage;
-		q = new TemporaryEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpBonus, tmpTax);
-		if (i >= ARR_SIZE) {
-			tableArr = (Employee**)realloc((ARR_SIZE * 2) * sizeof(Employee *));
-			if (i >= ARR_SIZE) {
-				Employee **tmp;
-				tmp = tabelArr;
-				tabelArr = new Empolyee*[ARR_SIZE + INCREASE];
-				size += ARR_INCREASE
-					for (int i = 0; i < size; i++) {
-						tabelArr[i] = tmp[i];
-					}
-				delete[]tmp;
-			}
-		}
-		tableArr[i] = q;
-		i++;
+	if (!readFromFile("RegStaffInf.txt", regular))
+		cout << "can not read data correctly";
+	if (!readFromFile("TemStaffInf.txt", temporary))
+		cout << "can not read data correctly";
+}
+
+//只统计某数额的工资人数
+void Table::statData() {
+	float wageSum = 0, wageAvg = 0;
+	int l = Table::length();
+	for (int i = 0; i < l; i++)
+	{
+		wageSum += Table::tableArr[i]->getBaseWage;
 	}
-    
-    
-
-
+	wageAvg = wageSum / l;
 }
-bool Table::readFromFile() {
 
+bool Table::readFromFile(string fileName, employeeType type){
+
+	ifstream infile(fileName);
+	if (!infile.is_open())
+		return FALSE;
+	else
+	{
+		switch (type)
+		{
+		case Regular:
+			RegularEmployee * p;
+			for (int i=0;!infile.eof();i++) {
+				double tmpAllowance, tmpProvidentFund, tmpPension,
+					tmpTax, tmpInsurance, tmpBaseWage, tmpRealWage;
+				int tmpId, tmpAge;
+				bool tmpSex;
+				string tmpName, tmpAddress;
+				infile >> tmpId >> tmpName >> tmpSex >> tmpAge >> tmpAddress >> tmpBaseWage >> tmpAllowance >>
+					tmpProvidentFund >> tmpPension >> tmpTax >> tmpInsurance >> tmpRealWage;
+				p = new RegularEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpAllowance,
+					tmpProvidentFund, tmpPension, tmpTax, tmpInsurance);
+				//内存重新分配
+				if (!memExtension()) {
+					cout << "memory error";
+					return FALSE;
+				}
+				tableArr[i] = p;
+			}
+			break;
+		case Temporary:
+			TemporaryEmployee * q;
+			for (int i = 0; !infile.eof(); i++) {
+				double tmpBaseWage, tmpRealWage, tmpTax, tmpBonus;
+				int tmpId, tmpAge;
+				bool tmpSex;
+				string tmpName, tmpAddress;
+				infile2 >> tmpId >> tmpName >> tmpSex >> tmpAge >> tmpAddress 
+						>>tmpBaseWage >> tmpBonus >> tmpTax >> tmpRealWage;
+				q = new TemporaryEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpBonus, tmpTax);
+				//内存重新分配
+				if (i >= size)
+					if (!memExtension()){
+						cout << "memory error";
+						return FALSE;
+					}
+				tableArr[i] = q;
+			}
+			break;
+		}
+	}
+	infile.close();
+	return TRUE;
 }
+
+bool Table::memExtension(){
+	Employee ** desMem=new Employee *[size+ ARR_INCREMENT];
+	if (!desMem)
+		return FALSE;
+	else
+		for (int i = 0; i < size; i++)
+			desMem[i] = tableArr[i];
+	delete[] tableArr;
+	tableArr = desMem;
+	size += ARR_INCREMENT;
+	return TRUE;
+}
+
+
+
+
+
+
+
+
+
+
+
