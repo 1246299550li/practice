@@ -14,7 +14,10 @@ const int ARR_INCREMENT = 50;
 class Table {
 private:
     Employee **tableArr;
+    Employee **deleteArr;
     int size;
+    int deleteSize;
+    int deleteapacity;
     int apacity;
 	int rear;
 	//内存空间扩容
