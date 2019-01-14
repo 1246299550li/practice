@@ -20,9 +20,10 @@ private:
     int deleteApacity;
     int apacity;
     int rear;
+    int deleteRear;
 
     //内存空间扩容
-    bool memExtension();
+    bool memExtension(bool tableType);
 
 
 public:
@@ -36,7 +37,11 @@ public:
     bool readFromScreen();
 
     //以id name realWage为关键字从表中查找匹配的记录，返回指针数组
-    Employee **searchEmployee(int id = 0, string name = "", double realWage = 0.0, bool tableType = true);
+    Employee **searchEmployee(int id, bool tableType);
+
+    Employee **searchEmployee(string name, bool tableType);
+
+    Employee **searchEmployee(double realWage, bool tableType);
 
     //修改employee指向的对象
     bool updateEmployee(Employee *employee);
@@ -47,14 +52,14 @@ public:
     //物理删除，不可恢复
     bool physicalDeleteEmployee(int id);
 
-	//恢复逻辑删除项
-	bool undeleteEmployee(int id);
+    //恢复逻辑删除项
+    bool undeleteEmployee(int id);
 
     //保存在文件中
     bool saveInFile(string fileName, bool tableType);
 
     //计算指针数组中所有指针指向对象的工资总值 平均工资
-    void calculateWage(Employee ** arr);
+    void calculateWage(Employee **arr);
 
     //按realWage排序tableArr中对象
     void sortByRealWage();

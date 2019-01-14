@@ -13,14 +13,14 @@ Table::Table() {
     apacity = 0;
     deleteApacity = 0;
     rear = 0;
-	deleteRear = 0;
+    deleteRear = 0;
 }
 
 
 bool Table::readFromFile(string fileName, bool tableType) {
 
     ifstream infile(fileName);
-	if (!infile.is_open())
+    if (!infile.is_open())
         return false;
     else {
         bool type;
@@ -58,32 +58,29 @@ bool Table::readFromFile(string fileName, bool tableType) {
 
 
 bool Table::memExtension(bool tableType) {
-	if (tableType)
-	{
-		Employee **desMem = new Employee *[size + ARR_INCREMENT];
-		if (!desMem)
-			return false;
-		else
-			for (int i = 0; i < size; i++)
-				desMem[i] = tableArr[i];
-		delete[] tableArr;
-		tableArr = desMem;
-		size += ARR_INCREMENT;
-		return true;
-	}
-	else
-	{
-		Employee **desMem = new Employee *[rearSize + ARR_INCREMENT];
-		if (!desMem)
-			return false;
-		else
-			for (int i = 0; i < size; i++)
-				desMem[i] = deleteArr[i];
-		delete[] deleteArr;
-		deleteArr = desMem;
-		deleteSize += ARR_INCREMENT;
-		return true;
-	}
+    if (tableType) {
+        Employee **desMem = new Employee *[size + ARR_INCREMENT];
+        if (!desMem)
+            return false;
+        else
+            for (int i = 0; i < size; i++)
+                desMem[i] = tableArr[i];
+        delete[] tableArr;
+        tableArr = desMem;
+        size += ARR_INCREMENT;
+        return true;
+    } else {
+        Employee **desMem = new Employee *[deleteSize + ARR_INCREMENT];
+        if (!desMem)
+            return false;
+        else
+            for (int i = 0; i < size; i++)
+                desMem[i] = deleteArr[i];
+        delete[] deleteArr;
+        deleteArr = desMem;
+        deleteSize += ARR_INCREMENT;
+        return true;
+    }
 }
 
 bool Table::readFromScreen() {
@@ -111,28 +108,25 @@ bool Table::readFromScreen() {
 }
 
 void Table::pushBack(Employee *employee, bool tableType) {
-	if (tableType)
-	{
-		if (rear == size)
-			if (!memExtension(tableType)) {
-				cout << "memory error";
-				return;
-			}
-		tableArr[rear] = employee;
-		rear++;
-		apacity++;
-	}
-	else
-	{
-		if (deleteRear == deleteSize)
-			if (!memExtension(tableType)) {
-				cout << "memory error";
-				return;
-			}
-		tableArr[deleteRear] = employee;
-		deleteRear ++;
-		deleteApacity++;
-	}
+    if (tableType) {
+        if (rear == size)
+            if (!memExtension(tableType)) {
+                cout << "memory error";
+                return;
+            }
+        tableArr[rear] = employee;
+        rear++;
+        apacity++;
+    } else {
+        if (deleteRear == deleteSize)
+            if (!memExtension(tableType)) {
+                cout << "memory error";
+                return;
+            }
+        tableArr[deleteRear] = employee;
+        deleteRear++;
+        deleteApacity++;
+    }
 
 }
 
@@ -140,7 +134,7 @@ Employee **Table::searchEmployee(int id, bool tableType) {
     Employee **p = new Employee *[ARR_SIZE];
     int j = 0;
     for (int i = 0; i < apacity; i++) {
-        if (tableArr[i]->getId() == id ) {
+        if (tableArr[i]->getId() == id) {
             p[j] = tableArr[i];
             j++;
         }
@@ -149,27 +143,27 @@ Employee **Table::searchEmployee(int id, bool tableType) {
 }
 
 Employee **Table::searchEmployee(string name, bool tableType) {
-	Employee **p = new Employee *[ARR_SIZE];
-	int j = 0;
-	for (int i = 0; i < apacity; i++) {
-		if ( tableArr[i]->getName() == name ) {
-			p[j] = tableArr[i];
-			j++;
-		}
-	}
-	return p;
+    Employee **p = new Employee *[ARR_SIZE];
+    int j = 0;
+    for (int i = 0; i < apacity; i++) {
+        if (tableArr[i]->getName() == name) {
+            p[j] = tableArr[i];
+            j++;
+        }
+    }
+    return p;
 }
 
 Employee **Table::searchEmployee(double realWage, bool tableType) {
-	Employee **p = new Employee *[ARR_SIZE];
-	int j = 0;
-	for (int i = 0; i < apacity; i++) {
-		if (tableArr[i]->getRealWage() == realWage) {
-			p[j] = tableArr[i];
-			j++;
-		}
-	}
-	return p;
+    Employee **p = new Employee *[ARR_SIZE];
+    int j = 0;
+    for (int i = 0; i < apacity; i++) {
+        if (tableArr[i]->getRealWage() == realWage) {
+            p[j] = tableArr[i];
+            j++;
+        }
+    }
+    return p;
 }
 
 bool Table::updateEmployee(Employee *tmpEmployee) {
@@ -337,19 +331,19 @@ bool Table::updateEmployee(Employee *tmpEmployee) {
 }
 
 void Table::sortByRealWage() {                                         //将总表按实发工资进行排序
-    for (int i = 0; i < this->size; i++) {
-        if (*(*tableArr + i) != NULL) {
-            for (int j = i + 1; j < this->size; j++) {
-                if (*(*tableArr + j) != NULL) {
-                    if (*(*tableArr + i).realwage < *(*tableArr + j).realwage) {
-                        double t = (*tableArr + i);
-                        (*tableArr + i) = (*tableArr + j);
-                        (*tableArr + j) = t;
-                    }
-                }
-            }
-        }
-    }
+//    for (int i = 0; i < apacity; i++) {
+//        if (*tableArr[i] != NULL) {
+//            for (int j = i + 1; j < apacity; j++) {
+//                if (*(*tableArr + j) != NULL) {
+//                    if (*(*tableArr + i).realwage < *(*tableArr + j).realwage) {
+//                        double t = (*tableArr + i);
+//                        (*tableArr + i) = (*tableArr + j);
+//                        (*tableArr + j) = t;
+//                    }
+//                }
+//            }
+//        }
+//    }
 }
 
 bool Table::saveInFile(string fileName, bool tableType) {
@@ -374,8 +368,8 @@ bool Table::saveInFile(string fileName, bool tableType) {
 }
 
 bool Table::logicalDeleteEmployee(int id) {
-    Employee ** resArr = searchEmployee(id,true);
-    if (resArr[0] == nullptr){
+    Employee **resArr = searchEmployee(id, true);
+    if (resArr[0] == nullptr) {
         return false;
     } else {
         pushBack(resArr[0], false);
@@ -386,32 +380,29 @@ bool Table::logicalDeleteEmployee(int id) {
 }
 
 bool Table::physicalDeleteEmployee(int id) {
-	Employee ** deletion = searchEmployee(id, false);
-	if (*deletion == nullptr) {
-		return false;
-	}
-	else {
-		delete *deletion;
-		*deletion = nullptr;
-		deleteApacity--;
-		saveInFile("DeletedStaffInfo.txt", false);
-		return true;
-	}
+    Employee **deletion = searchEmployee(id, false);
+    if (*deletion == nullptr) {
+        return false;
+    } else {
+        delete *deletion;
+        *deletion = nullptr;
+        deleteApacity--;
+        saveInFile("DeletedStaffInfo.txt", false);
+        return true;
+    }
 }
 
-bool Table::undeleteEmployee(int id)
-{
-	Employee ** recovery = searchEmployee(id, false);
-	if (*recovery == nullptr) {
-		return false;
-	}
-	else {
-			pushBack(*recovery, false);
-			saveInFile("DeletedStaffInfo.txt", false);
-			return true;
-		}
-	}
+bool Table::undeleteEmployee(int id) {
+    Employee **recovery = searchEmployee(id, false);
+    if (*recovery == nullptr) {
+        return false;
+    } else {
+        pushBack(*recovery, false);
+        saveInFile("DeletedStaffInfo.txt", false);
+        return true;
+    }
 }
+
 
 
 
