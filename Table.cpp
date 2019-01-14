@@ -7,6 +7,7 @@
 
 Table::Table() {
     tableArr = new Employee *[ARR_SIZE];    //总表
+    deleteArr = new Employee *[ARR_SIZE];    //逻辑删除表
     size = ARR_SIZE;
     rear = 0;
     if (!readFromFile("RegStaffInf.txt"))
@@ -119,9 +120,9 @@ void Table::push_back(Employee *employee) {
 }
 
 void Table::sortByRealWage() {                                         //将总表按实发工资进行排序
-    for (int i = 0; i < this->size - 1; i++) {
+    for (int i = 0; i < this->size; i++) {
         if (*(*tableArr + i) != NULL) {
-            for (int j = i + 1; j < this->size - 1; j++) {
+            for (int j = i + 1; j < this->size; j++) {
                 if (*(*tableArr + j) != NULL) {
                     if (*(*tableArr + i).realwage < *(*tableArr + j).realwage) {
                         double t = (*tableArr + i);
@@ -134,16 +135,42 @@ void Table::sortByRealWage() {                                         //将总�
     }
 }
 
-bool Table::saveInFile(string fileName, bool tableType) {
-    ofstream out;
-    out.open(fileName);
-    for (int i = 0; i < apacity; ++i) {
-        if (tableArr[i] != nullptr) {
-            out << tableArr[i] << endl;
+Table:: int search(int id) {
+    for (int i = 0; i < length; i++)
+        if (tableArr[i]->id == id)
+            return i;
+    cout << "can not find the object";
+    return -1;
+}
+
+Table:: bool physicalDeleteEmployee(int id) {
+
+    bool Table::saveInFile(string fileName, bool tableType) {
+        ofstream out;
+        out.open(fileName);
+        for (int i = 0; i < apacity; ++i) {
+            if (tableArr[i] != nullptr) {
+                out << tableArr[i] << endl;
+            }
         }
+        out.close();
+        return true;
     }
-    out.close();
-    return true;
+
+
+}
+
+Table:: bool logicalDeleteEmployee(int id) {
+    int pos = search(id);
+    if (pos = -1);
+    {
+        employee *p = tableArr[pos];
+        saveInFile("DeletedStaffInfo.txt");
+        tableArr[pos] = NULL;
+        return TRUE;
+    }
+    else
+    return FALSE;
 }
 
 
