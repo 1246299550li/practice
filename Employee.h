@@ -7,6 +7,7 @@
 
 #include <string>
 #include <iostream>
+
 using namespace std;
 
 //职工类
@@ -23,8 +24,11 @@ protected:
 
 public:
     virtual void displayInfo() = 0;
+
     virtual void readInfo() = 0;
+
     virtual void writeInFile() = 0;
+
     Employee(int id, const string &name, bool sex, int age, const string &address, double baseWage);
 
     Employee();

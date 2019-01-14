@@ -58,7 +58,7 @@ public:
              << "\n医疗保险：" << insurance
              << "\n实发工资：" << realWage;
     }
-    //写入信息到文件
+
 
     //从屏幕读入信息
     void readInfo() override {
@@ -97,7 +97,7 @@ public:
 
 
     }
-
+    //写入信息到文件
     friend ostream &operator<<(ostream &os, const RegularEmployee &employee) {
         os << static_cast<const Employee &>(employee) << " allowance: " << employee.allowance << " providentFund: "
            << employee.providentFund << " pension: " << employee.pension << " tax: " << employee.tax << " insurance: "

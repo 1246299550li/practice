@@ -87,7 +87,7 @@ public:
     TemporaryEmployee() {
 
     }
-
+    //写入信息到文件
     friend ostream &operator<<(ostream &os, const TemporaryEmployee &employee) {
         os << static_cast<const Employee &>(employee) << " bonus: " << employee.bonus << " tax: " << employee.tax
            << " realWage: " << employee.realWage;
