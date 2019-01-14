@@ -121,7 +121,21 @@ void push_back(Employee* employee){
 	rear++;
 }
 
-
+   void sortByRealWage() {                                         //将总表按实发工资进行排序
+	for (int i = 0; i < this.size; i++) {
+		if (*(*tableArr + i) != NULL) {
+			for (int j = 0; j < this.size - i; j++) {
+				if (*(*tableArr + j) != NULL) {
+					if (*(*tableArr + i).realwage < *(*tableArr + j).realwage) {
+						int t = (*tableArr + i);
+						(*tableArr + i) = (*tableArr + j);
+						(*tableArr + j) = t;
+					}
+				}
+			}
+		}
+	 }
+}
 
 
 
