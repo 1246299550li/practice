@@ -25,7 +25,7 @@ void Table::statData() {
     wageAvg = wageSum / l;
 }
 
-bool Table::readFromFile(string fileName) {
+bool Table::readFromFile(string fileName, bool tableType) {
 
     ifstream infile(fileName);
     if (!infile.is_open())
@@ -69,59 +69,59 @@ bool Table::readFromFile(string fileName) {
             return true;
         }
     }
+}
 
+bool Table::memExtension() {
+    Employee **desMem = new Employee *[size + ARR_INCREMENT];
+    if (!desMem)
+        return false;
+    else
+        for (int i = 0; i < size; i++)
+            desMem[i] = tableArr[i];
+    delete[] tableArr;
+    tableArr = desMem;
+    size += ARR_INCREMENT;
+    return true;
+}
 
-    bool Table::memExtension() {
-        Employee **desMem = new Employee *[size + ARR_INCREMENT];
-        if (!desMem)
-            return false;
-        else
-            for (int i = 0; i < size; i++)
-                desMem[i] = tableArr[i];
-        delete[] tableArr;
-        tableArr = desMem;
-        size += ARR_INCREMENT;
-        return true;
-    }
-
-    bool Table::readFromScreen() {
-        bool type;
-        cout << "请输入要添加的职工种类(1表示正式职工 0表示临时职工):";
-        while (!(cin >> type)) {
-            cout << "\n输入错误！请重新输入";
-            cin.clear();
-            while (cin.get() != '\n') {
-            }
-        }
-        cout << "\n输入成功";
+bool Table::readFromScreen() {
+    bool type;
+    cout << "请输入要添加的职工种类(1表示正式职工 0表示临时职工):";
+    while (!(cin >> type)) {
+        cout << "\n输入错误！请重新输入";
+        cin.clear();
         while (cin.get() != '\n') {
         }
-        Employee *p;
-        if (type) {
-            p = new RegularEmployee();
-            p->readInfo();
-        } else {
-            p = new TemporaryEmployee();
-            p->readInfo();
-        }
-        //插入表中
-        //this.push
     }
+    cout << "\n输入成功";
+    while (cin.get() != '\n') {
+    }
+    Employee *p;
+    if (type) {
+        p = new RegularEmployee();
+        p->readInfo();
+    } else {
+        p = new TemporaryEmployee();
+        p->readInfo();
+    }
+    //插入表中
+    //this.push
+}
 
-    void Table::push_back(Employee *employee) {
-        if (rear == size)
-            if (!memExtension()) {
-                cout << "memory error";
-                return;
-            }
-        tableArr[rear] = employee;
-        rear++;
-    }
+void Table::push_back(Employee *employee) {
+    if (rear == size)
+        if (!memExtension()) {
+            cout << "memory error";
+            return;
+        }
+    tableArr[rear] = employee;
+    rear++;
+}
 
 void Table::sortByRealWage() {                                         //将总表按实发工资进行排序
-    for (int i = 0; i < this->size-1; i++) {
+    for (int i = 0; i < this->size - 1; i++) {
         if (*(*tableArr + i) != NULL) {
-            for (int j = i+1; j < this->size-1; j++) {
+            for (int j = i + 1; j < this->size - 1; j++) {
                 if (*(*tableArr + j) != NULL) {
                     if (*(*tableArr + i).realwage < *(*tableArr + j).realwage) {
                         double t = (*tableArr + i);
@@ -134,17 +134,17 @@ void Table::sortByRealWage() {                                         //将总�
     }
 }
 
-    bool Table::saveInFile(string fileName) {
-        ofstream out;
-        out.open(fileName);
-        for (int i = 0; i < apacity; ++i) {
-            if (tableArr[i] != nullptr) {
-                out << tableArr[i] << endl;
-            }
+bool Table::saveInFile(string fileName, bool tableType) {
+    ofstream out;
+    out.open(fileName);
+    for (int i = 0; i < apacity; ++i) {
+        if (tableArr[i] != nullptr) {
+            out << tableArr[i] << endl;
         }
-        out.close();
-        return true;
     }
+    out.close();
+    return true;
+}
 
 
 
