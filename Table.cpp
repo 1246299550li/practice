@@ -10,7 +10,7 @@ Table::Table() {
     size = ARR_SIZE;
     if (!readFromFile("RegStaffInf.txt", regular))
         cout << "can not read data correctly";
-    if (!readFromFile("TemStaffInf.txt", temporary))
+    if (!readFromFile("TmpStaffInf.txt", temporary))
         cout << "can not read data correctly";
 }
 
@@ -78,6 +78,8 @@ bool Table::readFromFile(string fileName, employeeType type) {
     return true;
 }
 
+
+
 bool Table::memExtension() {
     Employee **desMem = new Employee *[size + ARR_INCREMENT];
     if (!desMem)
@@ -91,49 +93,28 @@ bool Table::memExtension() {
     return true;
 }
 
-bool Table::readFromScreen(employeeType type) {
-    int i;
-    switch (type) {
-        case Regular:
-            RegularEmployee *p;
-            double tmpAllowance, tmpProvidentFund, tmpPension,
-                    tmpTax, tmpInsurance, tmpBaseWage, tmpRealWage;
-            int tmpId, tmpAge;
-            bool tmpSex;
-            string tmpName, tmpAddress;
-            cin >> tmpId >> tmpName >> tmpSex >> tmpAge >> tmpAddress >> tmpBaseWage >> tmpAllowance >>
-                tmpProvidentFund >> tmpPension >> tmpTax >> tmpInsurance >> tmpRealWage;
-            p = new RegularEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpAllowance,
-                                    tmpProvidentFund, tmpPension, tmpTax, tmpInsurance);
-            for (i = 0; tableArr[i] != NULL && i < size; i++);
-            if (i == size) {
-                if (!memExtension()) {
-                    cout << "memory error";
-                    return false;
-                }
-            }
-            tableArr[i] = p;
-            return true;
-        case Temporary:
-            TemporaryEmployee *q;
-            double tmpBaseWage, tmpRealWage, tmpTax, tmpBonus;
-            int tmpId, tmpAge;
-            bool tmpSex;
-            string tmpName, tmpAddress;
-            cin >> tmpId >> tmpName >> tmpSex >> tmpAge >> tmpAddress
-                >> tmpBaseWage >> tmpBonus >> tmpTax >> tmpRealWage;
-            q = new TemporaryEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpBonus, tmpTax);
-            for (i = 0; tableArr[i] != NULL && i < size; i++);
-            if (i == size) {
-                if (!memExtension()) {
-                    cout << "memory error";
-                    return false;
-                }
-            }
-            tableArr[i] = q;
-            return true;
+bool Table::readFromScreen() {
+    bool type;
+    cout << "请输入要添加的职工种类(1表示正式职工 0表示临时职工):";
+    while (!(cin >> type)) {
+        cout << "\n输入错误！请重新输入";
+        cin.clear();
+        while (cin.get() != '\n') {
+        }
     }
-
+    cout << "\n输入成功";
+    while (cin.get() != '\n') {
+    }
+    Employee *p;
+    if (type){
+        p = new RegularEmployee();
+        p->readInfo();
+    } else {
+        p = new TemporaryEmployee();
+        p->readInfo();
+    }
+    //插入表中
+    //this.push
 }
 
 

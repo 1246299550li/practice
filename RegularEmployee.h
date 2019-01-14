@@ -39,6 +39,7 @@ public:
         }
     }
 
+    //显示信息
     void displayInfo() override {
         cout.precision(2);
         cout.setf(ios_base::fixed);
@@ -57,6 +58,7 @@ public:
              << "\n实发工资：" << realWage;
     }
 
+    //从屏幕读入信息
     void readInfo() override {
         cout << "\n请输入编号(正整数)：";
         checkInput(id);
@@ -100,6 +102,10 @@ public:
             allowance(allowance), providentFund(providentFund), pension(pension), tax(tax), insurance(insurance) {
         calculateRealWage();
         type = true;
+    }
+
+    RegularEmployee() {
+
     }
 
     virtual ~RegularEmployee() {
