@@ -17,7 +17,9 @@ private:
     Employee **tableArr;
     int size;
     int apacity;
-    bool memExtension();
+	int rear;
+	bool memExtension();
+	
 
 public:
     //构造器初始化空表
@@ -41,7 +43,7 @@ public:
     //按realWage排序tableArr中对象
     void sortByRealWage();
     void statData();
-
+	void push_back(Employee *employee);
     ~Table();
 };
 
