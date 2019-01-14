@@ -26,7 +26,7 @@ public:
     //构造器初始化空表
     Table();
     //从文件中读入信息
-    bool readFromFile(string fileName);
+    bool readFromFile(string fileName, bool tableType);
     //从屏幕中读入信息
     bool readFromScreen();
     //以id name realWage为关键字从表中查找匹配的记录，返回指针数组
@@ -38,7 +38,7 @@ public:
     //物理删除，不可恢复
     bool physicalDeleteEmployee(int id);
     //保存在文件中
-    bool saveInFile(string fileName);
+    bool saveInFile(string fileName, bool tableType);
     //计算指针数组中所有指针指向对象的工资总值 平均工资
     void calculateWage(Employee **);
     //按realWage排序tableArr中对象
