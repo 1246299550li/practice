@@ -119,9 +119,9 @@ bool Table::readFromFile(string fileName) {
     }
 
 void Table::sortByRealWage() {                                         //将总表按实发工资进行排序
-    for (int i = 0; i < this->size-1; i++) {
+    for (int i = 0; i < this->size; i++) {
         if (*(*tableArr + i) != NULL) {
-            for (int j = i+1; j < this->size-1; j++) {
+            for (int j = i+1; j < this->size; j++) {
                 if (*(*tableArr + j) != NULL) {
                     if (*(*tableArr + i).realwage < *(*tableArr + j).realwage) {
                         double t = (*tableArr + i);
