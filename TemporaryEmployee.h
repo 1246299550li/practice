@@ -5,6 +5,7 @@
 #ifndef NEW_TEMPORARYEMPLOYEE_H
 #define NEW_TEMPORARYEMPLOYEE_H
 
+#include <ostream>
 #include "Employee.h"
 
 //临时职工类
@@ -85,6 +86,12 @@ public:
 
     TemporaryEmployee() {
 
+    }
+    //写入信息到文件
+    friend ostream &operator<<(ostream &os, const TemporaryEmployee &employee) {
+        os << static_cast<const Employee &>(employee) << " bonus: " << employee.bonus << " tax: " << employee.tax
+           << " realWage: " << employee.realWage;
+        return os;
     }
 
     virtual ~TemporaryEmployee() {

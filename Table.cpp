@@ -7,10 +7,12 @@
 
 Table::Table() {
     tableArr = new Employee *[ARR_SIZE];    //总表
+    deleteArr = new Employee *[ARR_SIZE];    //逻辑删除表
     size = ARR_SIZE;
-    if (!readFromFile("RegStaffInf.txt", regular))
+    rear = 0;
+    if (!readFromFile("RegStaffInf.txt"))
         cout << "can not read data correctly";
-    if (!readFromFile("TmpStaffInf.txt", temporary))
+    if (!readFromFile("TmpStaffInf.txt"))
         cout << "can not read data correctly";
 }
 
@@ -24,58 +26,50 @@ void Table::statData() {
     wageAvg = wageSum / l;
 }
 
-bool Table::readFromFile(string fileName, employeeType type) {
+bool Table::readFromFile(string fileName, bool tableType) {
 
     ifstream infile(fileName);
     if (!infile.is_open())
         return false;
     else {
-        switch (type) {
-            case Regular:
-                RegularEmployee *p;
-                for (int i = 0; !infile.eof(); i++) {
-                    double tmpAllowance, tmpProvidentFund, tmpPension,
-                            tmpTax, tmpInsurance, tmpBaseWage, tmpRealWage;
-                    int tmpId, tmpAge;
-                    bool tmpSex;
-                    string tmpName, tmpAddress;
-                    infile >> tmpId >> tmpName >> tmpSex >> tmpAge >> tmpAddress >> tmpBaseWage >> tmpAllowance >>
-                           tmpProvidentFund >> tmpPension >> tmpTax >> tmpInsurance >> tmpRealWage;
-                    p = new RegularEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpAllowance,
-                                            tmpProvidentFund, tmpPension, tmpTax, tmpInsurance);
-                    //内存重新分配
-                    if (i >= size)
-                        if (!memExtension()) {
-                            cout << "memory error";
-                            return false;
-                        }
-                    tableArr[i] = p;
-                }
-                break;
-            case Temporary:
+        bool type;
+        infile >> type;
+        if (type) {
+            RegularEmployee *p;
+            while (!infile.eof() {//update:使用push_back后不需要i
+                double tmpAllowance, tmpProvidentFund, tmpPension,
+                        tmpTax, tmpInsurance, tmpBaseWage, tmpRealWage;
+                int tmpId, tmpAge;
+                bool tmpSex;
+                string tmpName, tmpAddress;
+                infile >> tmpId >> tmpName >> tmpSex >> tmpAge >> tmpAddress >> tmpBaseWage >> tmpAllowance >>
+                       tmpProvidentFund >> tmpPension >> tmpTax >> tmpInsurance >> tmpRealWage;
+                p = new RegularEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpAllowance,
+                                        tmpProvidentFund, tmpPension, tmpTax, tmpInsurance);
+                //内存重新分配
+                //update:直接使用push_back函数添加新项
+                push_back(p);
+            }
+            else{
                 TemporaryEmployee *q;
-                for (int i = 0; !infile.eof(); i++) {
+                while (!infile.eof() {//update:使用push_back后不需要i
                     double tmpBaseWage, tmpRealWage, tmpTax, tmpBonus;
                     int tmpId, tmpAge;
                     bool tmpSex;
                     string tmpName, tmpAddress;
                     infile >> tmpId >> tmpName >> tmpSex >> tmpAge >> tmpAddress
-                            >> tmpBaseWage >> tmpBonus >> tmpTax >> tmpRealWage;
+                           >> tmpBaseWage >> tmpBonus >> tmpTax >> tmpRealWage;
                     q = new TemporaryEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpBonus,
                                               tmpTax);
-                    //内存重新分配
-                    if (i >= size)
-                        if (!memExtension()) {
-                            cout << "memory error";
-                            return false;
-                        }
-                    tableArr[i] = q;
+                    //update:直接使用push_back函数添加新项
+                    push_back(p);
                 }
-                break;
+
+            }
+            infile.close();
+            return true;
         }
     }
-    infile.close();
-    return true;
 }
 
 bool Table::memExtension() {
@@ -104,7 +98,7 @@ bool Table::readFromScreen() {
     while (cin.get() != '\n') {
     }
     Employee *p;
-    if (type){
+    if (type) {
         p = new RegularEmployee();
         p->readInfo();
     } else {
@@ -113,6 +107,16 @@ bool Table::readFromScreen() {
     }
 	//插入表中
     //this.push
+}
+
+void Table::push_back(Employee *employee) {
+    if (rear == size)
+        if (!memExtension()) {
+            cout << "memory error";
+            return;
+        }
+    tableArr[rear] = employee;
+    rear++;
 }
 
 Employee **Table::searchEmployee(int id = 0, string name = "", double realWage = 0.0) {
@@ -262,9 +266,59 @@ bool **Table::updateEmployee(Employee *employee) {
 	}
 }
 
+void Table::sortByRealWage() {                                         //将总表按实发工资进行排序
+    for (int i = 0; i < this->size; i++) {
+        if (*(*tableArr + i) != NULL) {
+            for (int j = i + 1; j < this->size; j++) {
+                if (*(*tableArr + j) != NULL) {
+                    if (*(*tableArr + i).realwage < *(*tableArr + j).realwage) {
+                        double t = (*tableArr + i);
+                        (*tableArr + i) = (*tableArr + j);
+                        (*tableArr + j) = t;
+                    }
+                }
+            }
+        }
+    }
+}
+
+Table:: int search(int id) {
+    for (int i = 0; i < length; i++)
+        if (tableArr[i]->id == id)
+            return i;
+    cout << "can not find the object";
+    return -1;
+}
+
+Table:: bool physicalDeleteEmployee(int id) {
+
+    bool Table::saveInFile(string fileName, bool tableType) {
+        ofstream out;
+        out.open(fileName);
+        for (int i = 0; i < apacity; ++i) {
+            if (tableArr[i] != nullptr) {
+                out << tableArr[i] << endl;
+            }
+        }
+        out.close();
+        return true;
+    }
 
 
+}
 
+Table:: bool logicalDeleteEmployee(int id) {
+    int pos = search(id);
+    if (pos = -1);
+    {
+        employee *p = tableArr[pos];
+        saveInFile("DeletedStaffInfo.txt");
+        tableArr[pos] = NULL;
+        return TRUE;
+    }
+    else
+    return FALSE;
+}
 
 
 

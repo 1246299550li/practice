@@ -5,6 +5,7 @@
 #ifndef NEW_REGULAREMPLOYEE_H
 #define NEW_REGULAREMPLOYEE_H
 
+#include <ostream>
 #include "Employee.h"
 
 using namespace std;
@@ -58,6 +59,7 @@ public:
              << "\n实发工资：" << realWage;
     }
 
+
     //从屏幕读入信息
     void readInfo() override {
         cout << "\n请输入编号(正整数)：";
@@ -95,6 +97,13 @@ public:
 
 
     }
+    //写入信息到文件
+    friend ostream &operator<<(ostream &os, const RegularEmployee &employee) {
+        os << static_cast<const Employee &>(employee) << " allowance: " << employee.allowance << " providentFund: "
+           << employee.providentFund << " pension: " << employee.pension << " tax: " << employee.tax << " insurance: "
+           << employee.insurance << " realWage: " << employee.realWage;
+        return os;
+    }
 
     RegularEmployee(int id, const string &name, bool sex, int age, const string &address, double baseWage,
                     double allowance, double providentFund, double pension, double tax, double insurance) :
@@ -110,6 +119,26 @@ public:
 
     virtual ~RegularEmployee() {
 
+    }
+
+    void setAllowance(double allowance) {
+        RegularEmployee::allowance = allowance;
+    }
+
+    void setProvidentFund(double providentFund) {
+        RegularEmployee::providentFund = providentFund;
+    }
+
+    void setPension(double pension) {
+        RegularEmployee::pension = pension;
+    }
+
+    void setTax(double tax) {
+        RegularEmployee::tax = tax;
+    }
+
+    void setInsurance(double insurance) {
+        RegularEmployee::insurance = insurance;
     }
 
     double getAllowance() const {
@@ -135,6 +164,7 @@ public:
     double getRealWage() const {
         return realWage;
     }
+
 };
 
 
