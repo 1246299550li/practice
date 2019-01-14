@@ -121,12 +121,12 @@ void Table::push_back(Employee *employee) {
 }
 
 void Table::sortByRealWage() {                                         //将总表按实发工资进行排序
-    for (int i = 0; i < this.size; i++) {
+    for (int i = 0; i < this->size; i++) {
         if (*(*tableArr + i) != NULL) {
-            for (int j = 0; j < this.size - i; j++) {
+            for (int j = 0; j < this->size - i; j++) {
                 if (*(*tableArr + j) != NULL) {
-                    if (*(*tableArr + i).realwage < *(*tableArr + j).realwage) {
-                        int t = (*tableArr + i);
+                    if (*(*tableArr + i)->realwage < *(*tableArr + j)->realwage) {
+                        double t = (*tableArr + i);
                         (*tableArr + i) = (*tableArr + j);
                         (*tableArr + j) = t;
                     }
