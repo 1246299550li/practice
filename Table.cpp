@@ -7,6 +7,7 @@
 
 Table::Table() {
     tableArr = new Employee *[ARR_SIZE];    //总表
+	deleteArr = new Employee *[ARR_SIZE];	//逻辑删除表
     size = ARR_SIZE;
 	
 	rear = 0;             
@@ -136,7 +137,30 @@ void push_back(Employee* employee){
 		}
 	 }
 }
+   Table::int search(int id){
+	   for (int i = 0; i < length; i++)
+		   if (tableArr[i]->id == id)
+			   return i;
+	   cout << "can not find the object";
+	   return -1;
+   }
+Table::bool physicalDeleteEmployee(int id){
 
+
+
+}
+Table::bool logicalDeleteEmployee(int id) {
+	int pos = search(id);
+	if (pos = -1);
+	{
+		employee *p = tableArr[pos];
+		saveInFile("DeletedStaffInfo.txt");
+		tableArr[pos] = NULL;
+		return TRUE;
+	}
+	else
+		return FALSE;
+}
 
 
 
