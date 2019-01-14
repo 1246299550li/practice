@@ -27,8 +27,6 @@ public:
 
     virtual void readInfo() = 0;
 
-    virtual void writeInFile() = 0;
-
     Employee(int id, const string &name, bool sex, int age, const string &address, double baseWage);
 
     Employee();
