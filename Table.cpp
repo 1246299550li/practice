@@ -135,7 +135,7 @@ void Table::sortByRealWage() {                                         //将总�
     }
 }
 
-Table:: int search(int id) {
+int Table::search(int id) {
     for (int i = 0; i < length; i++)
         if (tableArr[i]->id == id)
             return i;
@@ -143,7 +143,7 @@ Table:: int search(int id) {
     return -1;
 }
 
-Table:: bool physicalDeleteEmployee(int id) {
+bool Table::physicalDeleteEmployee(int id) {
 
     bool Table::saveInFile(string fileName, bool tableType) {
         ofstream out;
@@ -160,17 +160,17 @@ Table:: bool physicalDeleteEmployee(int id) {
 
 }
 
-Table:: bool logicalDeleteEmployee(int id) {
+bool Table::logicalDeleteEmployee(int id) {
     int pos = search(id);
     if (pos = -1);
     {
         employee *p = tableArr[pos];
         saveInFile("DeletedStaffInfo.txt");
         tableArr[pos] = NULL;
-        return TRUE;
+        return true;
     }
     else
-    return FALSE;
+    return false;
 }
 
 
