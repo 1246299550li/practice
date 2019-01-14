@@ -46,11 +46,8 @@ public:
     void calculateWage(Employee **);
     //按realWage排序tableArr中对象
 	void sortByRealWage();
-    //工资统计
-	void statData();
 	//在tableArr表尾增添一个元素
-	void push_back(Employee *employee);
-	int search(int id);
+	void pushBack(Employee *employee);
 	~Table();
 };
 

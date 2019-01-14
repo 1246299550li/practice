@@ -8,23 +8,13 @@
 Table::Table() {
     tableArr = new Employee *[ARR_SIZE];    //总表
     deleteArr = new Employee *[ARR_SIZE];    //逻辑删除表
+    deleteSize = ARR_SIZE;
     size = ARR_SIZE;
+    apacity = 0;
+    deleteapacity = 0;
     rear = 0;
-    if (!readFromFile("RegStaffInf.txt"))
-        cout << "can not read data correctly";
-    if (!readFromFile("TmpStaffInf.txt"))
-        cout << "can not read data correctly";
 }
 
-//只统计某数额的工资人数
-void Table::statData() {
-    float wageSum = 0, wageAvg = 0;
-    int l = Table::length();
-    for (int i = 0; i < l; i++) {
-        wageSum += Table::tableArr[i]->getBaseWage;
-    }
-    wageAvg = wageSum / l;
-}
 
 bool Table::readFromFile(string fileName, bool tableType) {
 
@@ -33,44 +23,42 @@ bool Table::readFromFile(string fileName, bool tableType) {
         return false;
     else {
         bool type;
-        infile >> type;
-        if (type) {
-            RegularEmployee *p;
-            while (!infile.eof() {//update:使用push_back后不需要i
-                double tmpAllowance, tmpProvidentFund, tmpPension,
-                        tmpTax, tmpInsurance, tmpBaseWage, tmpRealWage;
-                int tmpId, tmpAge;
-                bool tmpSex;
-                string tmpName, tmpAddress;
-                infile >> tmpId >> tmpName >> tmpSex >> tmpAge >> tmpAddress >> tmpBaseWage >> tmpAllowance >>
-                       tmpProvidentFund >> tmpPension >> tmpTax >> tmpInsurance >> tmpRealWage;
+        while (infile >> type) {
+            double tmpAllowance, tmpProvidentFund, tmpPension, tmpTax,
+                    tmpInsurance, tmpBaseWage, tmpRealWage, tmpBonus;
+            int tmpId, tmpAge;
+            bool tmpSex;
+            string tmpName, tmpAddress;
+            Employee *p;
+            if (type) {
+                infile >> tmpId >> tmpName
+                       >> tmpSex >> tmpAge
+                       >> tmpAddress >> tmpBaseWage
+                       >> tmpAllowance >> tmpProvidentFund
+                       >> tmpPension >> tmpTax
+                       >> tmpInsurance >> tmpRealWage;
                 p = new RegularEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpAllowance,
                                         tmpProvidentFund, tmpPension, tmpTax, tmpInsurance);
-                //内存重新分配
-                //update:直接使用push_back函数添加新项
-                push_back(p);
+            } else {
+                infile >> tmpId >> tmpName
+                       >> tmpSex >> tmpAge
+                       >> tmpAddress >> tmpBaseWage
+                       >> tmpBonus >> tmpTax
+                       >> tmpRealWage;
+                p = new TemporaryEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpBonus,
+                                          tmpTax);
             }
-            else{
-                TemporaryEmployee *q;
-                while (!infile.eof() {//update:使用push_back后不需要i
-                    double tmpBaseWage, tmpRealWage, tmpTax, tmpBonus;
-                    int tmpId, tmpAge;
-                    bool tmpSex;
-                    string tmpName, tmpAddress;
-                    infile >> tmpId >> tmpName >> tmpSex >> tmpAge >> tmpAddress
-                           >> tmpBaseWage >> tmpBonus >> tmpTax >> tmpRealWage;
-                    q = new TemporaryEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpBonus,
-                                              tmpTax);
-                    //update:直接使用push_back函数添加新项
-                    push_back(p);
-                }
-
+            if (tableType) {
+                pushBack(p);
+            } else {
+                deletePushBack(p);
             }
-            infile.close();
-            return true;
         }
+        infile.close();
+        return true;
     }
 }
+
 
 bool Table::memExtension() {
     Employee **desMem = new Employee *[size + ARR_INCREMENT];
