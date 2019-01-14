@@ -8,6 +8,9 @@
 Table::Table() {
     tableArr = new Employee *[ARR_SIZE];    //总表
     size = ARR_SIZE;
+	
+	rear = 0;             
+
     if (!readFromFile("RegStaffInf.txt", regular))
         cout << "can not read data correctly";
     if (!readFromFile("TmpStaffInf.txt", temporary))
@@ -33,7 +36,7 @@ bool Table::readFromFile(string fileName, employeeType type) {
         switch (type) {
             case Regular:
                 RegularEmployee *p;
-                for (int i = 0; !infile.eof(); i++) {
+				while (!infile.eof()） {//update:使用push_back后不需要i
                     double tmpAllowance, tmpProvidentFund, tmpPension,
                             tmpTax, tmpInsurance, tmpBaseWage, tmpRealWage;
                     int tmpId, tmpAge;
@@ -43,18 +46,14 @@ bool Table::readFromFile(string fileName, employeeType type) {
                            tmpProvidentFund >> tmpPension >> tmpTax >> tmpInsurance >> tmpRealWage;
                     p = new RegularEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpAllowance,
                                             tmpProvidentFund, tmpPension, tmpTax, tmpInsurance);
-                    //内存重新分配
-                    if (i >= size)
-                        if (!memExtension()) {
-                            cout << "memory error";
-                            return false;
-                        }
-                    tableArr[i] = p;
-                }
+					//内存重新分配
+					//update:直接使用push_back函数添加新项
+					push_back(p);
+				}
                 break;
             case Temporary:
                 TemporaryEmployee *q;
-                for (int i = 0; !infile.eof(); i++) {
+                while(!infile.eof()）{//update:使用push_back后不需要i
                     double tmpBaseWage, tmpRealWage, tmpTax, tmpBonus;
                     int tmpId, tmpAge;
                     bool tmpSex;
@@ -63,13 +62,8 @@ bool Table::readFromFile(string fileName, employeeType type) {
                             >> tmpBaseWage >> tmpBonus >> tmpTax >> tmpRealWage;
                     q = new TemporaryEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpBonus,
                                               tmpTax);
-                    //内存重新分配
-                    if (i >= size)
-                        if (!memExtension()) {
-                            cout << "memory error";
-                            return false;
-                        }
-                    tableArr[i] = q;
+					//update:直接使用push_back函数添加新项
+					push_back(p);
                 }
                 break;
         }
@@ -116,7 +110,16 @@ bool Table::readFromScreen() {
     //插入表中
     //this.push
 }
-
+void push_back(Employee* employee){
+	if (rear == size)
+		if (!memExtension())
+		{
+			cout << "memory error";
+			return;
+		}
+	tableArr[rear] = employee;
+	rear++;
+}
 
 
 
