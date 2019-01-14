@@ -124,133 +124,159 @@ bool Table::updateEmployee(Employee *tmpEmployee) {
              "7.岗位津贴  8.住房公积金  9.养老金  10.所得税  11.医疗保险\n";
         cin >> c;
         switch (c) {
-            case 1:
+            case 1: {
                 cout << "输入修改后的编号\n";
                 int tmpId;
                 cin >> tmpId;
                 employee->setId(tmpId);
                 break;
-            case 2:
+            }
+            case 2: {
                 cout << "输入修改后的姓名\n";
                 string tmpName;
                 cin >> tmpName;
                 employee->setName(tmpName);
                 break;
-            case 3:
+            }
+            case 3: {
                 cout << "修改后的性别：男生为：true 女生为：false";
-                int tmpSex;
+                bool tmpSex;
                 cin >> tmpSex;
                 employee->setSex(tmpSex);
                 break;
-            case 4:
+            }
+            case 4: {
                 cout << "修改后的年龄\n";
                 int tmpAge;
                 cin >> tmpAge;
                 employee->setAge(tmpAge);
                 break;
-            case 5:
+            }
+            case 5: {
                 cout << "修改后的家庭住址\n";
                 string tmpAddress;
                 cin >> tmpAddress;
                 employee->setAddress(tmpAddress);
                 break;
-            case 6:
+            }
+            case 6: {
                 cout << "修改后的基本职务工资\n";
                 double tmpBaseWage;
                 cin >> tmpBaseWage;
                 employee->setBaseWage(tmpBaseWage);
                 break;
-            case 7:
+            }
+            case 7: {
                 cout << "修改后的岗位津贴\n";
                 double tmpAllowance;
                 cin >> tmpAllowance;
                 employee->setAllowance(tmpAllowance);
                 break;
-            case 8:
+            }
+            case 8: {
                 cout << "修改后的住房公积金\n";
                 double tmpProvidentFund;
                 cin >> tmpProvidentFund;
                 employee->setProvidentFund(tmpProvidentFund);
                 break;
-            case 9:
+            }
+            case 9: {
                 cout << "修改后的养老金\n";
                 double tmpPension;
                 cin >> tmpPension;
                 employee->setPension(tmpPension);
                 break;
-            case 10:
+            }
+            case 10: {
                 cout << "修改后的所得税\n";
                 double tmpTax;
                 cin >> tmpTax;
                 employee->setTax(tmpTax);
                 break;
-            case 11:
+            }
+            case 11: {
                 cout << "修改后的医疗保险\n";
                 double tmpInsurance;
                 cin >> tmpInsurance;
                 employee->setInsurance(tmpInsurance);
                 break;
-            default:break;
+            }
+            default: {
+                cout << "请输入正确的选项\n";
+                break;
+            }
+
         }
-        else {
-            TemporaryEmployee *employee = (TemporaryEmployee *) tmpEmployee;
-            cout << "输入要修改的项目\n";
-            cout << "1.编号  2.姓名  3.性别  4.年龄  5.家庭住址 6.基本职务工资\n" <<
-                 "7.奖金  8.所得税\n";
-            cin >> c;
-            switch (c) {
-                case 1:
-                    cout << "输入修改后的编号\n";
-                    int tmpId;
-                    cin >> tmpId;
-                    employee->setId(tmpId);
-                    break;
-                case 2:
-                    cout << "输入修改后的姓名\n";
-                    string tmpName;
-                    cin >> tmpName;
-                    employee->setId(tmpName);
-                    break;
-                case 3:
-                    cout << "修改后的性别：男生为：true 女生为：false";
-                    bool tmpSex;
-                    cin >> tmpSex;
-                    employee->setSex(tmpSex);
-                    break;
-                case 4:
-                    cout << "修改后的年龄\n";
-                    int tmpAge;
-                    cin >> tmpAge;
-                    employee->setAge(tmpAge);
-                    break;
-                case 5:
-                    cout << "修改后的家庭住址\n";
-                    string tmpAddress;
-                    cin >> tmpAddress;
-                    employee->setAddress(tmpAddress);
-                    break;
-                case 6:
-                    cout << "修改后的基本职务工资\n";
-                    double tmpBaseWage;
-                    cin >> tmpBaseWage;
-                    employee->setBaseWage(tmpBaseWage);
-                    break;
-                case 7:
-                    cout << "修改后的奖金\n";
-                    double tmpBonus;
-                    cin >> tmpBonus;
-                    employee->setBonus(tmpBonus);
-                    break;
-                case 8:
-                    cout << "修改后的所得税\n";
-                    double tmpRealWage;
-                    cin >> tmpRealWage;
-                    employee->setRealWage(tmpRealWage);
-                    break;
+    } else {
+        TemporaryEmployee *employee = (TemporaryEmployee *) tmpEmployee;
+        cout << "输入要修改的项目\n";
+        cout << "1.编号  2.姓名  3.性别  4.年龄  5.家庭住址 6.基本职务工资\n" <<
+             "7.奖金  8.所得税\n";
+        cin >> c;
+        switch (c) {
+            case 1: {
+                cout << "输入修改后的编号\n";
+                int tmpId;
+                cin >> tmpId;
+                employee->setId(tmpId);
+                break;
+            }
+            case 2: {
+                cout << "输入修改后的姓名\n";
+                string tmpName;
+                cin >> tmpName;
+                employee->setName(tmpName);
+                break;
+            }
+            case 3: {
+                cout << "修改后的性别：男生为：true 女生为：false";
+                bool tmpSex;
+                cin >> tmpSex;
+                employee->setSex(tmpSex);
+                break;
+            }
+            case 4: {
+                cout << "修改后的年龄\n";
+                int tmpAge;
+                cin >> tmpAge;
+                employee->setAge(tmpAge);
+                break;
+            }
+            case 5: {
+                cout << "修改后的家庭住址\n";
+                string tmpAddress;
+                cin >> tmpAddress;
+                employee->setAddress(tmpAddress);
+                break;
+            }
+            case 6: {
+                cout << "修改后的基本职务工资\n";
+                double tmpBaseWage;
+                cin >> tmpBaseWage;
+                employee->setBaseWage(tmpBaseWage);
+                break;
+            }
+            case 7: {
+                cout << "修改后的奖金\n";
+                double tmpBonus;
+                cin >> tmpBonus;
+                employee->setBonus(tmpBonus);
+                break;
+            }
+            case 8: {
+                cout << "修改后的所得税\n";
+                double tmpTax;
+                cin >> tmpTax;
+                employee->setTax(tmpTax);
+                break;
+            }
+            default: {
+                cout << "请输入正确的选项\n";
+                break;
             }
         }
-        cout << "修改成功\n";
     }
+    cout << "修改成功\n";
 }
 
 void Table::sortByRealWage() {                                         //将总表按实发工资进行排序
@@ -297,8 +323,8 @@ bool Table::saveInFile(string fileName, bool tableType) {
 }
 
 bool Table::logicalDeleteEmployee(int id) {
-    Employee ** resArr = searchEmployee(id);
-    if (resArr[0] == nullptr){
+    Employee **resArr = searchEmployee(id);
+    if (resArr[0] == nullptr) {
         return false;
     } else {
         pushBack(resArr[0], false);
