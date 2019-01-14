@@ -17,8 +17,10 @@ private:
     int size;
     int apacity;
 	int rear;
+	//内存空间扩容
 	bool memExtension();
 	
+
 
 public:
     //构造器初始化空表
@@ -40,10 +42,12 @@ public:
     //计算指针数组中所有指针指向对象的工资总值 平均工资
     void calculateWage(Employee **);
     //按realWage排序tableArr中对象
-    void sortByRealWage();
-    void statData();
+	void sortByRealWage();
+    //工资统计
+	void statData();
+	//在tableArr表尾增添一个元素
 	void push_back(Employee *employee);
-    ~Table();
+	~Table();
 };
 
 
