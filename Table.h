@@ -10,7 +10,6 @@
 
 const int ARR_SIZE = 100;
 const int ARR_INCREMENT = 50;
-eunm employeeType{regular, temproary};
 
 class Table {
 private:
@@ -27,7 +26,7 @@ public:
     //构造器初始化空表
     Table();
     //从文件中读入信息
-    bool readFromFile(string fileName, employeeType type);
+    bool readFromFile(string fileName);
     //从屏幕中读入信息
     bool readFromScreen();
     //以id name realWage为关键字从表中查找匹配的记录，返回指针数组
