@@ -47,6 +47,9 @@ public:
     //物理删除，不可恢复
     bool physicalDeleteEmployee(int id);
 
+	//恢复逻辑删除项
+	bool undeleteEmployee(int id);
+
     //保存在文件中
     bool saveInFile(string fileName, bool tableType);
 

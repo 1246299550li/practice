@@ -13,13 +13,14 @@ Table::Table() {
     apacity = 0;
     deleteApacity = 0;
     rear = 0;
+	deleteRear = 0;
 }
 
 
 bool Table::readFromFile(string fileName, bool tableType) {
 
     ifstream infile(fileName);
-    if (!infile.is_open())
+	if (!infile.is_open())
         return false;
     else {
         bool type;
@@ -48,7 +49,7 @@ bool Table::readFromFile(string fileName, bool tableType) {
                 p = new TemporaryEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpBonus,
                                           tmpTax);
             }
-            pushBack(p, tableType);
+            pushBack(p, true);
         }
         infile.close();
         return true;
@@ -56,17 +57,33 @@ bool Table::readFromFile(string fileName, bool tableType) {
 }
 
 
-bool Table::memExtension() {
-    Employee **desMem = new Employee *[size + ARR_INCREMENT];
-    if (!desMem)
-        return false;
-    else
-        for (int i = 0; i < size; i++)
-            desMem[i] = tableArr[i];
-    delete[] tableArr;
-    tableArr = desMem;
-    size += ARR_INCREMENT;
-    return true;
+bool Table::memExtension(bool tableType) {
+	if (tableType)
+	{
+		Employee **desMem = new Employee *[size + ARR_INCREMENT];
+		if (!desMem)
+			return false;
+		else
+			for (int i = 0; i < size; i++)
+				desMem[i] = tableArr[i];
+		delete[] tableArr;
+		tableArr = desMem;
+		size += ARR_INCREMENT;
+		return true;
+	}
+	else
+	{
+		Employee **desMem = new Employee *[rearSize + ARR_INCREMENT];
+		if (!desMem)
+			return false;
+		else
+			for (int i = 0; i < size; i++)
+				desMem[i] = deleteArr[i];
+		delete[] deleteArr;
+		deleteArr = desMem;
+		deleteSize += ARR_INCREMENT;
+		return true;
+	}
 }
 
 bool Table::readFromScreen() {
@@ -94,13 +111,29 @@ bool Table::readFromScreen() {
 }
 
 void Table::pushBack(Employee *employee, bool tableType) {
-    if (rear == size)
-        if (!memExtension()) {
-            cout << "memory error";
-            return;
-        }
-    tableArr[rear] = employee;
-    rear++;
+	if (tableType)
+	{
+		if (rear == size)
+			if (!memExtension(tableType)) {
+				cout << "memory error";
+				return;
+			}
+		tableArr[rear] = employee;
+		rear++;
+		apacity++;
+	}
+	else
+	{
+		if (deleteRear == deleteSize)
+			if (!memExtension(tableType)) {
+				cout << "memory error";
+				return;
+			}
+		tableArr[deleteRear] = employee;
+		deleteRear ++;
+		deleteApacity++;
+	}
+	
 }
 
 Employee **Table::searchEmployee(int id, bool tableType) {
@@ -333,12 +366,25 @@ bool Table::physicalDeleteEmployee(int id) {
 	else {
 		delete *deletion;
 		*deletion = nullptr;
+		deleteApacity--;
 		saveInFile("DeletedStaffInfo.txt", false);
 		return true;
 	}
 }
 
-
+bool Table::undeleteEmployee(int id)
+{
+	Employee ** recovery = searchEmployee(id, false);
+	if (*recovery == nullptr) {
+		return false;
+	}
+	else {
+			pushBack(*recovery, false);
+			saveInFile("DeletedStaffInfo.txt", false);
+			return true;
+		}
+	}
+}
 
 
 
