@@ -125,7 +125,7 @@ void Table::sortByRealWage() {                                         //将总�
         if (*(*tableArr + i) != NULL) {
             for (int j = 0; j < this->size - i; j++) {
                 if (*(*tableArr + j) != NULL) {
-                    if (*(*tableArr + i)->realwage < *(*tableArr + j)->realwage) {
+                    if (*(*tableArr + i).realwage < *(*tableArr + j).realwage) {
                         double t = (*tableArr + i);
                         (*tableArr + i) = (*tableArr + j);
                         (*tableArr + j) = t;
