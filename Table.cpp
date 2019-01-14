@@ -11,7 +11,7 @@ Table::Table() {
     deleteSize = ARR_SIZE;
     size = ARR_SIZE;
     apacity = 0;
-    deleteapacity = 0;
+    deleteApacity = 0;
     rear = 0;
 }
 
@@ -48,11 +48,7 @@ bool Table::readFromFile(string fileName, bool tableType) {
                 p = new TemporaryEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpBonus,
                                           tmpTax);
             }
-            if (tableType) {
-                pushBack(p);
-            } else {
-                deletePushBack(p);
-            }
+            pushBack(p, tableType);
         }
         infile.close();
         return true;
@@ -93,11 +89,11 @@ bool Table::readFromScreen() {
         p = new TemporaryEmployee();
         p->readInfo();
     }
-    //插入表中
-    //this.push
+    pushBack(p, true);
+
 }
 
-void Table::push_back(Employee *employee) {
+void Table::pushBack(Employee *employee, bool tableType) {
     if (rear == size)
         if (!memExtension()) {
             cout << "memory error";
@@ -107,11 +103,11 @@ void Table::push_back(Employee *employee) {
     rear++;
 }
 
-Employee **Table::searchEmployee(int id = 0, string name = "", double realWage = 0.0) {
-    Employee **p = new Employee[ARR_SIZE];
+Employee **Table::searchEmployee(int id, string name, double realWage, bool tableType) {
+    Employee **p = new Employee *[ARR_SIZE];
     int j = 0;
     for (int i = 0; i < apacity; i++) {
-        if (tableArr[i] == id || tableArr[i] == name || tableArr[i] == realWage) {
+        if (tableArr[i]->getId() == id || tableArr[i]->getName() == name || tableArr[i]->getRealWage() == realWage) {
             p[j] = tableArr[i];
             j++;
         }
@@ -119,9 +115,10 @@ Employee **Table::searchEmployee(int id = 0, string name = "", double realWage =
     return p;
 }
 
-bool **Table::updateEmployee(Employee *employee) {
+bool Table::updateEmployee(Employee *tmpEmployee) {
     int c;
-    if (employee->type) {
+    if (tmpEmployee->isType()) {
+        RegularEmployee *employee = (RegularEmployee *) tmpEmployee;
         cout << "输入要修改的项目\n";
         cout << "1.编号  2.姓名  3.性别  4.年龄  5.家庭住址 6.基本职务工资\n" <<
              "7.岗位津贴  8.住房公积金  9.养老金  10.所得税  11.医疗保险\n";
@@ -137,10 +134,10 @@ bool **Table::updateEmployee(Employee *employee) {
                 cout << "输入修改后的姓名\n";
                 string tmpName;
                 cin >> tmpName;
-                employee->setId(tmpName);
+                employee->setName(tmpName);
                 break;
             case 3:
-                cout << "修改后的性别：男生为：TRUE 女生为：FALUSE";
+                cout << "修改后的性别：男生为：true 女生为：false";
                 int tmpSex;
                 cin >> tmpSex;
                 employee->setSex(tmpSex);
@@ -171,7 +168,7 @@ bool **Table::updateEmployee(Employee *employee) {
                 break;
             case 8:
                 cout << "修改后的住房公积金\n";
-                doule tmpProvidentFund;
+                double tmpProvidentFund;
                 cin >> tmpProvidentFund;
                 employee->setProvidentFund(tmpProvidentFund);
                 break;
@@ -193,8 +190,10 @@ bool **Table::updateEmployee(Employee *employee) {
                 cin >> tmpInsurance;
                 employee->setInsurance(tmpInsurance);
                 break;
+            default:break;
         }
         else {
+            TemporaryEmployee *employee = (TemporaryEmployee *) tmpEmployee;
             cout << "输入要修改的项目\n";
             cout << "1.编号  2.姓名  3.性别  4.年龄  5.家庭住址 6.基本职务工资\n" <<
                  "7.奖金  8.所得税\n";
@@ -213,8 +212,8 @@ bool **Table::updateEmployee(Employee *employee) {
                     employee->setId(tmpName);
                     break;
                 case 3:
-                    cout << "修改后的性别：男生为：TRUE 女生为：FALUSE";
-                    int tmpSex;
+                    cout << "修改后的性别：男生为：true 女生为：false";
+                    bool tmpSex;
                     cin >> tmpSex;
                     employee->setSex(tmpSex);
                     break;
@@ -270,13 +269,6 @@ void Table::sortByRealWage() {                                         //将总�
     }
 }
 
-int Table::search(int id) {
-    for (int i = 0; i < length; i++)
-        if (tableArr[i]->id == id)
-            return i;
-    cout << "can not find the object";
-    return -1;
-}
 
 bool Table::physicalDeleteEmployee(int id) {
 
@@ -305,16 +297,15 @@ bool Table::saveInFile(string fileName, bool tableType) {
 }
 
 bool Table::logicalDeleteEmployee(int id) {
-    int pos = search(id);
-    if (pos = -1);
-    {
-        employee *p = tableArr[pos];
-        saveInFile("DeletedStaffInfo.txt");
-        tableArr[pos] = NULL;
+    Employee ** resArr = searchEmployee(id);
+    if (resArr[0] == nullptr){
+        return false;
+    } else {
+        pushBack(resArr[0], false);
+        saveInFile("DeletedStaffInfo.txt", false);
         return true;
     }
-    else
-    return false;
+
 }
 
 

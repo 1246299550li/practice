@@ -68,3 +68,7 @@ ostream &operator<<(ostream &os, const Employee &employee) {
        << " age: " << employee.age << " address: " << employee.address << " baseWage: " << employee.baseWage;
     return os;
 }
+
+bool Employee::isType() const {
+    return type;
+}
