@@ -131,7 +131,8 @@ bool Table::readFromScreen() {
 				}
 			}
 		}
-	}
+	 }
+}
 
 
 
