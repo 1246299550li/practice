@@ -49,6 +49,7 @@ public:
              << "\n实发工资：" << realWage;
     }
 
+    //从屏幕读入信息
     void readInfo() override {
         cout << "\n请输入编号(正整数)：";
         checkInput(id);
@@ -80,6 +81,10 @@ public:
             Employee(id, name, sex, age, address, baseWage), bonus(bonus), tax(tax) {
         calculateRealWage();
         type = false;
+    }
+
+    TemporaryEmployee() {
+
     }
 
     virtual ~TemporaryEmployee() {
