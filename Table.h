@@ -47,6 +47,7 @@ public:
 	void statData();
 	//在tableArr表尾增添一个元素
 	void push_back(Employee *employee);
+	int search(int id);
 	~Table();
 };
 

@@ -27,52 +27,51 @@ void Table::statData() {
 }
 
 bool Table::readFromFile(string fileName) {
+	ifstream infile(fileName);
+	if (!infile.is_open())
+		return false;
+	else {
+		bool type;
+		infile >> type;
+		if (type) {
+			RegularEmployee *p;
+			while (!infile.eof() {//update:使用push_back后不需要i
+				double tmpAllowance, tmpProvidentFund, tmpPension,
+					tmpTax, tmpInsurance, tmpBaseWage, tmpRealWage;
+				int tmpId, tmpAge;
+				bool tmpSex;
+				string tmpName, tmpAddress;
+				infile >> tmpId >> tmpName >> tmpSex >> tmpAge >> tmpAddress >> tmpBaseWage >> tmpAllowance >>
+					tmpProvidentFund >> tmpPension >> tmpTax >> tmpInsurance >> tmpRealWage;
+				p = new RegularEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpAllowance,
+					tmpProvidentFund, tmpPension, tmpTax, tmpInsurance);
+				//内存重新分配
+				//update:直接使用push_back函数添加新项
+				push_back(p);
+			}
+		else {
+			TemporaryEmployee *q;
+			while (!infile.eof() {//update:使用push_back后不需要i
+				double tmpBaseWage, tmpRealWage, tmpTax, tmpBonus;
+				int tmpId, tmpAge;
+				bool tmpSex;
+				string tmpName, tmpAddress;
+				infile >> tmpId >> tmpName >> tmpSex >> tmpAge >> tmpAddress
+					>> tmpBaseWage >> tmpBonus >> tmpTax >> tmpRealWage;
+				q = new TemporaryEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpBonus,
+					tmpTax);
+				//update:直接使用push_back函数添加新项
+				push_back(p);
+			}
 
-    ifstream infile(fileName);
-    if (!infile.is_open())
-        return false;
-    else {
-        bool type;
-        infile >> type;
-        if (type) {
-            RegularEmployee *p;
-            while (!infile.eof() {//update:使用push_back后不需要i
-                double tmpAllowance, tmpProvidentFund, tmpPension,
-                        tmpTax, tmpInsurance, tmpBaseWage, tmpRealWage;
-                int tmpId, tmpAge;
-                bool tmpSex;
-                string tmpName, tmpAddress;
-                infile >> tmpId >> tmpName >> tmpSex >> tmpAge >> tmpAddress >> tmpBaseWage >> tmpAllowance >>
-                       tmpProvidentFund >> tmpPension >> tmpTax >> tmpInsurance >> tmpRealWage;
-                p = new RegularEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpAllowance,
-                                        tmpProvidentFund, tmpPension, tmpTax, tmpInsurance);
-                //内存重新分配
-                //update:直接使用push_back函数添加新项
-                push_back(p);
-            }
-            else{
-                TemporaryEmployee *q;
-                while (!infile.eof() {//update:使用push_back后不需要i
-                    double tmpBaseWage, tmpRealWage, tmpTax, tmpBonus;
-                    int tmpId, tmpAge;
-                    bool tmpSex;
-                    string tmpName, tmpAddress;
-                    infile >> tmpId >> tmpName >> tmpSex >> tmpAge >> tmpAddress
-                           >> tmpBaseWage >> tmpBonus >> tmpTax >> tmpRealWage;
-                    q = new TemporaryEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpBonus,
-                                              tmpTax);
-                    //update:直接使用push_back函数添加新项
-                    push_back(p);
-                }
+		}
+		infile.close();
+		return true;
+		}
+	}
+}
 
-            }
-            infile.close();
-            return true;
-        }
-    }
-
-
-    bool Table::memExtension() {
+bool Table::memExtension() {
         Employee **desMem = new Employee *[size + ARR_INCREMENT];
         if (!desMem)
             return false;
@@ -85,7 +84,7 @@ bool Table::readFromFile(string fileName) {
         return true;
     }
 
-    bool Table::readFromScreen() {
+bool Table::readFromScreen() {
         bool type;
         cout << "请输入要添加的职工种类(1表示正式职工 0表示临时职工):";
         while (!(cin >> type)) {
@@ -109,7 +108,7 @@ bool Table::readFromFile(string fileName) {
         //this.push
     }
 
-    void Table::push_back(Employee *employee) {
+void Table::push_back(Employee *employee) {
         if (rear == size)
             if (!memExtension()) {
                 cout << "memory error";
@@ -134,14 +133,16 @@ void Table::sortByRealWage() {                                         //将总�
         }
     }
 }
-   Table::int search(int id){
+
+int Table::search(int id){
 	   for (int i = 0; i < length; i++)
 		   if (tableArr[i]->id == id)
 			   return i;
 	   cout << "can not find the object";
 	   return -1;
    }
-Table::bool physicalDeleteEmployee(int id){
+
+bool Table::physicalDeleteEmployee(int id){
 
     bool Table::saveInFile(string fileName) {
         ofstream out;
@@ -157,7 +158,8 @@ Table::bool physicalDeleteEmployee(int id){
 
 
 }
-Table::bool logicalDeleteEmployee(int id) {
+
+bool Table::logicalDeleteEmployee(int id) {
 	int pos = search(id);
 	if (pos = -1);
 	{
