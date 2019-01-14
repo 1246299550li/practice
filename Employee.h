@@ -24,9 +24,12 @@ protected:
 public:
     virtual void displayInfo() = 0;
     virtual void readInfo() = 0;
+    virtual void writeInFile() = 0;
     Employee(int id, const string &name, bool sex, int age, const string &address, double baseWage);
 
     Employee();
+
+    friend ostream &operator<<(ostream &os, const Employee &employee);
 
     void setId(int id);
 
