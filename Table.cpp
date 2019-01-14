@@ -103,16 +103,40 @@ void Table::pushBack(Employee *employee, bool tableType) {
     rear++;
 }
 
-Employee **Table::searchEmployee(int id, string name, double realWage, bool tableType) {
+Employee **Table::searchEmployee(int id, bool tableType) {
     Employee **p = new Employee *[ARR_SIZE];
     int j = 0;
     for (int i = 0; i < apacity; i++) {
-        if (tableArr[i]->getId() == id || tableArr[i]->getName() == name || tableArr[i]->getRealWage() == realWage) {
+        if (tableArr[i]->getId() == id ) {
             p[j] = tableArr[i];
             j++;
         }
     }
     return p;
+}
+
+Employee **Table::searchEmployee(string name, bool tableType) {
+	Employee **p = new Employee *[ARR_SIZE];
+	int j = 0;
+	for (int i = 0; i < apacity; i++) {
+		if ( tableArr[i]->getName() == name ) {
+			p[j] = tableArr[i];
+			j++;
+		}
+	}
+	return p;
+}
+
+Employee **Table::searchEmployee(double realWage, bool tableType) {
+	Employee **p = new Employee *[ARR_SIZE];
+	int j = 0;
+	for (int i = 0; i < apacity; i++) {
+		if (tableArr[i]->getRealWage() == realWage) {
+			p[j] = tableArr[i];
+			j++;
+		}
+	}
+	return p;
 }
 
 bool Table::updateEmployee(Employee *tmpEmployee) {
@@ -269,12 +293,6 @@ void Table::sortByRealWage() {                                         //将总�
     }
 }
 
-
-bool Table::physicalDeleteEmployee(int id) {
-
-
-}
-
 bool Table::saveInFile(string fileName, bool tableType) {
     ofstream out;
     out.open(fileName);
@@ -297,7 +315,7 @@ bool Table::saveInFile(string fileName, bool tableType) {
 }
 
 bool Table::logicalDeleteEmployee(int id) {
-    Employee ** resArr = searchEmployee(id);
+    Employee ** resArr = searchEmployee(id,true);
     if (resArr[0] == nullptr){
         return false;
     } else {
@@ -305,10 +323,20 @@ bool Table::logicalDeleteEmployee(int id) {
         saveInFile("DeletedStaffInfo.txt", false);
         return true;
     }
-
 }
 
-
+bool Table::physicalDeleteEmployee(int id) {
+	Employee ** deletion = searchEmployee(id, false);
+	if (*deletion == nullptr) {
+		return false;
+	}
+	else {
+		delete *deletion;
+		*deletion = nullptr;
+		saveInFile("DeletedStaffInfo.txt", false);
+		return true;
+	}
+}
 
 
 
