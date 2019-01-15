@@ -1,0 +1,1 @@
+type: 80 id: 15 name: ÈöµØ·½ sex: 1 age: 45 address: sdf baseWage: 12

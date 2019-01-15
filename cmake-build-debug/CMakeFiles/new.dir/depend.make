@@ -18,5 +18,9 @@ CMakeFiles/new.dir/TemporaryEmployee.cpp.obj: ../Employee.h
 CMakeFiles/new.dir/TemporaryEmployee.cpp.obj: ../TemporaryEmployee.cpp
 CMakeFiles/new.dir/TemporaryEmployee.cpp.obj: ../TemporaryEmployee.h
 
+CMakeFiles/new.dir/main.cpp.obj: ../Employee.h
+CMakeFiles/new.dir/main.cpp.obj: ../RegularEmployee.h
+CMakeFiles/new.dir/main.cpp.obj: ../Table.h
+CMakeFiles/new.dir/main.cpp.obj: ../TemporaryEmployee.h
 CMakeFiles/new.dir/main.cpp.obj: ../main.cpp
 
