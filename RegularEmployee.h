@@ -8,42 +8,31 @@
 #include <ostream>
 #include "Employee.h"
 
-//æ­£å¼èŒå·¥ç±»
+//ÕıÊ½Ö°¹¤Àà
 class RegularEmployee : public Employee {
 private:
-    double allowance; //å²—ä½æ´¥è´´
-    double providentFund; //ä½æˆ¿å…¬ç§¯é‡‘
-    double pension; //å…»è€é‡‘
-    double tax; //æ‰€å¾—ç¨
-    double insurance; //åŒ»ç–—ä¿é™©
-    double realWage; //å®å‘å·¥èµ„
+    double allowance; //¸ÚÎ»½òÌù
+    double providentFund; //×¡·¿¹«»ı½ğ
+    double pension; //ÑøÀÏ½ğ
+    double tax; //ËùµÃË°
+    double insurance; //Ò½ÁÆ±£ÏÕ
+    double realWage; //Êµ·¢¹¤×Ê
 
 protected:
-    // è®¡ç®—å®å‘å·¥èµ„=åŸºæœ¬èŒåŠ¡å·¥èµ„+å²—ä½æ´¥è´´-å…»è€é‡‘-ä½æˆ¿å…¬ç§¯é‡‘-æ‰€å¾—ç¨-åŒ»ç–—ä¿é™©
+    // ¼ÆËãÊµ·¢¹¤×Ê=»ù±¾Ö°Îñ¹¤×Ê+¸ÚÎ»½òÌù-ÑøÀÏ½ğ-×¡·¿¹«»ı½ğ-ËùµÃË°-Ò½ÁÆ±£ÏÕ
     void calculateRealWage() override;
 
 public:
-    template<typename T>
-    void checkInput(T &target) {
-        while (!(cin >> target)) {
-            cout << "\nè¾“å…¥é”™è¯¯ï¼è¯·é‡æ–°è¾“å…¥";
-            cin.clear();
-            while (cin.get() != '\n') {
-            }
-        }
-        cout << "\nè¾“å…¥æˆåŠŸ";
-        while (cin.get() != '\n') {
-        }
-    }
 
-    //æ˜¾ç¤ºä¿¡æ¯
+
+    //ÏÔÊ¾ĞÅÏ¢
     void displayInfo() override;
 
 
-    //ä»å±å¹•è¯»å…¥ä¿¡æ¯
+    //´ÓÆÁÄ»¶ÁÈëĞÅÏ¢
     void readInfo() override;
 
-    //å†™å…¥ä¿¡æ¯åˆ°æ–‡ä»¶
+    //Ğ´ÈëĞÅÏ¢µ½ÎÄ¼ş
     friend ostream &operator<<(ostream &os, const RegularEmployee &employee);
 
     RegularEmployee(int id, const string &name, bool sex, int age, const string &address, double baseWage,

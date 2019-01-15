@@ -10,19 +10,31 @@
 
 using namespace std;
 
-//èŒå·¥ç±»
+//Ö°¹¤Àà
 class Employee {
 protected:
-    bool type; //ç±»å‹ tureä¸ºæ­£å¼èŒå·¥ falseä¸ºä¸´æ—¶èŒå·¥
-    int id; //ç¼–å·
-    string name; //å§“å
-    bool sex; //æ€§åˆ« tureä¸ºç”· falseä¸ºå¥³
-    int age; //å¹´é¾„
-    string address; //å®¶åº­ä½å€
-    double baseWage; //åŸºæœ¬èŒåŠ¡å·¥èµ„
+    bool type; //ÀàĞÍ tureÎªÕıÊ½Ö°¹¤ falseÎªÁÙÊ±Ö°¹¤
+    int id; //±àºÅ
+    string name; //ĞÕÃû
+    bool sex; //ĞÔ±ğ tureÎªÄĞ falseÎªÅ®
+    int age; //ÄêÁä
+    string address; //¼ÒÍ¥×¡Ö·
+    double baseWage; //»ù±¾Ö°Îñ¹¤×Ê
     virtual void calculateRealWage() = 0;
 
 public:
+    template<typename T>
+    static void checkInput(T &target) {
+        while (!(cin >> target)) {
+            cout << "\nÊäÈë´íÎó£¡ÇëÖØĞÂÊäÈë";
+            cin.clear();
+            while (cin.get() != '\n') {
+            }
+        }
+        cout << "\nÊäÈë³É¹¦";
+        while (cin.get() != '\n') {
+        }
+    }
     virtual void displayInfo() = 0;
 
     virtual void readInfo() = 0;

@@ -4,48 +4,48 @@
 
 #include "TemporaryEmployee.h"
 
-//æ˜¾ç¤ºä¿¡æ¯
+//ÏÔÊ¾ĞÅÏ¢
 void TemporaryEmployee::displayInfo() {
     cout.precision(2);
     cout.
             setf(ios_base::fixed);
-    cout << "--ä¸´æ—¶èŒå·¥--\n"
-         << "\nç¼–å·ï¼š" << id
-         << "\nå§“åï¼š" << name
-         << "\næ€§åˆ«ï¼š" << sex
-         << "\nå¹´é¾„ï¼š" << age
-         << "\nå®¶åº­ä½å€ï¼š" << address
-         << "\nåŸºæœ¬èŒåŠ¡å·¥èµ„ï¼š" << baseWage
-         << "\nå¥–é‡‘ï¼š" << bonus
-         << "\næ‰€å¾—ç¨ï¼š" << tax
-         << "\nå®å‘å·¥èµ„ï¼š" <<
+    cout << "--ÁÙÊ±Ö°¹¤--\n"
+         << "\n±àºÅ£º" << id
+         << "\nĞÕÃû£º" << name
+         << "\nĞÔ±ğ£º" << sex
+         << "\nÄêÁä£º" << age
+         << "\n¼ÒÍ¥×¡Ö·£º" << address
+         << "\n»ù±¾Ö°Îñ¹¤×Ê£º" << baseWage
+         << "\n½±½ğ£º" << bonus
+         << "\nËùµÃË°£º" << tax
+         << "\nÊµ·¢¹¤×Ê£º" <<
          realWage;
 }
 
-//ä»å±å¹•è¯»å…¥ä¿¡æ¯
+//´ÓÆÁÄ»¶ÁÈëĞÅÏ¢
 void TemporaryEmployee::readInfo() {
-    cout << "\nè¯·è¾“å…¥ç¼–å·(æ­£æ•´æ•°)ï¼š";
+    cout << "\nÇëÊäÈë±àºÅ(ÕıÕûÊı)£º";
     checkInput(id);
 
-    cout << "\nè¯·è¾“å…¥å§“åï¼š";
+    cout << "\nÇëÊäÈëĞÕÃû£º";
     checkInput(name);
 
-    cout << "\nè¯·è¾“å…¥å§“åˆ«(1è¡¨ç¤ºç”·, 0è¡¨ç¤ºå¥³)ï¼š";
+    cout << "\nÇëÊäÈëĞÕ±ğ(1±íÊ¾ÄĞ, 0±íÊ¾Å®)£º";
     checkInput(sex);
 
-    cout << "\nè¯·è¾“å…¥å¹´é¾„(æ­£æ•´æ•°)ï¼š";
+    cout << "\nÇëÊäÈëÄêÁä(ÕıÕûÊı)£º";
     checkInput(age);
 
-    cout << "\nè¯·è¾“å…¥å®¶åº­ä½å€ï¼š";
+    cout << "\nÇëÊäÈë¼ÒÍ¥×¡Ö·£º";
     checkInput(address);
 
-    cout << "\nè¯·è¾“å…¥åŸºæœ¬èŒåŠ¡å·¥èµ„ï¼š";
+    cout << "\nÇëÊäÈë»ù±¾Ö°Îñ¹¤×Ê£º";
     checkInput(baseWage);
 
-    cout << "\nè¯·è¾“å…¥å¥–é‡‘ï¼š";
+    cout << "\nÇëÊäÈë½±½ğ£º";
     checkInput(bonus);
 
-    cout << "\nè¯·è¾“å…¥æ‰€å¾—ç¨ï¼š";
+    cout << "\nÇëÊäÈëËùµÃË°£º";
     checkInput(tax);
 }
 
@@ -59,7 +59,7 @@ TemporaryEmployee::TemporaryEmployee(int id, const string &name, bool sex, int a
 
 TemporaryEmployee::TemporaryEmployee() = default;
 
-//å†™å…¥ä¿¡æ¯åˆ°æ–‡ä»¶
+//Ğ´ÈëĞÅÏ¢µ½ÎÄ¼ş
 ostream &operator<<(ostream &os, const TemporaryEmployee &employee) {
     os << static_cast<const Employee &>(employee) << " bonus: " << employee.bonus << " tax: " << employee.tax
        << " realWage: " << employee.realWage;

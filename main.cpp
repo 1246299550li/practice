@@ -2,6 +2,7 @@
 #include "Table.h"
 #include<iomanip>
 using namespace std;
+Table *table = nullptr;
 void wageStatistic(Table t) {		//功能4
 	double sum = 0, average = 0;
 	t.calculateWage(t.tableArr, sum, average);
@@ -42,7 +43,19 @@ void sortWage(Table t) {			//功能5
 	}
 }
 int main() {
-    cout << "Hello, World!" << endl;
-    Table t;
+
+
+    outputMenu();
+//    cout << "你好风格士大夫" << endl;
+
+//    Table t;
+
+//    t.readFromFile("E:\\new\\1.txt", true);
+//    t.readFromScreen();
+//    system("pause");
+//    t.tableArr[0]->displayInfo();
+//    system("pause");
+//    t.saveInFile("E:\\new\\output.txt", true);
+//    system("pause");
     return 0;
 }
