@@ -27,6 +27,9 @@ private:
 
 
 public:
+    template<typename T>
+    void checkInput(T &target);
+
     //构造器初始化空表
     Table();
 
