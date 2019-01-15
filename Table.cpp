@@ -327,14 +327,14 @@ bool Table::updateEmployee(Employee *tmpEmployee) {
 }
 
 void Table::sortByRealWage() {                                         //将总表按实发工资进行排序
-//    for (int i = 0; i < apacity; i++) {
+//    for (int i = 0; i < size; i++) {
 //        if (*tableArr[i] != NULL) {
-//            for (int j = i + 1; j < apacity; j++) {
-//                if (*(*tableArr + j) != NULL) {
-//                    if (*(*tableArr + i).realwage < *(*tableArr + j).realwage) {
-//                        double t = (*tableArr + i);
-//                        (*tableArr + i) = (*tableArr + j);
-//                        (*tableArr + j) = t;
+//            for (int j = i + 1; j < size; j++) {
+//                if (*tableArr[j] != NULL) {
+//                    if (*tableArr[i]->realwage < *tableArr[j]->realwage) {
+//                        double t = *tableArr[i];
+//                        *tableArr[i] = *tableArr[j];
+//                        *tableArr[j] = t;
 //                    }
 //                }
 //            }
