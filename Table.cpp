@@ -19,9 +19,10 @@ Table::Table() {
 bool Table::readFromFile(string fileName, bool tableType) {
 
     ifstream infile(fileName);
-    if (!infile.is_open())
+    if (!infile.is_open()) {
+        cout << "false" << endl;
         return false;
-    else {
+    } else {
         bool type;
         while (infile >> type) {
             double tmpAllowance, tmpProvidentFund, tmpPension, tmpTax,
@@ -50,6 +51,7 @@ bool Table::readFromFile(string fileName, bool tableType) {
             }
             pushBack(p, tableType);
         }
+        cout << "successful" << endl;
         infile.close();
         return true;
     }
@@ -432,3 +434,4 @@ void Table::calculateWage(Employee **) {        //计算指针数组中所有指
     cout << "平均工资：" << average << "\n";
 }
 
+Table::~Table() = default;

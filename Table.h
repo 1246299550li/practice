@@ -13,6 +13,9 @@ const int ARR_INCREMENT = 50;
 
 class Table {
 private:
+
+
+public:
     Employee **tableArr;
     Employee **deleteArr;
     int size;
@@ -25,8 +28,6 @@ private:
     //内存空间扩容
     bool memExtension(bool tableType);
 
-
-public:
     template<typename T>
     void checkInput(T &target) {
         while (!(cin >> target)) {
