@@ -404,5 +404,14 @@ bool Table::undeleteEmployee(int id) {
 }
 
 
-
+void Table::calculateWage(Employee **) {        //计算指针数组中所有指针指向对象的工资总值 平均工资
+	double sum = 0;
+	double average = 0;
+	for (int i = 0; i < this->size; i++) {
+		if (tableArr[i] != NULL)
+			sum = sum + *tableArr[i];
+	}
+	average = sum / this->apacity;
+	cout << "工资总值："<<sum<<"\n";
+	cout << "平均工资：" << average << "\n";
 
