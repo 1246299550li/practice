@@ -28,6 +28,18 @@ public:
     //å†…å­˜ç©ºé—´æ‰©å®¹
     bool memExtension(bool tableType);
 
+    template<typename T>
+    void checkInput(T &target) {
+        while (!(cin >> target)) {
+            cout << "\nÊäÈë´íÎó£¡ÇëÖØÐÂÊäÈë";
+            cin.clear();
+            while (cin.get() != '\n') {
+            }
+        }
+        cout << "\nÊäÈë³É¹¦";
+        while (cin.get() != '\n') {
+        }
+    }
 
     //æž„é€ å™¨åˆå§‹åŒ–ç©ºè¡¨
     Table();
