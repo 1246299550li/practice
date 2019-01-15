@@ -8,15 +8,15 @@
 #include <ostream>
 #include "Employee.h"
 
-//ÁÙÊ±Ö°¹¤Àà
+//ä¸´æ—¶èŒå·¥ç±»
 class TemporaryEmployee : public Employee {
 private:
-    double bonus; //½±½ğ
-    double tax; //ËùµÃË°
-    double realWage; //Êµ·¢¹¤×Ê
+    double bonus; //å¥–é‡‘
+    double tax; //æ‰€å¾—ç¨
+    double realWage; //å®å‘å·¥èµ„
 
 protected:
-    //¼ÆËãÊµ·¢¹¤×Ê=»ù±¾Ö°Îñ¹¤×Ê+½±½ğ-ËùµÃË°
+    //è®¡ç®—å®å‘å·¥èµ„=åŸºæœ¬èŒåŠ¡å·¥èµ„+å¥–é‡‘-æ‰€å¾—ç¨
     void calculateRealWage() override {
         realWage = baseWage + bonus - tax;
     };
@@ -24,20 +24,20 @@ public:
     template<typename T>
     void checkInput(T &target) {
         while (!(cin >> target)) {
-            cout << "\nÊäÈë´íÎó£¡ÇëÖØĞÂÊäÈë";
+            cout << "\nè¾“å…¥é”™è¯¯ï¼è¯·é‡æ–°è¾“å…¥";
             cin.clear();
             while (cin.get() != '\n') {
             }
         }
-        cout << "\nÊäÈë³É¹¦";
+        cout << "\nè¾“å…¥æˆåŠŸ";
         while (cin.get() != '\n') {
         }
     }
 
-    //ÏÔÊ¾ĞÅÏ¢
+    //æ˜¾ç¤ºä¿¡æ¯
     void displayInfo() override;
 
-    //´ÓÆÁÄ»¶ÁÈëĞÅÏ¢
+    //ä»å±å¹•è¯»å…¥ä¿¡æ¯
     void readInfo() override;
 
     TemporaryEmployee(int id, const string &name, bool sex, int age, const string &address, double baseWage,
@@ -45,7 +45,7 @@ public:
 
     TemporaryEmployee();
 
-    //Ğ´ÈëĞÅÏ¢µ½ÎÄ¼ş
+    //å†™å…¥ä¿¡æ¯åˆ°æ–‡ä»¶
     friend ostream &operator<<(ostream &os, const TemporaryEmployee &employee);
 
 

@@ -63,19 +63,14 @@ void sortWage(Table t) {			//功能5
 	}
 }
 int main() {
-
-
-    outputMenu();
-//    cout << "你好风格士大夫" << endl;
-
-//    Table t;
-
+    cout << "Hello, World!" << endl;
+    Table t;
 //    t.readFromFile("E:\\new\\1.txt", true);
-//    t.readFromScreen();
-//    system("pause");
-//    t.tableArr[0]->displayInfo();
-//    system("pause");
-//    t.saveInFile("E:\\new\\output.txt", true);
-//    system("pause");
+    t.readFromScreen();
+    system("pause");
+    t.tableArr[0]->displayInfo();
+    system("pause");
+    t.saveInFile("E:\\new\\output.txt", true);
+    system("pause");
     return 0;
 }

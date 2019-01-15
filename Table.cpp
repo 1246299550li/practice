@@ -13,7 +13,6 @@ Table::Table() {
     size = ARR_SIZE;
     apacity = 0;
     deleteApacity = 0;
-    cout << "你好说的话" << endl;
 }
 
 
@@ -86,9 +85,7 @@ bool Table::memExtension(bool tableType) {
 bool Table::readFromScreen() {
     bool type;
     cout << "请输入要添加的职工种类(1表示正式职工 0表示临时职工):";
-//    checkInput(type);
-cin >> type;
-//    cout << "1" << endl;
+    checkInput(type);
     Employee *p;
     if (type) {
         p = new RegularEmployee();
@@ -97,7 +94,6 @@ cin >> type;
         p = new TemporaryEmployee();
         p->readInfo();
     }
-    cout << "1" << endl;
     pushBack(p, true);
 	return true;
 
@@ -387,13 +383,13 @@ bool Table::saveInFile(string fileName, bool tableType) {
     if (tableType) {
         for (int i = 0; i < apacity; ++i) {
             if (tableArr[i] != nullptr) {
-                out << *tableArr[i] << endl;
+                out << tableArr[i] << endl;
             }
         }
     } else {
         for (int i = 0; i < deleteApacity; ++i) {
             if (tableArr[i] != nullptr) {
-                out << *deleteArr[i] << endl;
+                out << tableArr[i] << endl;
             }
         }
     }
