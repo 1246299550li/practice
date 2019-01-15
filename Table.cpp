@@ -85,7 +85,9 @@ bool Table::memExtension(bool tableType) {
 bool Table::readFromScreen() {
     bool type;
     cout << "请输入要添加的职工种类(1表示正式职工 0表示临时职工):";
-    checkInput(type);
+//    checkInput(type);
+cin >> type;
+//    cout << "1" << endl;
     Employee *p;
     if (type) {
         p = new RegularEmployee();
