@@ -59,7 +59,7 @@ public:
 
     double getBaseWage() const;
 
-    virtual double getRealWage() = 0;
+    virtual double getRealWage() const = 0;
 
     virtual ~Employee();
 };

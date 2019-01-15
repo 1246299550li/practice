@@ -141,3 +141,4 @@ double RegularEmployee::getInsurance() const {
 double RegularEmployee::getRealWage() const {
     return realWage;
 }
+

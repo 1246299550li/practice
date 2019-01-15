@@ -64,7 +64,7 @@ public:
 
     double getInsurance() const;
 
-    double getRealWage() const;
+    double getRealWage() const override ;
 
 
 };

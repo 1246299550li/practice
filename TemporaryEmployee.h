@@ -49,7 +49,7 @@ public:
 
     double getTax() const;
 
-    double getRealWage() const;
+    double getRealWage() const override;
 };
 
 
