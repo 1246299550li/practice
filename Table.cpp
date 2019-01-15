@@ -12,8 +12,6 @@ Table::Table() {
     size = ARR_SIZE;
     apacity = 0;
     deleteApacity = 0;
-    rear = 0;
-    deleteRear = 0;
 }
 
 
@@ -109,22 +107,20 @@ bool Table::readFromScreen() {
 
 void Table::pushBack(Employee *employee, bool tableType) {
     if (tableType) {
-        if (rear == size)
+        if (apacity == size)
             if (!memExtension(tableType)) {
                 cout << "memory error";
                 return;
             }
-        tableArr[rear] = employee;
-        rear++;
+        tableArr[apacity] = employee;
         apacity++;
     } else {
-        if (deleteRear == deleteSize)
+        if (deleteApacity == deleteSize)
             if (!memExtension(tableType)) {
                 cout << "memory error";
                 return;
             }
-        tableArr[deleteRear] = employee;
-        deleteRear++;
+        tableArr[deleteApacity] = employee;
         deleteApacity++;
     }
 
@@ -331,14 +327,14 @@ bool Table::updateEmployee(Employee *tmpEmployee) {
 }
 
 void Table::sortByRealWage() {                                         //将总表按实发工资进行排序
-//    for (int i = 0; i < apacity; i++) {
+//    for (int i = 0; i < size; i++) {
 //        if (*tableArr[i] != NULL) {
-//            for (int j = i + 1; j < apacity; j++) {
-//                if (*(*tableArr + j) != NULL) {
-//                    if (*(*tableArr + i).realwage < *(*tableArr + j).realwage) {
-//                        double t = (*tableArr + i);
-//                        (*tableArr + i) = (*tableArr + j);
-//                        (*tableArr + j) = t;
+//            for (int j = i + 1; j < size; j++) {
+//                if (*tableArr[j] != NULL) {
+//                    if (*tableArr[i]->realwage < *tableArr[j]->realwage) {
+//                        double t = *tableArr[i];
+//                        *tableArr[i] = *tableArr[j];
+//                        *tableArr[j] = t;
 //                    }
 //                }
 //            }
@@ -386,7 +382,6 @@ bool Table::physicalDeleteEmployee(int id) {
     } else {
         delete *deletion;
         *deletion = nullptr;
-        deleteApacity--;
         saveInFile("DeletedStaffInfo.txt", false);
         return true;
     }
@@ -404,5 +399,15 @@ bool Table::undeleteEmployee(int id) {
 }
 
 
-
+void Table::calculateWage(Employee **) {        //计算指针数组中所有指针指向对象的工资总值 平均工资
+	double sum = 0;
+	double average = 0;
+	for (int i = 0; i < this->size; i++) {
+		if (tableArr[i] != NULL)
+			sum = sum + *tableArr[i];
+	}
+	average = sum / this->apacity;
+	cout << "工资总值：" << sum << "\n";
+	cout << "平均工资：" << average << "\n";
+}
 
