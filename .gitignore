@@ -2,10 +2,4 @@
 # 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
 ################################################################################
 
-/.vs/VSWorkspaceState.json
-/.vs/practice/v15/Browse.VC.db
-/.vs/practice/v15/Browse.VC.opendb
-/.vs/practice/v15/ipch/AutoPCH/929fe0c3ca05a6c8/TABLE.ipch
-/.vs/ProjectSettings.json
-/.vs/slnx.sqlite
-/.vs/practice/v15/.suo
+/.vs

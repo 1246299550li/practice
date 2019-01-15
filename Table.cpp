@@ -12,8 +12,6 @@ Table::Table() {
     size = ARR_SIZE;
     apacity = 0;
     deleteApacity = 0;
-    rear = 0;
-    deleteRear = 0;
 }
 
 
@@ -109,22 +107,20 @@ bool Table::readFromScreen() {
 
 void Table::pushBack(Employee *employee, bool tableType) {
     if (tableType) {
-        if (rear == size)
+        if (apacity == size)
             if (!memExtension(tableType)) {
                 cout << "memory error";
                 return;
             }
-        tableArr[rear] = employee;
-        rear++;
+        tableArr[apacity] = employee;
         apacity++;
     } else {
-        if (deleteRear == deleteSize)
+        if (deleteApacity == deleteSize)
             if (!memExtension(tableType)) {
                 cout << "memory error";
                 return;
             }
-        tableArr[deleteRear] = employee;
-        deleteRear++;
+        tableArr[deleteApacity] = employee;
         deleteApacity++;
     }
 
@@ -421,7 +417,6 @@ bool Table::physicalDeleteEmployee(int id) {
     } else {
         delete *deletion;
         *deletion = nullptr;
-        deleteApacity--;
         saveInFile("DeletedStaffInfo.txt", false);
         return true;
     }
@@ -447,7 +442,7 @@ void Table::calculateWage(Employee **) {        //计算指针数组中所有指
 			sum = sum + *tableArr[i];
 	}
 	average = sum / this->apacity;
-	cout << "工资总值："<<sum<<"\n";
+	cout << "工资总值：" << sum << "\n";
 	cout << "平均工资：" << average << "\n";
 }
 
