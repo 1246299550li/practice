@@ -18,13 +18,10 @@ private:
     double insurance; //医疗保险
     double realWage; //实发工资
 
-protected:
-    // 计算实发工资=基本职务工资+岗位津贴-养老金-住房公积金-所得税-医疗保险
-    void calculateRealWage() override;
-
 public:
 
-
+// 计算实发工资=基本职务工资+岗位津贴-养老金-住房公积金-所得税-医疗保险
+    void calculateRealWage() override;
     //显示信息
     void displayInfo() override;
 

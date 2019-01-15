@@ -20,9 +20,10 @@ protected:
     int age; //年龄
     string address; //家庭住址
     double baseWage; //基本职务工资
-    virtual void calculateRealWage() = 0;
+
 
 public:
+    virtual void calculateRealWage() = 0;
     template<typename T>
     static void checkInput(T &target) {
         while (!(cin >> target)) {

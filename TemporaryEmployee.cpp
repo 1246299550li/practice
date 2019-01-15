@@ -4,6 +4,10 @@
 
 #include "TemporaryEmployee.h"
 
+void TemporaryEmployee::calculateRealWage() {
+    realWage = baseWage + bonus - tax;
+};
+
 //œ‘ æ–≈œ¢
 void TemporaryEmployee::displayInfo() {
     cout.precision(2);

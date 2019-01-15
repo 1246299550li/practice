@@ -353,6 +353,7 @@ bool Table::updateEmployee(Employee *tmpEmployee) {
             }
         }
     }
+    tmpEmployee->calculateRealWage();
     cout << "修改成功!\n";
 }
 
@@ -430,16 +431,19 @@ bool Table::recoverDeleteEmployee(int id, string nowOpenedFile) {
 }
 
 //计算指针数组中所有指针指向对象的工资总值 平均工资
-void Table::calculateWage(Employee **) {
+void Table::calculateWage(Employee **arr) {
     double sum = 0;
     double average = 0;
-    for (int i = 0; i < apacity; i++) {
-        if (tableArr[i] != nullptr)
-            sum = sum + tableArr[i]->getRealWage();
+    int cot = 0;
+    for (int i = 0; i < ARR_SIZE; i++) {
+        if (arr[i] != nullptr) {
+            sum += arr[i]->getRealWage();
+            cot++;
+        }
     }
-    average = sum / apacity;
-    cout << "工资总值：" << sum << "\n";
-    cout << "平均工资：" << average << "\n";
+    average = sum / cot;
+    cout << "工资总值：" << sum << endl;
+    cout << "平均工资：" << average << endl;
 }
 
 Table::~Table() = default;

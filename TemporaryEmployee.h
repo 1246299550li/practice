@@ -15,13 +15,10 @@ private:
     double tax; //所得税
     double realWage; //实发工资
 
-protected:
-    //计算实发工资=基本职务工资+奖金-所得税
-    void calculateRealWage() override {
-        realWage = baseWage + bonus - tax;
-    };
-public:
 
+public:
+    //计算实发工资=基本职务工资+奖金-所得税
+    void calculateRealWage() override;
 
     //显示信息
     void displayInfo() override;
