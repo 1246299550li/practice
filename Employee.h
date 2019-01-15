@@ -58,7 +58,9 @@ public:
     const string &getAddress() const;
 
     double getBaseWage() const;
-    virtual double getRealWage() == 0;
+
+    virtual double getRealWage() = 0;
+
     virtual ~Employee();
 };
 

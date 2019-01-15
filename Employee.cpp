@@ -72,3 +72,7 @@ ostream &operator<<(ostream &os, const Employee &employee) {
 bool Employee::isType() const {
     return type;
 }
+
+double Employee::getRealWage() {
+    return 0;
+}
