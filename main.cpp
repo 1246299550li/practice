@@ -21,7 +21,8 @@ void outputMenu() {
 
 void newDataFile() {
     if (table != nullptr){
-        cout << "已打开文件"
+        cout << "已打开文件\n";
+//        cout <<
     }
 
 }

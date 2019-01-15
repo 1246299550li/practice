@@ -23,6 +23,18 @@ protected:
     virtual void calculateRealWage() = 0;
 
 public:
+    template<typename T>
+    static void checkInput(T &target) {
+        while (!(cin >> target)) {
+            cout << "\n输入错误！请重新输入";
+            cin.clear();
+            while (cin.get() != '\n') {
+            }
+        }
+        cout << "\n输入成功";
+        while (cin.get() != '\n') {
+        }
+    }
     virtual void displayInfo() = 0;
 
     virtual void readInfo() = 0;
