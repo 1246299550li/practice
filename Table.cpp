@@ -334,11 +334,11 @@ void Table::sortByRealWage() {                                         //将总�
 //    for (int i = 0; i < apacity; i++) {
 //        if (*tableArr[i] != NULL) {
 //            for (int j = i + 1; j < apacity; j++) {
-//                if (*(*tableArr + j) != NULL) {
-//                    if (*(*tableArr + i).realwage < *(*tableArr + j).realwage) {
-//                        double t = (*tableArr + i);
-//                        (*tableArr + i) = (*tableArr + j);
-//                        (*tableArr + j) = t;
+//                if (*tableArr[j] != NULL) {
+//                    if (*tableArr[i]->realwage < *tableArr[j]->realwage) {
+//                        double t = *tableArr[i];
+//                        *tableArr[i] = *tableArr[j];
+//                        *tableArr[j] = t;
 //                    }
 //                }
 //            }
@@ -414,4 +414,5 @@ void Table::calculateWage(Employee **) {        //计算指针数组中所有指
 	average = sum / this->apacity;
 	cout << "工资总值："<<sum<<"\n";
 	cout << "平均工资：" << average << "\n";
+}
 
