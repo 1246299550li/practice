@@ -119,16 +119,26 @@ void Table::push_back(Employee *employee) {
     rear++;
 }
 
-Employee **Table::searchEmployee(int id = 0, string name = "", double realWage = 0.0) {
-	Employee **p = new Employee[ARR_SIZE];
-	int j = 0;
-	for (int i = 0; i < apacity; i++) {
-		if (tableArr[i] == id || tableArr[i] == name || tableArr[i] == realWage) {
-			p[j] = tableArr[i];
-			j++;
+Employee **Table::searchEmployee(int id = 0, string name = "", double realWage = 0.0,bool tableType) {
+		Employee **p = new Employee[ARR_SIZE];
+		int j = 0;
+		if (tableType) {
+			for (int i = 0; i < apacity; i++) {
+				if (tableArr[i]->getId == id || tableArr[i]->getName == name || tableArr[i]->getRealWage== realWage) {
+					p[j] = tableArr[i];
+					j++;
+				}
+			}
+			return p;
 		}
+		else{
+			for (int i = 0; i < deleteApacity; i++) {
+				if (deleteArr[i]->getId == id || deleteArr[i]->getName = name || deleteArr[i]->getRealWage = realWage) {
+					p[j] = deleteArr[i];
+					j++;
+				}
+			}
 	}
-	return p;
 }
 
 bool **Table::updateEmployee(Employee *employee) {
