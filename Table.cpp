@@ -5,18 +5,6 @@
 #include "Table.h"
 #include<fstream>
 
-template<typename T>
-void TemporaryEmployee::checkInput(T &target) {
-    while (!(cin >> target)) {
-        cout << "\n输入错误！请重新输入";
-        cin.clear();
-        while (cin.get() != '\n') {
-        }
-    }
-    cout << "\n输入成功";
-    while (cin.get() != '\n') {
-    }
-}
 
 Table::Table() {
     tableArr = new Employee *[ARR_SIZE];    //总表
@@ -332,7 +320,7 @@ bool Table::updateEmployee(Employee *tmpEmployee) {
             case 6: {
                 cout << "修改后的基本职务工资\n";
                 double tmpBaseWage;
-                checkInput(tmpBaseWag);
+                checkInput(tmpBaseWage);
                 employee->setBaseWage(tmpBaseWage);
                 break;
             }

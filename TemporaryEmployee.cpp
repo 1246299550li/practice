@@ -4,19 +4,6 @@
 
 #include "TemporaryEmployee.h"
 
-template<typename T>
-void TemporaryEmployee::checkInput(T &target) {
-    while (!(cin >> target)) {
-        cout << "\n输入错误！请重新输入";
-        cin.clear();
-        while (cin.get() != '\n') {
-        }
-    }
-    cout << "\n输入成功";
-    while (cin.get() != '\n') {
-    }
-}
-
 //显示信息
 void TemporaryEmployee::displayInfo() {
     cout.precision(2);
