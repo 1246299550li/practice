@@ -13,17 +13,16 @@ const int ARR_INCREMENT = 50;
 
 class Table {
 private:
+    Employee **tableArr;
+    int apacity;
+    int size;
 
+    Employee **deleteArr;
+    int deleteApacity;
+    int deleteSize;
 
 public:
-    Employee **tableArr;
-    Employee **deleteArr;
-    int size;
-    int deleteSize;
-    int deleteApacity;
-    int apacity;
-    int rear;
-    int deleteRear;
+
 
     //内存空间扩容
     bool memExtension(bool tableType);
@@ -39,7 +38,7 @@ public:
     bool readFromScreen();
 
     //以id name realWage为关键字从表中查找匹配的记录，返回指针数组
-    Employee **searchEmployee(int id, bool tableType);
+    int searchEmployee(int id, bool tableType);
 
     Employee **searchEmployee(string name, bool tableType);
 
@@ -49,13 +48,13 @@ public:
     bool updateEmployee(Employee *employee);
 
     //逻辑删除，可恢复，放入回收站中
-    bool logicalDeleteEmployee(int id);
+    bool logicalDeleteEmployee(int id, string nowOpenedFile);
 
     //物理删除，不可恢复
-    bool physicalDeleteEmployee(int id);
+    bool physicalDeleteEmployee(int id, string nowOpenedFile);
 
     //恢复逻辑删除项
-    bool undeleteEmployee(int id);
+    bool recoverDeleteEmployee(int id, string nowOpenedFile);
 
     //保存在文件中
     bool saveInFile(string fileName, bool tableType);

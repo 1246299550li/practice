@@ -8,12 +8,12 @@
 
 Table::Table() {
     tableArr = new Employee *[ARR_SIZE];    //总表
-    deleteArr = new Employee *[ARR_SIZE];    //逻辑删除表
-    deleteSize = ARR_SIZE;
-    size = ARR_SIZE;
     apacity = 0;
+    size = ARR_SIZE;
+
+    deleteArr = new Employee *[ARR_SIZE];    //逻辑删除表
     deleteApacity = 0;
-    cout << "你好说的话" << endl;
+    deleteSize = ARR_SIZE;
 }
 
 
@@ -101,7 +101,7 @@ bool Table::readFromScreen() {
 
 void Table::pushBack(Employee *employee, bool tableType) {
     if (tableType) {
-        if (apacity == size)
+        if (apacity >= size)
             if (!memExtension(tableType)) {
                 cout << "memory error";
                 return;
@@ -109,81 +109,87 @@ void Table::pushBack(Employee *employee, bool tableType) {
         tableArr[apacity] = employee;
         apacity++;
     } else {
-        if (deleteApacity == deleteSize)
+        if (deleteApacity >= deleteSize)
             if (!memExtension(tableType)) {
                 cout << "memory error";
                 return;
             }
-        tableArr[deleteApacity] = employee;
+        deleteArr[deleteApacity] = employee;
         deleteApacity++;
     }
 
 }
 
-Employee **Table::searchEmployee(int id, bool tableType) {
-    auto **p = new Employee *[ARR_SIZE];
+int Table::searchEmployee(int id, bool tableType) {
     int j = 0;
     if (tableType) {
-        for (int i = 0; tableArr[i] != nullptr && i < apacity; i++) {
-            if (tableArr[i]->getId() == id) {
-                p[j] = tableArr[i];
-                j++;
+        for (int i = 0; i < apacity; i++) {
+            if (tableArr[i] != nullptr) {
+                if (tableArr[i]->getId() == id) {
+                    return i;
+                }
             }
         }
-        return p;
+
     } else {
-        for (int i = 0; deleteArr[i] != nullptr && i < deleteApacity; i++) {
-            if (deleteArr[i]->getId() == id) {
-                p[j] = deleteArr[i];
-                j++;
+        for (int i = 0; i < deleteApacity; i++) {
+            if (deleteArr[i] != nullptr) {
+                if (deleteArr[i]->getId() == id) {
+                    return i;
+                }
             }
+
         }
-        return p;
     }
+    return -1;
 }
 
 Employee **Table::searchEmployee(string name, bool tableType) {
     auto **p = new Employee *[ARR_SIZE];
     int j = 0;
     if (tableType) {
-        for (int i = 0; tableArr[i] != nullptr && i < apacity; i++) {
-            if (tableArr[i]->getName() == name) {
-                p[j] = tableArr[i];
-                j++;
+        for (int i = 0; i < apacity; i++) {
+            if (tableArr[i] != nullptr) {
+                if (tableArr[i]->getName() == name) {
+                    p[j++] = tableArr[i];
+                }
             }
         }
-        return p;
+
     } else {
-        for (int i = 0; deleteArr[i] != nullptr && i < deleteApacity; i++) {
-            if (deleteArr[i]->getName() == name) {
-                p[j] = deleteArr[i];
-                j++;
+        for (int i = 0; i < deleteApacity; i++) {
+            if (deleteArr[i] != nullptr) {
+                if (deleteArr[i]->getName() == name) {
+                    p[j++] = deleteArr[i];
+                }
             }
         }
-        return p;
     }
+    return p;
 }
 
 Employee **Table::searchEmployee(double realWage, bool tableType) {
     auto **p = new Employee *[ARR_SIZE];
     int j = 0;
     if (tableType) {
-        for (int i = 0; tableArr[i] != nullptr && i < apacity; i++) {
-            if (tableArr[i]->getRealWage() == realWage) {
-                p[j] = tableArr[i];
-                j++;
+        for (int i = 0; i < apacity; i++) {
+            if (tableArr[i] != nullptr) {
+                if (tableArr[i]->getRealWage() == realWage) {
+                    p[j] = tableArr[i];
+                }
             }
         }
-        return p;
     } else {
-        for (int i = 0; deleteArr[i] != nullptr && i < deleteApacity; i++) {
-            if (deleteArr[i]->getRealWage() == realWage) {
-                p[j] = tableArr[i];
-                j++;
+        for (int i = 0; i < deleteApacity; i++) {
+            if (deleteArr[i] != nullptr) {
+                if (deleteArr[i]->getRealWage() == realWage) {
+                    p[j] = tableArr[i];
+                }
             }
         }
-        return p;
+
     }
+    return p;
 }
 
 bool Table::updateEmployee(Employee *tmpEmployee) {
@@ -347,7 +353,7 @@ bool Table::updateEmployee(Employee *tmpEmployee) {
             }
         }
     }
-    cout << "修改成功\n";
+    cout << "修改成功!\n";
 }
 
 void Table::sortByRealWage() {                                         //将总表按实发工资进行排序
@@ -386,43 +392,45 @@ bool Table::saveInFile(string fileName, bool tableType) {
     return true;
 }
 
-bool Table::logicalDeleteEmployee(int id) {
-    Employee **resArr = searchEmployee(id, true);
-    if (resArr[0] == nullptr) {
+bool Table::logicalDeleteEmployee(int id, string nowOpenedFile) {
+    int pos = searchEmployee(id, true);
+    if (pos == -1) {
         return false;
     } else {
-        pushBack(resArr[0], false);
-        saveInFile("DeletedStaffInfo.txt", false);
-        return true;
-    }
-
-}
-
-bool Table::physicalDeleteEmployee(int id) {
-    Employee **deletion = searchEmployee(id, false);
-    if (*deletion == nullptr) {
-        return false;
-    } else {
-        delete *deletion;
-        *deletion = nullptr;
-        saveInFile("DeletedStaffInfo.txt", false);
+        pushBack(tableArr[pos], false);
+        delete tableArr[pos];
+        saveInFile("delete" + nowOpenedFile, false);
+        saveInFile(nowOpenedFile, true);
         return true;
     }
 }
 
-bool Table::undeleteEmployee(int id) {
-    Employee **recovery = searchEmployee(id, false);
-    if (*recovery == nullptr) {
+bool Table::physicalDeleteEmployee(int id, string nowOpenedFile) {
+    int pos = searchEmployee(id, true);
+    if (pos == -1) {
         return false;
     } else {
-        pushBack(*recovery, false);
-        saveInFile("DeletedStaffInfo.txt", false);
+        delete tableArr[pos];
+        saveInFile(nowOpenedFile, true);
         return true;
     }
 }
 
+bool Table::recoverDeleteEmployee(int id, string nowOpenedFile) {
+    int pos = searchEmployee(id, false);
+    if (pos == -1) {
+        return false;
+    } else {
+        pushBack(deleteArr[pos], true);
+        delete deleteArr[pos];
+        saveInFile("delete" + nowOpenedFile, false);
+        saveInFile(nowOpenedFile, true);
+        return true;
+    }
+}
 
-void Table::calculateWage(Employee **) {        //计算指针数组中所有指针指向对象的工资总值 平均工资
+//计算指针数组中所有指针指向对象的工资总值 平均工资
+void Table::calculateWage(Employee **) {
     double sum = 0;
     double average = 0;
     for (int i = 0; i < apacity; i++) {
