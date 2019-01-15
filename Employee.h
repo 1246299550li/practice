@@ -45,6 +45,8 @@ public:
 
     void setBaseWage(double baseWage);
 
+    bool isType() const;
+
     int getId() const;
 
     const string &getName() const;
@@ -56,7 +58,7 @@ public:
     const string &getAddress() const;
 
     double getBaseWage() const;
-
+    virtual double getRealWage() == 0;
     virtual ~Employee();
 };
 
