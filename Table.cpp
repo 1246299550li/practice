@@ -127,39 +127,74 @@ void Table::pushBack(Employee *employee, bool tableType) {
 }
 
 Employee **Table::searchEmployee(int id, bool tableType) {
-    Employee **p = new Employee *[ARR_SIZE];
-    int j = 0;
-    for (int i = 0; i < apacity; i++) {
-        if (tableArr[i]->getId() == id) {
-            p[j] = tableArr[i];
-            j++;
-        }
-    }
-    return p;
+	Employee **p = new Employee *[ARR_SIZE];
+	int j = 0;
+	if (tableType) {
+		for (int i = 0; tableArr[i]!=NULL&&i < apacity; i++) {
+			if (tableArr[i]->getId() == id) {
+				p[j] = tableArr[i];
+				j++;
+			}
+		}
+		return p;
+	}
+	else {
+		for (int i = 0; i < deleteApacity; i++) {
+			if (deleteArr[i] != NULL && i < deleteApacity; i++) {
+				if (deleteArr[i]->getId() == id) {
+					p[j] = deleteArr[i];
+					j++;
+				}
+			}
+		}
+		return p;
+	}
 }
 
 Employee **Table::searchEmployee(string name, bool tableType) {
     Employee **p = new Employee *[ARR_SIZE];
     int j = 0;
-    for (int i = 0; i < apacity; i++) {
-        if (tableArr[i]->getName() == name) {
-            p[j] = tableArr[i];
-            j++;
-        }
-    }
-    return p;
+	if (tableType) {
+		for (int i = 0; tableArr[i] != NULL && i < apacity; i++) {
+			if (tableArr[i]->getName() == name) {
+				p[j] = tableArr[i];
+				j++;
+			}
+		}
+		return p;
+	}
+	else {
+		for (int i = 0; deleteArr[i] != NULL && i < deleteApacity; i++) {
+			if (deleteArr[i]->getName() == name) {
+				p[j] = deleteArr[i];
+				j++;
+			}
+		}
+		return p;
+	}
 }
 
 Employee **Table::searchEmployee(double realWage, bool tableType) {
     Employee **p = new Employee *[ARR_SIZE];
     int j = 0;
-    for (int i = 0; i < apacity; i++) {
-        if (tableArr[i]->getRealWage() == realWage) {
-            p[j] = tableArr[i];
-            j++;
-        }
-    }
-    return p;
+	if (tableType) {
+		for (int i = 0; tableArr[i] != NULL&&i < apacity; i++) {
+			if (tableArr[i]->getRealWage() == realWage) {
+				p[j] = tableArr[i];
+				j++;
+			}
+		}
+		return p;
+	}
+	else {
+		for (int i = 0; deleteArr[i] != NULL && i < deleteApacity; i++) {
+			if (deleteArr[i]->getRealWage() == realWage) {
+				p[j] = tableArr[i];
+				j++;
+			}
+		}
+		return p;
+	}
 }
 
 bool Table::updateEmployee(Employee *tmpEmployee) {
