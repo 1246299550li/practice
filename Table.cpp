@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by xunmi on 2019/1/12.
 //
 
@@ -95,6 +95,7 @@ bool Table::readFromScreen() {
         p->readInfo();
     }
     pushBack(p, true);
+	return true;
 
 }
 
@@ -347,22 +348,33 @@ bool Table::updateEmployee(Employee *tmpEmployee) {
         }
     }
     cout << "修改成功\n";
+	return true;
 }
-
+double helpSort(Employee * p) {
+		if (p->isType()) {
+			return dynamic_cast<RegularEmployee *>(p)->getRealWage();
+		}
+		else {
+			return dynamic_cast<TemporaryEmployee*>(p)->getRealWage();
+		}
+	
+}
 void Table::sortByRealWage() {                                         //将总表按实发工资进行排序
-//    for (int i = 0; i < size; i++) {
-//        if (*tableArr[i] != nullptr) {
-//            for (int j = i + 1; j < size; j++) {
-//                if (*tableArr[j] != nullptr) {
-//                    if (*tableArr[i]->realwage < *tableArr[j]->realwage) {
-//                        double t = *tableArr[i];
-//                        *tableArr[i] = *tableArr[j];
-//                        *tableArr[j] = t;
-//                    }
-//                }
-//            }
-//        }
-//    }
+    for (int i = 0; i <apacity; i++) {
+        if (tableArr[i] != nullptr) {
+			double tmpI = helpSort(tableArr[i]);
+            for (int j = i + 1; j < apacity; j++) {
+                if (tableArr[j] != nullptr) {
+					double tmpJ = helpSort(tableArr[j]);
+                    if (tmpI< tmpJ) {
+                        Employee *t = tableArr[i];
+                        tableArr[i] = tableArr[j];
+                        tableArr[j] = t;
+                    }
+                }
+            }
+        }
+   }
 }
 
 bool Table::saveInFile(string fileName, bool tableType) {
@@ -371,13 +383,13 @@ bool Table::saveInFile(string fileName, bool tableType) {
     if (tableType) {
         for (int i = 0; i < apacity; ++i) {
             if (tableArr[i] != nullptr) {
-                out << tableArr[i] << endl;
+                out << *tableArr[i] << endl;
             }
         }
     } else {
         for (int i = 0; i < deleteApacity; ++i) {
             if (tableArr[i] != nullptr) {
-                out << tableArr[i] << endl;
+                out << *tableArr[i] << endl;
             }
         }
     }
@@ -422,16 +434,15 @@ bool Table::undeleteEmployee(int id) {
 }
 
 
-void Table::calculateWage(Employee **) {        //计算指针数组中所有指针指向对象的工资总值 平均工资
-    double sum = 0;
-    double average = 0;
+void Table::calculateWage(Employee **arr,double &sum,double &average) {        //计算指针数组中所有指针指向对象的工资总值 平均工资
+	int account = 0;
     for (int i = 0; i < apacity; i++) {
-        if (tableArr[i] != nullptr)
-            sum = sum + tableArr[i]->getRealWage();
+        if (arr[i] != nullptr)
+            sum = sum + arr[i]->getRealWage();
+		account++;
     }
-    average = sum / apacity;
-    cout << "工资总值：" << sum << "\n";
-    cout << "平均工资：" << average << "\n";
+    average = sum / account;
+    
 }
 
 Table::~Table() = default;

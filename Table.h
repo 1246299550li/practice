@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by xunmi on 2019/1/12.
 //
 
@@ -73,7 +73,7 @@ public:
     bool saveInFile(string fileName, bool tableType);
 
     //计算指针数组中所有指针指向对象的工资总值 平均工资
-    void calculateWage(Employee **arr);
+    void calculateWage(Employee **arr,double &sum,double &average);
 
     //按realWage排序tableArr中对象
     void sortByRealWage();
