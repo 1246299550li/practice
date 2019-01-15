@@ -7,12 +7,13 @@
 
 
 Table::Table() {
-    tableArr = new Employee *[ARR_SIZE];    //æ€»è¡¨
-    deleteArr = new Employee *[ARR_SIZE];    //é€»è¾‘åˆ é™¤è¡¨
+    tableArr = new Employee *[ARR_SIZE];    //×Ü±í
+    deleteArr = new Employee *[ARR_SIZE];    //Âß¼­É¾³ý±í
     deleteSize = ARR_SIZE;
     size = ARR_SIZE;
     apacity = 0;
     deleteApacity = 0;
+    cout << "ÄãºÃËµµÄ»°" << endl;
 }
 
 
@@ -84,8 +85,10 @@ bool Table::memExtension(bool tableType) {
 
 bool Table::readFromScreen() {
     bool type;
-    cout << "è¯·è¾“å…¥è¦æ·»åŠ çš„èŒå·¥ç§ç±»(1è¡¨ç¤ºæ­£å¼èŒå·¥ 0è¡¨ç¤ºä¸´æ—¶èŒå·¥):";
-    checkInput(type);
+    cout << "ÇëÊäÈëÒªÌí¼ÓµÄÖ°¹¤ÖÖÀà(1±íÊ¾ÕýÊ½Ö°¹¤ 0±íÊ¾ÁÙÊ±Ö°¹¤):";
+//    checkInput(type);
+cin >> type;
+//    cout << "1" << endl;
     Employee *p;
     if (type) {
         p = new RegularEmployee();
@@ -94,6 +97,7 @@ bool Table::readFromScreen() {
         p = new TemporaryEmployee();
         p->readInfo();
     }
+    cout << "1" << endl;
     pushBack(p, true);
 
 }
@@ -189,167 +193,167 @@ bool Table::updateEmployee(Employee *tmpEmployee) {
     int c;
     if (tmpEmployee->isType()) {
         auto *employee = (RegularEmployee *) tmpEmployee;
-        cout << "è¾“å…¥è¦ä¿®æ”¹çš„é¡¹ç›®\n";
-        cout << "1.ç¼–å·  2.å§“å  3.æ€§åˆ«  4.å¹´é¾„  5.å®¶åº­ä½å€ 6.åŸºæœ¬èŒåŠ¡å·¥èµ„\n" <<
-             "7.å²—ä½æ´¥è´´  8.ä½æˆ¿å…¬ç§¯é‡‘  9.å…»è€é‡‘  10.æ‰€å¾—ç¨Ž  11.åŒ»ç–—ä¿é™©\n";
+        cout << "ÊäÈëÒªÐÞ¸ÄµÄÏîÄ¿\n";
+        cout << "1.±àºÅ  2.ÐÕÃû  3.ÐÔ±ð  4.ÄêÁä  5.¼ÒÍ¥×¡Ö· 6.»ù±¾Ö°Îñ¹¤×Ê\n" <<
+             "7.¸ÚÎ»½òÌù  8.×¡·¿¹«»ý½ð  9.ÑøÀÏ½ð  10.ËùµÃË°  11.Ò½ÁÆ±£ÏÕ\n";
         checkInput(c);
         switch (c) {
             case 1: {
-                cout << "è¾“å…¥ä¿®æ”¹åŽçš„ç¼–å·\n";
+                cout << "ÊäÈëÐÞ¸ÄºóµÄ±àºÅ\n";
                 int tmpId;
                 checkInput(tmpId);
                 employee->setId(tmpId);
                 break;
             }
             case 2: {
-                cout << "è¾“å…¥ä¿®æ”¹åŽçš„å§“å\n";
+                cout << "ÊäÈëÐÞ¸ÄºóµÄÐÕÃû\n";
                 string tmpName;
                 checkInput(tmpName);
                 employee->setName(tmpName);
                 break;
             }
             case 3: {
-                cout << "ä¿®æ”¹åŽçš„æ€§åˆ«ï¼šç”·ç”Ÿä¸ºï¼štrue å¥³ç”Ÿä¸ºï¼šfalse";
+                cout << "ÐÞ¸ÄºóµÄÐÔ±ð£ºÄÐÉúÎª£ºtrue Å®ÉúÎª£ºfalse";
                 bool tmpSex;
                 checkInput(tmpSex);
                 employee->setSex(tmpSex);
                 break;
             }
             case 4: {
-                cout << "ä¿®æ”¹åŽçš„å¹´é¾„\n";
+                cout << "ÐÞ¸ÄºóµÄÄêÁä\n";
                 int tmpAge;
                 checkInput(tmpAge);
                 employee->setAge(tmpAge);
                 break;
             }
             case 5: {
-                cout << "ä¿®æ”¹åŽçš„å®¶åº­ä½å€\n";
+                cout << "ÐÞ¸ÄºóµÄ¼ÒÍ¥×¡Ö·\n";
                 string tmpAddress;
                 checkInput(tmpAddress);
                 employee->setAddress(tmpAddress);
                 break;
             }
             case 6: {
-                cout << "ä¿®æ”¹åŽçš„åŸºæœ¬èŒåŠ¡å·¥èµ„\n";
+                cout << "ÐÞ¸ÄºóµÄ»ù±¾Ö°Îñ¹¤×Ê\n";
                 double tmpBaseWage;
                 checkInput(tmpBaseWage);
                 employee->setBaseWage(tmpBaseWage);
                 break;
             }
             case 7: {
-                cout << "ä¿®æ”¹åŽçš„å²—ä½æ´¥è´´\n";
+                cout << "ÐÞ¸ÄºóµÄ¸ÚÎ»½òÌù\n";
                 double tmpAllowance;
                 checkInput(tmpAllowance);
                 employee->setAllowance(tmpAllowance);
                 break;
             }
             case 8: {
-                cout << "ä¿®æ”¹åŽçš„ä½æˆ¿å…¬ç§¯é‡‘\n";
+                cout << "ÐÞ¸ÄºóµÄ×¡·¿¹«»ý½ð\n";
                 double tmpProvidentFund;
                 checkInput(tmpProvidentFund);
                 employee->setProvidentFund(tmpProvidentFund);
                 break;
             }
             case 9: {
-                cout << "ä¿®æ”¹åŽçš„å…»è€é‡‘\n";
+                cout << "ÐÞ¸ÄºóµÄÑøÀÏ½ð\n";
                 double tmpPension;
                 checkInput(tmpPension);
                 employee->setPension(tmpPension);
                 break;
             }
             case 10: {
-                cout << "ä¿®æ”¹åŽçš„æ‰€å¾—ç¨Ž\n";
+                cout << "ÐÞ¸ÄºóµÄËùµÃË°\n";
                 double tmpTax;
                 checkInput(tmpTax);
                 employee->setTax(tmpTax);
                 break;
             }
             case 11: {
-                cout << "ä¿®æ”¹åŽçš„åŒ»ç–—ä¿é™©\n";
+                cout << "ÐÞ¸ÄºóµÄÒ½ÁÆ±£ÏÕ\n";
                 double tmpInsurance;
                 checkInput(tmpInsurance);
                 employee->setInsurance(tmpInsurance);
                 break;
             }
             default: {
-                cout << "è¯·è¾“å…¥æ­£ç¡®çš„é€‰é¡¹\n";
+                cout << "ÇëÊäÈëÕýÈ·µÄÑ¡Ïî\n";
                 break;
             }
 
         }
     } else {
         auto *employee = (TemporaryEmployee *) tmpEmployee;
-        cout << "è¾“å…¥è¦ä¿®æ”¹çš„é¡¹ç›®\n";
-        cout << "1.ç¼–å·  2.å§“å  3.æ€§åˆ«  4.å¹´é¾„  5.å®¶åº­ä½å€ 6.åŸºæœ¬èŒåŠ¡å·¥èµ„\n" <<
-             "7.å¥–é‡‘  8.æ‰€å¾—ç¨Ž\n";
+        cout << "ÊäÈëÒªÐÞ¸ÄµÄÏîÄ¿\n";
+        cout << "1.±àºÅ  2.ÐÕÃû  3.ÐÔ±ð  4.ÄêÁä  5.¼ÒÍ¥×¡Ö· 6.»ù±¾Ö°Îñ¹¤×Ê\n" <<
+             "7.½±½ð  8.ËùµÃË°\n";
         checkInput(c);
         switch (c) {
             case 1: {
-                cout << "è¾“å…¥ä¿®æ”¹åŽçš„ç¼–å·\n";
+                cout << "ÊäÈëÐÞ¸ÄºóµÄ±àºÅ\n";
                 int tmpId;
                 checkInput(tmpId);
                 employee->setId(tmpId);
                 break;
             }
             case 2: {
-                cout << "è¾“å…¥ä¿®æ”¹åŽçš„å§“å\n";
+                cout << "ÊäÈëÐÞ¸ÄºóµÄÐÕÃû\n";
                 string tmpName;
                 checkInput(tmpName);
                 employee->setName(tmpName);
                 break;
             }
             case 3: {
-                cout << "ä¿®æ”¹åŽçš„æ€§åˆ«ï¼šç”·ç”Ÿä¸ºï¼štrue å¥³ç”Ÿä¸ºï¼šfalse";
+                cout << "ÐÞ¸ÄºóµÄÐÔ±ð£ºÄÐÉúÎª£ºtrue Å®ÉúÎª£ºfalse";
                 bool tmpSex;
                 checkInput(tmpSex);
                 employee->setSex(tmpSex);
                 break;
             }
             case 4: {
-                cout << "ä¿®æ”¹åŽçš„å¹´é¾„\n";
+                cout << "ÐÞ¸ÄºóµÄÄêÁä\n";
                 int tmpAge;
                 checkInput(tmpAge);
                 employee->setAge(tmpAge);
                 break;
             }
             case 5: {
-                cout << "ä¿®æ”¹åŽçš„å®¶åº­ä½å€\n";
+                cout << "ÐÞ¸ÄºóµÄ¼ÒÍ¥×¡Ö·\n";
                 string tmpAddress;
                 checkInput(tmpAddress);
                 employee->setAddress(tmpAddress);
                 break;
             }
             case 6: {
-                cout << "ä¿®æ”¹åŽçš„åŸºæœ¬èŒåŠ¡å·¥èµ„\n";
+                cout << "ÐÞ¸ÄºóµÄ»ù±¾Ö°Îñ¹¤×Ê\n";
                 double tmpBaseWage;
                 checkInput(tmpBaseWage);
                 employee->setBaseWage(tmpBaseWage);
                 break;
             }
             case 7: {
-                cout << "ä¿®æ”¹åŽçš„å¥–é‡‘\n";
+                cout << "ÐÞ¸ÄºóµÄ½±½ð\n";
                 double tmpBonus;
                 checkInput(tmpBonus);
                 employee->setBonus(tmpBonus);
                 break;
             }
             case 8: {
-                cout << "ä¿®æ”¹åŽçš„æ‰€å¾—ç¨Ž\n";
+                cout << "ÐÞ¸ÄºóµÄËùµÃË°\n";
                 double tmpTax;
                 checkInput(tmpTax);
                 employee->setTax(tmpTax);
                 break;
             }
             default: {
-                cout << "è¯·è¾“å…¥æ­£ç¡®çš„é€‰é¡¹\n";
+                cout << "ÇëÊäÈëÕýÈ·µÄÑ¡Ïî\n";
                 break;
             }
         }
     }
-    cout << "ä¿®æ”¹æˆåŠŸ\n";
+    cout << "ÐÞ¸Ä³É¹¦\n";
 }
 
-void Table::sortByRealWage() {                                         //å°†æ€»è¡¨æŒ‰å®žå‘å·¥èµ„è¿›è¡ŒæŽ’åº
+void Table::sortByRealWage() {                                         //½«×Ü±í°´Êµ·¢¹¤×Ê½øÐÐÅÅÐò
 //    for (int i = 0; i < size; i++) {
 //        if (*tableArr[i] != nullptr) {
 //            for (int j = i + 1; j < size; j++) {
@@ -371,13 +375,13 @@ bool Table::saveInFile(string fileName, bool tableType) {
     if (tableType) {
         for (int i = 0; i < apacity; ++i) {
             if (tableArr[i] != nullptr) {
-                out << tableArr[i] << endl;
+                out << *tableArr[i] << endl;
             }
         }
     } else {
         for (int i = 0; i < deleteApacity; ++i) {
             if (tableArr[i] != nullptr) {
-                out << tableArr[i] << endl;
+                out << *deleteArr[i] << endl;
             }
         }
     }
@@ -422,7 +426,7 @@ bool Table::undeleteEmployee(int id) {
 }
 
 
-void Table::calculateWage(Employee **) {        //è®¡ç®—æŒ‡é’ˆæ•°ç»„ä¸­æ‰€æœ‰æŒ‡é’ˆæŒ‡å‘å¯¹è±¡çš„å·¥èµ„æ€»å€¼ å¹³å‡å·¥èµ„
+void Table::calculateWage(Employee **) {        //¼ÆËãÖ¸ÕëÊý×éÖÐËùÓÐÖ¸ÕëÖ¸Ïò¶ÔÏóµÄ¹¤×Ê×ÜÖµ Æ½¾ù¹¤×Ê
     double sum = 0;
     double average = 0;
     for (int i = 0; i < apacity; i++) {
@@ -430,8 +434,8 @@ void Table::calculateWage(Employee **) {        //è®¡ç®—æŒ‡é’ˆæ•°ç»„ä¸­æ‰€æœ‰æŒ‡
             sum = sum + tableArr[i]->getRealWage();
     }
     average = sum / apacity;
-    cout << "å·¥èµ„æ€»å€¼ï¼š" << sum << "\n";
-    cout << "å¹³å‡å·¥èµ„ï¼š" << average << "\n";
+    cout << "¹¤×Ê×ÜÖµ£º" << sum << "\n";
+    cout << "Æ½¾ù¹¤×Ê£º" << average << "\n";
 }
 
 Table::~Table() = default;

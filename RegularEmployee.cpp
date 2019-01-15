@@ -8,64 +8,64 @@ void RegularEmployee::calculateRealWage() {
     realWage = baseWage + allowance - pension - providentFund - tax - insurance;
 }
 
-//ÊòæÁ§∫‰ø°ÊÅØ
+//œ‘ æ–≈œ¢
 void RegularEmployee::displayInfo() {
     cout.precision(2);
     cout.setf(ios_base::fixed);
-    cout << "--Ê≠£ÂºèËÅåÂ∑•--\n"
-         << "\nÁºñÂè∑Ôºö" << id
-         << "\nÂßìÂêçÔºö" << name
-         << "\nÊÄßÂà´Ôºö" << sex
-         << "\nÂπ¥ÈæÑÔºö" << age
-         << "\nÂÆ∂Â∫≠‰ΩèÂùÄÔºö" << address
-         << "\nÂü∫Êú¨ËÅåÂä°Â∑•ËµÑÔºö" << baseWage
-         << "\nÂ≤ó‰ΩçÊ¥•Ë¥¥Ôºö" << allowance
-         << "\n‰ΩèÊàøÂÖ¨ÁßØÈáëÔºö" << providentFund
-         << "\nÂÖªËÄÅÈáëÔºö" << pension
-         << "\nÊâÄÂæóÁ®éÔºö" << tax
-         << "\nÂåªÁñó‰øùÈô©Ôºö" << insurance
-         << "\nÂÆûÂèëÂ∑•ËµÑÔºö" << realWage;
+    cout << "--’˝ Ω÷∞π§--\n"
+         << "\n±‡∫≈£∫" << id
+         << "\n–’√˚£∫" << name
+         << "\n–‘±£∫" << sex
+         << "\nƒÍ¡‰£∫" << age
+         << "\nº“Õ•◊°÷∑£∫" << address
+         << "\nª˘±æ÷∞ŒÒπ§◊ £∫" << baseWage
+         << "\n∏⁄ŒªΩÚÃ˘£∫" << allowance
+         << "\n◊°∑øπ´ª˝Ω£∫" << providentFund
+         << "\n—¯¿œΩ£∫" << pension
+         << "\nÀ˘µ√À∞£∫" << tax
+         << "\n“Ω¡∆±£œ’£∫" << insurance
+         << "\n µ∑¢π§◊ £∫" << realWage;
 }
 
-//‰ªéÂ±èÂπïËØªÂÖ•‰ø°ÊÅØ
+//¥”∆¡ƒª∂¡»Î–≈œ¢
 void RegularEmployee::readInfo() {
-    cout << "\nËØ∑ËæìÂÖ•ÁºñÂè∑(Ê≠£Êï¥Êï∞)Ôºö";
+    cout << "\n«Î ‰»Î±‡∫≈(’˝’˚ ˝)£∫";
     checkInput(id);
 
-    cout << "\nËØ∑ËæìÂÖ•ÂßìÂêçÔºö";
+    cout << "\n«Î ‰»Î–’√˚£∫";
     checkInput(name);
 
-    cout << "\nËØ∑ËæìÂÖ•ÂßìÂà´(1Ë°®Á§∫Áî∑, 0Ë°®Á§∫Â•≥)Ôºö";
+    cout << "\n«Î ‰»Î–’±(1±Ì æƒ–, 0±Ì æ≈Æ)£∫";
     checkInput(sex);
 
-    cout << "\nËØ∑ËæìÂÖ•Âπ¥ÈæÑ(Ê≠£Êï¥Êï∞)Ôºö";
+    cout << "\n«Î ‰»ÎƒÍ¡‰(’˝’˚ ˝)£∫";
     checkInput(age);
 
-    cout << "\nËØ∑ËæìÂÖ•ÂÆ∂Â∫≠‰ΩèÂùÄÔºö";
+    cout << "\n«Î ‰»Îº“Õ•◊°÷∑£∫";
     checkInput(address);
 
-    cout << "\nËØ∑ËæìÂÖ•Âü∫Êú¨ËÅåÂä°Â∑•ËµÑÔºö";
+    cout << "\n«Î ‰»Îª˘±æ÷∞ŒÒπ§◊ £∫";
     checkInput(baseWage);
 
-    cout << "\nËØ∑ËæìÂÖ•Â≤ó‰ΩçÊ¥•Ë¥¥Ôºö";
+    cout << "\n«Î ‰»Î∏⁄ŒªΩÚÃ˘£∫";
     checkInput(allowance);
 
-    cout << "\nËØ∑ËæìÂÖ•‰ΩèÊàøÂÖ¨ÁßØÈáëÔºö";
+    cout << "\n«Î ‰»Î◊°∑øπ´ª˝Ω£∫";
     checkInput(providentFund);
 
-    cout << "\nËØ∑ËæìÂÖ•ÂÖªËÄÅÈáëÔºö";
+    cout << "\n«Î ‰»Î—¯¿œΩ£∫";
     checkInput(pension);
 
-    cout << "\nËØ∑ËæìÂÖ•ÊâÄÂæóÁ®éÔºö";
+    cout << "\n«Î ‰»ÎÀ˘µ√À∞£∫";
     checkInput(tax);
 
-    cout << "\nËØ∑ËæìÂÖ•ÂåªÁñó‰øùÈô©Ôºö";
+    cout << "\n«Î ‰»Î“Ω¡∆±£œ’£∫";
     checkInput(insurance);
 
 
 }
 
-//ÂÜôÂÖ•‰ø°ÊÅØÂà∞Êñá‰ª∂
+//–¥»Î–≈œ¢µΩŒƒº˛
 ostream &operator<<(ostream &os, const RegularEmployee &employee) {
     os << static_cast<const Employee &>(employee) << " allowance: " << employee.allowance << " providentFund: "
        << employee.providentFund << " pension: " << employee.pension << " tax: " << employee.tax << " insurance: "

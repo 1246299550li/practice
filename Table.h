@@ -25,60 +25,60 @@ public:
     int rear;
     int deleteRear;
 
-    //å†…å­˜ç©ºé—´æ‰©å®¹
+    //ÄÚ´æ¿Õ¼äÀ©ÈÝ
     bool memExtension(bool tableType);
 
     template<typename T>
     void checkInput(T &target) {
         while (!(cin >> target)) {
-            cout << "\nè¾“å…¥é”™è¯¯ï¼è¯·é‡æ–°è¾“å…¥";
+            cout << "\nÊäÈë´íÎó£¡ÇëÖØÐÂÊäÈë";
             cin.clear();
             while (cin.get() != '\n') {
             }
         }
-        cout << "\nè¾“å…¥æˆåŠŸ";
+        cout << "\nÊäÈë³É¹¦";
         while (cin.get() != '\n') {
         }
     }
 
-    //æž„é€ å™¨åˆå§‹åŒ–ç©ºè¡¨
+    //¹¹ÔìÆ÷³õÊ¼»¯¿Õ±í
     Table();
 
-    //ä»Žæ–‡ä»¶ä¸­è¯»å…¥ä¿¡æ¯
+    //´ÓÎÄ¼þÖÐ¶ÁÈëÐÅÏ¢
     bool readFromFile(string fileName, bool tableType);
 
-    //ä»Žå±å¹•ä¸­è¯»å…¥ä¿¡æ¯
+    //´ÓÆÁÄ»ÖÐ¶ÁÈëÐÅÏ¢
     bool readFromScreen();
 
-    //ä»¥id name realWageä¸ºå…³é”®å­—ä»Žè¡¨ä¸­æŸ¥æ‰¾åŒ¹é…çš„è®°å½•ï¼Œè¿”å›žæŒ‡é’ˆæ•°ç»„
+    //ÒÔid name realWageÎª¹Ø¼ü×Ö´Ó±íÖÐ²éÕÒÆ¥ÅäµÄ¼ÇÂ¼£¬·µ»ØÖ¸ÕëÊý×é
     Employee **searchEmployee(int id, bool tableType);
 
     Employee **searchEmployee(string name, bool tableType);
 
     Employee **searchEmployee(double realWage, bool tableType);
 
-    //ä¿®æ”¹employeeæŒ‡å‘çš„å¯¹è±¡
+    //ÐÞ¸ÄemployeeÖ¸ÏòµÄ¶ÔÏó
     bool updateEmployee(Employee *employee);
 
-    //é€»è¾‘åˆ é™¤ï¼Œå¯æ¢å¤ï¼Œæ”¾å…¥å›žæ”¶ç«™ä¸­
+    //Âß¼­É¾³ý£¬¿É»Ö¸´£¬·ÅÈë»ØÊÕÕ¾ÖÐ
     bool logicalDeleteEmployee(int id);
 
-    //ç‰©ç†åˆ é™¤ï¼Œä¸å¯æ¢å¤
+    //ÎïÀíÉ¾³ý£¬²»¿É»Ö¸´
     bool physicalDeleteEmployee(int id);
 
-    //æ¢å¤é€»è¾‘åˆ é™¤é¡¹
+    //»Ö¸´Âß¼­É¾³ýÏî
     bool undeleteEmployee(int id);
 
-    //ä¿å­˜åœ¨æ–‡ä»¶ä¸­
+    //±£´æÔÚÎÄ¼þÖÐ
     bool saveInFile(string fileName, bool tableType);
 
-    //è®¡ç®—æŒ‡é’ˆæ•°ç»„ä¸­æ‰€æœ‰æŒ‡é’ˆæŒ‡å‘å¯¹è±¡çš„å·¥èµ„æ€»å€¼ å¹³å‡å·¥èµ„
+    //¼ÆËãÖ¸ÕëÊý×éÖÐËùÓÐÖ¸ÕëÖ¸Ïò¶ÔÏóµÄ¹¤×Ê×ÜÖµ Æ½¾ù¹¤×Ê
     void calculateWage(Employee **arr);
 
-    //æŒ‰realWageæŽ’åºtableArrä¸­å¯¹è±¡
+    //°´realWageÅÅÐòtableArrÖÐ¶ÔÏó
     void sortByRealWage();
 
-    //åœ¨tableArrè¡¨å°¾å¢žæ·»ä¸€ä¸ªå…ƒç´ 
+    //ÔÚtableArr±íÎ²ÔöÌíÒ»¸öÔªËØ
     void pushBack(Employee *employee, bool tableType);
 
     ~Table();
