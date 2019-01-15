@@ -21,7 +21,7 @@ bool Table::readFromFile(string fileName, bool tableType) {
 
     ifstream infile(fileName);
     if (!infile.is_open()) {
-        cout << "false" << endl;
+        cout << "不存在此文件\n" << endl;
         return false;
     } else {
         bool type;
@@ -52,8 +52,8 @@ bool Table::readFromFile(string fileName, bool tableType) {
             }
             pushBack(p, tableType);
         }
-        cout << "successful" << endl;
         infile.close();
+        cout << "读入成功！\n" << endl;
         return true;
     }
 }
@@ -86,9 +86,7 @@ bool Table::memExtension(bool tableType) {
 bool Table::readFromScreen() {
     bool type;
     cout << "请输入要添加的职工种类(1表示正式职工 0表示临时职工):";
-//    Employee::checkInput(type);
-cin >> type;
-//    cout << "1" << endl;
+    Employee::checkInput(type);
     Employee *p;
     if (type) {
         p = new RegularEmployee();
@@ -97,7 +95,6 @@ cin >> type;
         p = new TemporaryEmployee();
         p->readInfo();
     }
-    cout << "1" << endl;
     pushBack(p, true);
 
 }
@@ -385,7 +382,6 @@ bool Table::saveInFile(string fileName, bool tableType) {
             }
         }
     }
-
     out.close();
     return true;
 }

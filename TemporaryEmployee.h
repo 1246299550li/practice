@@ -5,7 +5,7 @@
 #ifndef NEW_TEMPORARYEMPLOYEE_H
 #define NEW_TEMPORARYEMPLOYEE_H
 
-#include <ostream>
+#include <fstream>
 #include "Employee.h"
 
 //临时职工类
