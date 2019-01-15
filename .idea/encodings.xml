@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" addBOMForNewFiles="with NO BOM" />
+  <component name="Encoding" defaultCharsetForPropertiesFiles="GBK" addBOMForNewFiles="with NO BOM">
+    <file url="file://$PROJECT_DIR$/Employee.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/Employee.h" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/RegularEmployee.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/RegularEmployee.h" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/Table.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/Table.h" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/TemporaryEmployee.cpp" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/TemporaryEmployee.h" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/main.cpp" charset="GBK" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
 </project>

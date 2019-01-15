@@ -29,12 +29,9 @@ void newDataFile() {
 
 int main() {
 
-
     outputMenu();
 //    cout << "你好风格士大夫" << endl;
-
 //    Table t;
-
 //    t.readFromFile("E:\\new\\1.txt", true);
 //    t.readFromScreen();
 //    system("pause");
