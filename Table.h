@@ -8,7 +8,7 @@
 #include "RegularEmployee.h"
 #include "TemporaryEmployee.h"
 
-const int ARR_SIZE = 100;
+const int ARR_SIZE = 150;
 const int ARR_INCREMENT = 50;
 
 class Table {
@@ -20,6 +20,7 @@ private:
     Employee **deleteArr;
     int deleteApacity;
     int deleteSize;
+    double helpSort(Employee * p);
 
 public:
 
@@ -28,6 +29,8 @@ public:
     bool memExtension(bool tableType);
 
     Employee **getTableArr() const;
+
+    int getApacity() const;
 
     //构造器初始化空表
     Table();
@@ -44,6 +47,8 @@ public:
     Employee **searchEmployee(string name, bool tableType);
 
     Employee **searchEmployee(double realWage, bool tableType);
+
+    Employee **searchEmployee(bool type, bool tableType);
 
     //修改employee指向的对象
     bool updateEmployee(Employee *employee);

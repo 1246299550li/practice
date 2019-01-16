@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Table.h"
+#include <iomanip>
 
 using namespace std;
 Table *table = nullptr;
@@ -114,12 +115,90 @@ void saveDataFile() {
     }
 }
 
-//6.添加职工信息
+//4.数据统计(工资总额/平均工资)
+void wageStatistic() {
+    if (table == nullptr) {
+        cout << "未打开文件，请打开后再试\n";
+    } else {
+        int choice;
+        Employee **p = nullptr;
+        bool flag = true;
+        while (flag) {
+            cout << "输入统计关键字  1.全体员工  2.正式职工  3.临时工\n";
+            Employee::checkInput(choice);
+            switch (choice) {
+                case 1: {
+                    table->calculateWage(table->getTableArr());
+                    return;
+                }
+                case 2: {
+                    p = table->searchEmployee(true, true);
+                    flag = false;
+                    break;
+                }
+                case 3: {
+                    p = table->searchEmployee(false, true);
+                    flag = false;
+                    break;
+                }
+                default: {
+                    cout << "输入信息有误，重新输入\n";
+                    flag = true;
+                }
+
+            }
+        }
+        table->calculateWage(p);
+    }
+}
+
+//5.排序输出每个职工实发工资
+void sortByWage() {
+    if (table == nullptr) {
+        cout << "未打开文件，请打开后再试\n";
+    } else {
+        table->sortByRealWage();
+        string sex;
+        for (int i = 0; i < table->getApacity(); i++) {
+            if (table->getTableArr()[i] != nullptr) {
+                if (table->getTableArr()[i]->isSex()) {
+                    sex = "男";
+                } else {
+                    sex = "女";
+                }
+                cout.precision(2);
+                cout.setf(ios_base::fixed);
+                if (table->getTableArr()[i]->isType()) {
+                    auto *tmpReg = dynamic_cast<RegularEmployee *>(table->getTableArr()[i]);
+                    if (tmpReg != nullptr) {
+                        cout << "正式职工：" << setw(10) << tmpReg->getId() << setw(15) << tmpReg->getName() << setw(5)
+                             << sex
+                             << setw(30) << tmpReg->getAddress() << setw(10) << tmpReg->getBaseWage()
+                             << tmpReg->getAllowance() << setw(10) << tmpReg->getTax()
+                             << setw(10) << tmpReg->getInsurance() << setw(10) << tmpReg->getRealWage() << endl;
+                    }
+                } else {
+                    auto *tmpTem = dynamic_cast<TemporaryEmployee *>(table->getTableArr()[i]);
+                    if (tmpTem != nullptr) {
+                        cout << "临时职工：" << setw(10) << tmpTem->getId() << setw(15) << tmpTem->getName() << setw(5)
+                             << sex
+                             << setw(30) << tmpTem->getAddress() << setw(10) << tmpTem->getBaseWage()
+                             << setw(10) << tmpTem->getBonus() << setw(10) << tmpTem->getTax()
+                             << setw(10) << tmpTem->getRealWage() << endl;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//6.添加职工信息(有bug)
 void insertInfo() {
     if (table == nullptr) {
         cout << "未打开文件，请打开后再试\n";
     } else {
         table->readFromScreen();
+        table->saveInFile(nowOpenedFile, true);
     }
 }
 
@@ -131,7 +210,7 @@ void selectInfo() {
         cout << "请输入查找选项 1.按编号  2.按姓名  3.按实发工资\n";
         int choice;
         bool flag = true;
-        Employee **p;
+        Employee **p = nullptr;
         while (flag) {
             Employee::checkInput(choice);
 
@@ -193,7 +272,28 @@ void selectInfo() {
 
 //8.修改职工信息
 void updateInfo() {
-
+    cout << "请输入修改的职工编号\n";
+    int tmpId;
+    Employee::checkInput(tmpId);
+    int pos = table->searchEmployee(tmpId, true);
+    if (pos == -1) {
+        cout << "不存在此员工！\n";
+        return;
+    }
+    if ((table->getTableArr())[pos]->isType()) {
+        dynamic_cast<RegularEmployee *>((table->getTableArr())[pos])->displayInfo();
+    } else {
+        dynamic_cast<TemporaryEmployee *>((table->getTableArr())[pos])->displayInfo();
+    }
+    cout << "请确认这是否是您要修改的职工(1是 0否)";
+    bool choice;
+    Employee::checkInput(choice);
+    if (choice) {
+        table->updateEmployee((table->getTableArr())[pos]);
+        table->saveInFile(nowOpenedFile, true);
+    } else {
+        return;
+    }
 }
 
 int main() {
@@ -219,9 +319,11 @@ int main() {
                 break;
             }
             case 4: {
+                wageStatistic();
                 break;
             }
             case 5: {
+                sortByWage();
                 break;
             }
             case 6: {
@@ -233,6 +335,7 @@ int main() {
                 break;
             }
             case 8: {
+                updateInfo();
                 break;
             }
             case 9: {

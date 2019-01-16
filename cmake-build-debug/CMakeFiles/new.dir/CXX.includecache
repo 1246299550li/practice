@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-E:/new/Employee.cpp
-Employee.h
-E:/new/Employee.h
-
 E:/new/Employee.h
 string
 -
@@ -17,6 +13,8 @@ iostream
 -
 
 E:/new/RegularEmployee.h
+ostream
+-
 Employee.h
 E:/new/Employee.h
 
@@ -27,6 +25,8 @@ TemporaryEmployee.h
 E:/new/TemporaryEmployee.h
 
 E:/new/TemporaryEmployee.h
+fstream
+-
 Employee.h
 E:/new/Employee.h
 
