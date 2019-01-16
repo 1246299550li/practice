@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Table.h"
 #include <iomanip>
 
@@ -8,17 +7,15 @@ string nowOpenedFile = "";
 
 void outputMenu() {
     cout << "-------欢迎使用职工工资信息管理系统-------\n";
+    cout << "-   0.退出系统                         -\n";
     cout << "-   1.新建数据文件                      -\n";
     cout << "-   2.打开数据文件                      -\n";
     cout << "-   3.保存数据文件并关闭                 -\n";
-
     cout << "-   4.数据统计(工资总额/平均工资)        -\n";
     cout << "-   5.排序输出每个职工实发工资           -\n";
-
     cout << "-   6.添加职工信息                      -\n";
     cout << "-   7.查询职工信息                      -\n";
     cout << "-   8.修改职工信息                      -\n";
-
     cout << "-   9.删除职工信息                      -\n";
     cout << "-   10.恢复职工信息                     -\n";
     cout << "-   11.显示职工信息                     -\n";
@@ -112,6 +109,7 @@ void saveDataFile() {
         }
         nowOpenedFile = "";
         delete table;
+        table = nullptr;
         cout << "成功!文件已关闭！\n";
     }
 }
@@ -133,12 +131,12 @@ void wageStatistic() {
                     return;
                 }
                 case 2: {
-                    p = table->searchEmployee(true, true);
+                    p = table->searchEmployee(true);
                     flag = false;
                     break;
                 }
                 case 3: {
-                    p = table->searchEmployee(false, true);
+                    p = table->searchEmployee(false);
                     flag = false;
                     break;
                 }
@@ -174,7 +172,7 @@ void sortByWage() {
                     if (tmpReg != nullptr) {
                         cout << "正式职工：" << setw(10) << tmpReg->getId() << setw(15) << tmpReg->getName() << setw(5)
                              << sex
-                             << setw(30) << tmpReg->getAddress() << setw(10) << tmpReg->getBaseWage()<< setw(10)
+                             << setw(30) << tmpReg->getAddress() << setw(10) << tmpReg->getBaseWage() << setw(10)
                              << tmpReg->getAllowance() << setw(10) << tmpReg->getTax()
                              << setw(10) << tmpReg->getInsurance() << setw(10) << tmpReg->getRealWage() << endl;
                     }
@@ -217,7 +215,7 @@ void selectInfo() {
 
             switch (choice) {
                 case 1: {
-                    cout << "请输入编号\n";
+                    cout << "请输入编号:";
                     int tmpId;
                     Employee::checkInput(tmpId);
                     int pos = table->searchEmployee(tmpId, true);
@@ -231,27 +229,27 @@ void selectInfo() {
                         dynamic_cast<TemporaryEmployee *>((table->getTableArr())[pos])->displayInfo();
                     }
                     return;
-
                 }
                 case 2: {
-                    cout << "请输入姓名\n";
+                    cout << "请输入姓名:";
                     string tmpName;
                     Employee::checkInput(tmpName);
-                    p = table->searchEmployee(tmpName, true);
-                    cout << "查找完成\n";
+                    p = table->searchEmployee(tmpName);
+                    cout << "查找完成:";
                     flag = false;
-                }
                     break;
+                }
+
                 case 3: {
-                    cout << "请输入实发工资\n";
+                    cout << "请输入实发工资:";
                     double tmpRealWage;
                     Employee::checkInput(tmpRealWage);
-                    p = table->searchEmployee(tmpRealWage, true);
+                    p = table->searchEmployee(tmpRealWage);
                     flag = false;
                     break;
                 }
                 default: {
-                    cout << "输入信息有误，重新输入\n";
+                    cout << "输入信息有误，重新输入:";
                 }
 
             }
@@ -273,7 +271,7 @@ void selectInfo() {
 
 //8.修改职工信息
 void updateInfo() {
-    cout << "请输入修改的职工编号\n";
+    cout << "请输入修改的职工编号:";
     int tmpId;
     Employee::checkInput(tmpId);
     int pos = table->searchEmployee(tmpId, true);
@@ -286,7 +284,7 @@ void updateInfo() {
     } else {
         dynamic_cast<TemporaryEmployee *>((table->getTableArr())[pos])->displayInfo();
     }
-    cout << "请确认这是否是您要修改的职工(1是 0否)";
+    cout << "请确认这是否是您要修改的职工(1是 0否):";
     bool choice;
     Employee::checkInput(choice);
     if (choice) {
@@ -294,6 +292,78 @@ void updateInfo() {
         table->saveInFile(nowOpenedFile, true);
     } else {
         return;
+    }
+}
+
+// 9.删除职工信息
+void deleteInfo() {
+    if (table == nullptr) {
+        cout << "未打开文件，请打开后再试\n";
+    } else {
+        cout << "请输入选项(1.移除职工信息(可恢复)  2.彻底删除职工信息)：";
+        bool flag = true;
+        while (flag) {
+            int option;
+            Employee::checkInput(option);
+            table->display(true);
+            switch (option) {
+                case 1: {
+                    cout << "请输入要移除的职工的id:";
+                    int id;
+                    Employee::checkInput(id);
+                    if (table->logicalDeleteEmployee(id, nowOpenedFile)) {
+                        cout << "移除成功！\n";
+                    } else {
+                        cout << "移除失败！请检查输入id！\n";
+                    }
+                    flag = false;
+                    break;
+                }
+                case 2: {
+
+                    cout << "请输入要彻底删除的职工的id:";
+                    int id;
+                    Employee::checkInput(id);
+                    if (table->physicalDeleteEmployee(id, nowOpenedFile)) {
+                        cout << "彻底删除成功！\n";
+                    } else {
+                        cout << "彻底删除失败！请检查输入id！\n";
+                    }
+                    flag = false;
+                    break;
+                }
+                default: {
+                    cout << "选项不存在，请重新输入";
+                }
+            }
+        }
+    }
+}
+
+// 10.恢复职工信息
+void recoverInfo() {
+    if (table == nullptr) {
+        cout << "未打开文件，请打开后再试\n";
+    } else {
+        table->readFromFile("delete" + nowOpenedFile, false);
+        table->display(false);
+        cout << "请输入要恢复的职工的id" << endl;
+        int id;
+        Employee::checkInput(id);
+        if (table->recoverDeleteEmployee(id, nowOpenedFile)) {
+            cout << "恢复成功！" << endl;
+        } else {
+            cout << "恢复失败！请检查输入id！" << endl;
+        }
+    }
+}
+
+//11.显示职工信息
+void displayInfo() {
+    if (table == nullptr) {
+        cout << "未打开文件，请打开后再试\n";
+    } else {
+        table->display(true);
     }
 }
 
@@ -340,13 +410,15 @@ int main() {
                 break;
             }
             case 9: {
+                deleteInfo();
                 break;
             }
             case 10: {
+                recoverInfo();
                 break;
             }
             case 11: {
-                table->display(true);
+                displayInfo();
                 break;
             }
             default: {

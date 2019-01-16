@@ -15,27 +15,23 @@ private:
     double tax; //所得税
     double realWage; //实发工资
 
-
 public:
-    //计算实发工资=基本职务工资+奖金-所得税
-    void calculateRealWage() override;
-
-    //显示信息
-    void displayInfo() override;
-
-    //从屏幕读入信息
-    void readInfo() override;
-
     TemporaryEmployee(int id, const string &name, bool sex, int age, const string &address, double baseWage,
                       double bonus, double tax);
 
     TemporaryEmployee();
 
+    //计算实发工资=基本职务工资+奖金-所得税
+    void calculateRealWage() override;
+
+    //显示职工信息
+    void displayInfo() override;
+
+    //从屏幕读入职工信息
+    void readInfo() override;
+
     //写入信息到文件
     friend ostream &operator<<(ostream &os, const TemporaryEmployee &employee);
-
-
-    ~TemporaryEmployee() override;
 
     void setBonus(double bonus);
 
@@ -46,6 +42,8 @@ public:
     double getTax() const;
 
     double getRealWage() const override;
+
+    ~TemporaryEmployee() override;
 };
 
 

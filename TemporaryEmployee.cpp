@@ -4,55 +4,6 @@
 
 #include "TemporaryEmployee.h"
 
-void TemporaryEmployee::calculateRealWage() {
-    realWage = baseWage + bonus - tax;
-};
-
-//显示信息
-void TemporaryEmployee::displayInfo() {
-    cout.precision(2);
-    cout.
-            setf(ios_base::fixed);
-    cout << "--临时职工--\n"
-         << "\n编号：" << id
-         << "\n姓名：" << name
-         << "\n性别：" << sex
-         << "\n年龄：" << age
-         << "\n家庭住址：" << address
-         << "\n基本职务工资：" << baseWage
-         << "\n奖金：" << bonus
-         << "\n所得税：" << tax
-         << "\n实发工资：" <<
-         realWage;
-}
-
-//从屏幕读入信息
-void TemporaryEmployee::readInfo() {
-    cout << "\n请输入编号(正整数)：";
-    checkInput(id);
-
-    cout << "\n请输入姓名：";
-    checkInput(name);
-
-    cout << "\n请输入姓别(1表示男, 0表示女)：";
-    checkInput(sex);
-
-    cout << "\n请输入年龄(正整数)：";
-    checkInput(age);
-
-    cout << "\n请输入家庭住址：";
-    checkInput(address);
-
-    cout << "\n请输入基本职务工资：";
-    checkInput(baseWage);
-
-    cout << "\n请输入奖金：";
-    checkInput(bonus);
-
-    cout << "\n请输入所得税：";
-    checkInput(tax);
-}
-
 TemporaryEmployee::TemporaryEmployee(int id, const string &name, bool sex, int age, const string &address,
                                      double baseWage,
                                      double bonus, double tax) :
@@ -63,14 +14,52 @@ TemporaryEmployee::TemporaryEmployee(int id, const string &name, bool sex, int a
 
 TemporaryEmployee::TemporaryEmployee() = default;
 
-//写入信息到文件
-ostream &operator<<(ostream &os, const TemporaryEmployee &employee) {
-    os << static_cast<const Employee &>(employee) << " " << employee.bonus << " " << employee.tax
-       << " " << employee.realWage;
-    return os;
+void TemporaryEmployee::calculateRealWage() {
+    realWage = baseWage + bonus - tax;
+};
+
+//显示职工信息
+void TemporaryEmployee::displayInfo() {
+    cout.precision(2);
+    cout.setf(ios_base::fixed);
+    cout << "--临时职工--"
+         << "\n编号：" << id
+         << "   姓名：" << name
+         << "   性别：" << sex
+         << "   年龄：" << age
+         << "   家庭住址：" << address
+         << "   基本职务工资：" << baseWage
+         << "\n奖金：" << bonus
+         << "   所得税：" << tax
+         << "   实发工资：" << realWage
+         << "\n\n";
 }
 
-TemporaryEmployee::~TemporaryEmployee() = default;
+//从屏幕读入职工信息
+void TemporaryEmployee::readInfo() {
+    cout << "\n请输入编号(正整数)：";
+    checkInput(id);
+    cout << "\n请输入姓名：";
+    checkInput(name);
+    cout << "\n请输入姓别(1表示男, 0表示女)：";
+    checkInput(sex);
+    cout << "\n请输入年龄(正整数)：";
+    checkInput(age);
+    cout << "\n请输入家庭住址：";
+    checkInput(address);
+    cout << "\n请输入基本职务工资：";
+    checkInput(baseWage);
+    cout << "\n请输入奖金：";
+    checkInput(bonus);
+    cout << "\n请输入所得税：";
+    checkInput(tax);
+}
+
+//写入信息到文件
+ostream &operator<<(ostream &os, const TemporaryEmployee &employee) {
+    os << static_cast<const Employee &>(employee) << " " << employee.bonus << " " << employee.tax;
+    return os;
+}
 
 void TemporaryEmployee::setBonus(double bonus) {
     TemporaryEmployee::bonus = bonus;
@@ -91,3 +80,5 @@ double TemporaryEmployee::getTax() const {
 double TemporaryEmployee::getRealWage() const {
     return realWage;
 }
+
+TemporaryEmployee::~TemporaryEmployee() = default;

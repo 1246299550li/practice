@@ -21,22 +21,22 @@ private:
     int deleteApacity;
     int deleteSize;
 
-    double helpSort(Employee *p);
+    double getThisRealWage(Employee *p);
 
 public:
-
-
-    //内存空间扩容
-    bool memExtension(bool tableType);
-
-    Employee **getTableArr() const;
+    //构造器初始化空表
+    Table();
 
     int getApacity() const;
 
-    void display(bool tableType);
+    Employee **getTableArr() const;
 
-    //构造器初始化空表
-    Table();
+    //内存空间扩容
+    bool memExtension(bool tableType);
+    //在tableArr表尾增添一个元素
+    void pushBack(Employee *employee, bool tableType);
+
+    void display(bool tableType);
 
     //从文件中读入信息
     bool readFromFile(string fileName, bool tableType);
@@ -47,11 +47,11 @@ public:
     //以id name realWage为关键字从表中查找匹配的记录，返回指针数组
     int searchEmployee(int id, bool tableType);
 
-    Employee **searchEmployee(string name, bool tableType);
+    Employee **searchEmployee(string name);
 
-    Employee **searchEmployee(double realWage, bool tableType);
+    Employee **searchEmployee(double realWage);
 
-    Employee **searchEmployee(bool type, bool tableType);
+    Employee **searchEmployee(bool type);
 
     //修改employee指向的对象
     bool updateEmployee(Employee *employee);
@@ -74,8 +74,7 @@ public:
     //按realWage排序tableArr中对象
     void sortByRealWage();
 
-    //在tableArr表尾增添一个元素
-    void pushBack(Employee *employee, bool tableType);
+
 
     ~Table();
 };

@@ -5,7 +5,6 @@
 #ifndef NEW_REGULAREMPLOYEE_H
 #define NEW_REGULAREMPLOYEE_H
 
-#include <ostream>
 #include "Employee.h"
 
 //正式职工类
@@ -19,26 +18,22 @@ private:
     double realWage; //实发工资
 
 public:
-
-// 计算实发工资=基本职务工资+岗位津贴-养老金-住房公积金-所得税-医疗保险
-    void calculateRealWage() override;
-    //显示信息
-    void displayInfo() override;
-
-
-    //从屏幕读入信息
-    void readInfo() override;
-
-    //写入信息到文件
-    friend ostream &operator<<(ostream &os, const RegularEmployee &employee);
-
     RegularEmployee(int id, const string &name, bool sex, int age, const string &address, double baseWage,
                     double allowance, double providentFund, double pension, double tax, double insurance);
 
-
     RegularEmployee();
 
-    ~RegularEmployee() override;
+    // 计算实发工资=基本职务工资+岗位津贴-养老金-住房公积金-所得税-医疗保险
+    void calculateRealWage() override;
+
+    //显示职工信息
+    void displayInfo() override;
+
+    //从屏幕读入职工信息
+    void readInfo() override;
+
+    //重载输出方法
+    friend ostream &operator<<(ostream &os, const RegularEmployee &employee);
 
     void setAllowance(double allowance);
 
@@ -52,16 +47,13 @@ public:
 
     double getAllowance() const;
 
-    double getProvidentFund() const;
-
-    double getPension() const;
-
     double getTax() const;
 
     double getInsurance() const;
 
     double getRealWage() const override;
 
+    ~RegularEmployee() override;
 
 };
 

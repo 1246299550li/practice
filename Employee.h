@@ -20,10 +20,12 @@ protected:
     int age; //年龄
     string address; //家庭住址
     double baseWage; //基本职务工资
-
-
 public:
-    virtual void calculateRealWage() = 0;
+    Employee(int id, const string &name, bool sex, int age, const string &address, double baseWage);
+
+    Employee();
+
+    //规范输入静态方法
     template<typename T>
     static void checkInput(T &target) {
         while (!(cin >> target)) {
@@ -32,18 +34,19 @@ public:
             while (cin.get() != '\n') {
             }
         }
-        cout << "输入成功\n";
+        cout << "输入正确\n";
+        cin.clear();
         while (cin.get() != '\n') {
         }
     }
+
+    virtual void calculateRealWage() = 0;
+
     virtual void displayInfo() = 0;
 
     virtual void readInfo() = 0;
 
-    Employee(int id, const string &name, bool sex, int age, const string &address, double baseWage);
-
-    Employee();
-
+    //重载输出方法
     friend ostream &operator<<(ostream &os, const Employee &employee);
 
     void setId(int id);
@@ -65,8 +68,6 @@ public:
     const string &getName() const;
 
     bool isSex() const;
-
-    int getAge() const;
 
     const string &getAddress() const;
 

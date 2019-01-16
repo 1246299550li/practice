@@ -4,8 +4,17 @@
 
 #include "Employee.h"
 
-Employee::~Employee() {
+Employee::Employee(int id, const string &name, bool sex, int age, const string &address, double baseWage) :
+        id(id), name(name), sex(sex), age(age), address(address), baseWage(baseWage) {
 
+}
+
+Employee::Employee() = default;
+
+ostream &operator<<(ostream &os, const Employee &employee) {
+    os << " " << employee.type << " " << employee.id << " " << employee.name << " " << employee.sex
+       << " " << employee.age << " " << employee.address << " " << employee.baseWage;
+    return os;
 }
 
 void Employee::setId(int id) {
@@ -32,6 +41,10 @@ void Employee::setBaseWage(double baseWage) {
     Employee::baseWage = baseWage;
 }
 
+bool Employee::isType() const {
+    return type;
+}
+
 int Employee::getId() const {
     return id;
 }
@@ -44,10 +57,6 @@ bool Employee::isSex() const {
     return sex;
 }
 
-int Employee::getAge() const {
-    return age;
-}
-
 const string &Employee::getAddress() const {
     return address;
 }
@@ -56,20 +65,4 @@ double Employee::getBaseWage() const {
     return baseWage;
 }
 
-Employee::Employee(int id, const string &name, bool sex, int age, const string &address, double baseWage) :
-        id(id), name(name), sex(sex), age(age), address(address), baseWage(baseWage) {
-
-}
-
-Employee::Employee() = default;
-
-ostream &operator<<(ostream &os, const Employee &employee) {
-    os << " " << employee.type << " " << employee.id << " " << employee.name << " " << employee.sex
-       << " " << employee.age << " " << employee.address << " " << employee.baseWage;
-    return os;
-}
-
-bool Employee::isType() const {
-    return type;
-}
-
+Employee::~Employee() = default;
