@@ -396,6 +396,7 @@ bool Table::saveInFile(string fileName, bool tableType) {
             }
         }
     }
+
     out.close();
     return true;
 }
@@ -411,6 +412,7 @@ bool Table::logicalDeleteEmployee(int id, string nowOpenedFile) {
         saveInFile(nowOpenedFile, true);
         return true;
     }
+
 }
 
 bool Table::physicalDeleteEmployee(int id, string nowOpenedFile) {
