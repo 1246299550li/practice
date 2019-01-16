@@ -386,20 +386,29 @@ bool Table::saveInFile(string fileName, bool tableType) {
     if (tableType) {
         for (int i = 0; i < apacity; ++i) {
             if (tableArr[i] != nullptr) {
-                out << *tableArr[i] << endl;
+                if (tableArr[i]->isType()) {
+                    out << *dynamic_cast<RegularEmployee *>(tableArr[i]) << endl;
+                } else {
+                    out << *dynamic_cast<TemporaryEmployee *>(tableArr[i]) << endl;
+                }
+
             }
         }
     } else {
         for (int i = 0; i < deleteApacity; ++i) {
-            if (tableArr[i] != nullptr) {
-                out << *deleteArr[i] << endl;
+            if (deleteArr[i] != nullptr) {
+                if (deleteArr[i]->isType()) {
+                    out << *dynamic_cast<RegularEmployee *>(deleteArr[i]) << endl;
+                } else {
+                    out << *dynamic_cast<TemporaryEmployee *>(deleteArr[i]) << endl;
+                }
             }
         }
     }
-
     out.close();
     return true;
 }
+
 
 bool Table::logicalDeleteEmployee(int id, string nowOpenedFile) {
     int pos = searchEmployee(id, true);
@@ -408,7 +417,7 @@ bool Table::logicalDeleteEmployee(int id, string nowOpenedFile) {
     } else {
         pushBack(tableArr[pos], false);
         delete tableArr[pos];
-        saveInFile("delete" + nowOpenedFile, false);
+        saveInFile("delete"+nowOpenedFile, false);
         saveInFile(nowOpenedFile, true);
         return true;
     }
@@ -421,6 +430,7 @@ bool Table::physicalDeleteEmployee(int id, string nowOpenedFile) {
         return false;
     } else {
         delete tableArr[pos];
+        tableArr[pos]= nullptr;
         saveInFile(nowOpenedFile, true);
         return true;
     }
@@ -433,26 +443,49 @@ bool Table::recoverDeleteEmployee(int id, string nowOpenedFile) {
     } else {
         pushBack(deleteArr[pos], true);
         delete deleteArr[pos];
+        deleteArr[pos]= nullptr;
         saveInFile("delete" + nowOpenedFile, false);
         saveInFile(nowOpenedFile, true);
+        cout<<"done";
         return true;
     }
 }
 
-//计算指针数组中所有指针指向对象的工资总值 平均工资
-void Table::calculateWage(Employee **arr) {
-    double sum = 0;
-    double average = 0;
-    int cot = 0;
-    for (int i = 0; i < ARR_SIZE; i++) {
-        if (arr[i] != nullptr) {
-            sum += arr[i]->getRealWage();
-            cot++;
+
+void Table::display(bool tableType) {
+    if (tableType) {
+        for (int i = 0; i < apacity; i++) {
+            if (tableArr[i] != nullptr) {
+                if (tableArr[i]->isType()) {
+                    RegularEmployee *tmp;
+                    tmp = dynamic_cast<RegularEmployee *>(tableArr[i]);
+                    tmp->displayInfo();
+                    cout << endl;
+                } else {
+                    TemporaryEmployee *tmp;
+                    tmp = dynamic_cast<TemporaryEmployee *>(tableArr[i]);
+                    tmp->displayInfo();
+                    cout << endl;
+                }
+            }
+        }
+    } else {
+        for (int i = 0; i < deleteApacity; i++) {
+            if (deleteArr[i] != nullptr) {
+                if (deleteArr[i]->isType()) {
+                    RegularEmployee *tmp;
+                    tmp = dynamic_cast<RegularEmployee *>(deleteArr[i]);
+                    tmp->displayInfo();
+                    cout << endl;
+                } else {
+                    TemporaryEmployee *tmp;
+                    tmp = dynamic_cast<TemporaryEmployee *>(deleteArr[i]);
+                    tmp->displayInfo();
+                    cout << endl;
+                }
+            }
         }
     }
-    average = sum / cot;
-    cout << "工资总值：" << sum << endl;
-    cout << "平均工资：" << average << endl;
 }
 
 Employee **Table::getTableArr() const {
