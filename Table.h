@@ -20,7 +20,8 @@ private:
     Employee **deleteArr;
     int deleteApacity;
     int deleteSize;
-    double helpSort(Employee * p);
+
+    double helpSort(Employee *p);
 
 public:
 
@@ -31,6 +32,8 @@ public:
     Employee **getTableArr() const;
 
     int getApacity() const;
+
+    void display(bool tableType);
 
     //构造器初始化空表
     Table();

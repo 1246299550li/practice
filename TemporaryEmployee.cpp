@@ -65,8 +65,8 @@ TemporaryEmployee::TemporaryEmployee() = default;
 
 //写入信息到文件
 ostream &operator<<(ostream &os, const TemporaryEmployee &employee) {
-    os << static_cast<const Employee &>(employee) << " bonus: " << employee.bonus << " tax: " << employee.tax
-       << " realWage: " << employee.realWage;
+    os << static_cast<const Employee &>(employee) << " " << employee.bonus << " " << employee.tax
+       << " " << employee.realWage;
     return os;
 }
 

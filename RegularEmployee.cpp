@@ -67,9 +67,9 @@ void RegularEmployee::readInfo() {
 
 //写入信息到文件
 ostream &operator<<(ostream &os, const RegularEmployee &employee) {
-    os << static_cast<const Employee &>(employee) << " allowance: " << employee.allowance << " providentFund: "
-       << employee.providentFund << " pension: " << employee.pension << " tax: " << employee.tax << " insurance: "
-       << employee.insurance << " realWage: " << employee.realWage;
+    os << static_cast<const Employee &>(employee) << " " << employee.allowance << " "
+       << employee.providentFund << " " << employee.pension << " " << employee.tax << " "
+       << employee.insurance << " " << employee.realWage;
     return os;
 }
 

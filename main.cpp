@@ -21,6 +21,7 @@ void outputMenu() {
 
     cout << "-   9.删除职工信息                      -\n";
     cout << "-   10.恢复职工信息                     -\n";
+    cout << "-   11.显示职工信息                     -\n";
     cout << "----------------------------------------\n";
 }
 
@@ -342,6 +343,10 @@ int main() {
                 break;
             }
             case 10: {
+                break;
+            }
+            case 11: {
+                table->display(true);
                 break;
             }
             default: {
