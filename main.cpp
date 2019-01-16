@@ -174,7 +174,7 @@ void sortByWage() {
                     if (tmpReg != nullptr) {
                         cout << "正式职工：" << setw(10) << tmpReg->getId() << setw(15) << tmpReg->getName() << setw(5)
                              << sex
-                             << setw(30) << tmpReg->getAddress() << setw(10) << tmpReg->getBaseWage()
+                             << setw(30) << tmpReg->getAddress() << setw(10) << tmpReg->getBaseWage()<< setw(10)
                              << tmpReg->getAllowance() << setw(10) << tmpReg->getTax()
                              << setw(10) << tmpReg->getInsurance() << setw(10) << tmpReg->getRealWage() << endl;
                     }

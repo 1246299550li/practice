@@ -18,14 +18,6 @@ ostream
 Employee.h
 E:/new/Employee.h
 
-E:/new/Table.cpp
-Table.h
-E:/new/Table.h
-fstream
--
-algorithm
--
-
 E:/new/Table.h
 RegularEmployee.h
 E:/new/RegularEmployee.h
@@ -37,4 +29,12 @@ fstream
 -
 Employee.h
 E:/new/Employee.h
+
+E:/new/main.cpp
+iostream
+-
+Table.h
+E:/new/Table.h
+iomanip
+-
 

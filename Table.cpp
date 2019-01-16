@@ -501,6 +501,8 @@ void Table::calculateWage(Employee **arr) {
         }
     }
     average = sum / cot;
+    cout.precision(2);
+    cout.setf(ios_base::fixed);
     cout << "工资总值：" << sum << endl;
     cout << "平均工资：" << average << endl;
 }
