@@ -28,6 +28,18 @@ public:
     //内存空间扩容
     bool memExtension(bool tableType);
 
+    template<typename T>
+    void checkInput(T &target) {
+        while (!(cin >> target)) {
+            cout << "\n输入错误！请重新输入";
+            cin.clear();
+            while (cin.get() != '\n') {
+            }
+        }
+        cout << "\n输入成功";
+        while (cin.get() != '\n') {
+        }
+    }
 
     //构造器初始化空表
     Table();
@@ -68,6 +80,8 @@ public:
 
     //在tableArr表尾增添一个元素
     void pushBack(Employee *employee, bool tableType);
+
+    void display(bool tableType);
 
     ~Table();
 };
