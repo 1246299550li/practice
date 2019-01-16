@@ -64,8 +64,8 @@ Employee::Employee(int id, const string &name, bool sex, int age, const string &
 Employee::Employee() = default;
 
 ostream &operator<<(ostream &os, const Employee &employee) {
-    os << "type: " << employee.type << " id: " << employee.id << " name: " << employee.name << " sex: " << employee.sex
-       << " age: " << employee.age << " address: " << employee.address << " baseWage: " << employee.baseWage;
+    os << " " << employee.type << " " << employee.id << " " << employee.name << " " << employee.sex
+       << " " << employee.age << " " << employee.address << " " << employee.baseWage;
     return os;
 }
 

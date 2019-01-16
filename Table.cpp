@@ -4,16 +4,31 @@
 
 #include "Table.h"
 #include<fstream>
-
+#include <algorithm>
 
 Table::Table() {
     tableArr = new Employee *[ARR_SIZE];    //总表
+    for (int i = 0; i < ARR_SIZE; i++) {
+        tableArr[i] = nullptr;
+    }
     apacity = 0;
     size = ARR_SIZE;
 
     deleteArr = new Employee *[ARR_SIZE];    //逻辑删除表
+    for (int i = 0; i < ARR_SIZE; i++) {
+        deleteArr[i] = nullptr;
+    }
     deleteApacity = 0;
     deleteSize = ARR_SIZE;
+}
+
+double Table::helpSort(Employee *p) {
+    if (p->isType()) {
+        return dynamic_cast<RegularEmployee *>(p)->getRealWage();
+    } else {
+        return dynamic_cast<TemporaryEmployee *>(p)->getRealWage();
+    }
+
 }
 
 
@@ -38,15 +53,14 @@ bool Table::readFromFile(string fileName, bool tableType) {
                        >> tmpAddress >> tmpBaseWage
                        >> tmpAllowance >> tmpProvidentFund
                        >> tmpPension >> tmpTax
-                       >> tmpInsurance >> tmpRealWage;
+                       >> tmpInsurance;
                 p = new RegularEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpAllowance,
                                         tmpProvidentFund, tmpPension, tmpTax, tmpInsurance);
             } else {
                 infile >> tmpId >> tmpName
                        >> tmpSex >> tmpAge
                        >> tmpAddress >> tmpBaseWage
-                       >> tmpBonus >> tmpTax
-                       >> tmpRealWage;
+                       >> tmpBonus >> tmpTax;
                 p = new TemporaryEmployee(tmpId, tmpName, tmpSex, tmpAge, tmpAddress, tmpBaseWage, tmpBonus,
                                           tmpTax);
             }
@@ -182,7 +196,7 @@ Employee **Table::searchEmployee(double realWage, bool tableType) {
         for (int i = 0; i < apacity; i++) {
             if (tableArr[i] != nullptr) {
                 if (tableArr[i]->getRealWage() == realWage) {
-                    p[j] = tableArr[i];
+                    p[j++] = tableArr[i];
                 }
             }
         }
@@ -190,7 +204,34 @@ Employee **Table::searchEmployee(double realWage, bool tableType) {
         for (int i = 0; i < deleteApacity; i++) {
             if (deleteArr[i] != nullptr) {
                 if (deleteArr[i]->getRealWage() == realWage) {
-                    p[j] = tableArr[i];
+                    p[j++] = tableArr[i];
+                }
+            }
+        }
+
+    }
+    return p;
+}
+
+Employee **Table::searchEmployee(bool type, bool tableType) {
+    auto **p = new Employee *[ARR_SIZE];
+    for (int i = 0; i < ARR_SIZE; i++) {
+        p[i] = nullptr;
+    }
+    int j = 0;
+    if (tableType) {
+        for (int i = 0; i < apacity; i++) {
+            if (tableArr[i] != nullptr) {
+                if (tableArr[i]->isType() == type) {
+                    p[j++] = tableArr[i];
+                }
+            }
+        }
+    } else {
+        for (int i = 0; i < deleteApacity; i++) {
+            if (deleteArr[i] != nullptr) {
+                if (deleteArr[i]->isType() == type) {
+                    p[j++] = tableArr[i];
                 }
             }
         }
@@ -365,20 +406,23 @@ bool Table::updateEmployee(Employee *tmpEmployee) {
 }
 
 void Table::sortByRealWage() {                                         //将总表按实发工资进行排序
-//    for (int i = 0; i < size; i++) {
-//        if (*tableArr[i] != nullptr) {
-//            for (int j = i + 1; j < size; j++) {
-//                if (*tableArr[j] != nullptr) {
-//                    if (*tableArr[i]->realwage < *tableArr[j]->realwage) {
-//                        double t = *tableArr[i];
-//                        *tableArr[i] = *tableArr[j];
-//                        *tableArr[j] = t;
-//                    }
-//                }
-//            }
-//        }
-//    }
+    for (int i = 0; i < apacity; i++) {
+        if (tableArr[i] != nullptr) {
+            double tmpI = helpSort(tableArr[i]);
+            for (int j = i + 1; j < apacity; j++) {
+                if (tableArr[j] != nullptr) {
+                    double tmpJ = helpSort(tableArr[j]);
+                    if (tmpI < tmpJ) {
+                        Employee *t = tableArr[i];
+                        tableArr[i] = tableArr[j];
+                        tableArr[j] = t;
+                    }
+                }
+            }
+        }
+    }
 }
+
 
 bool Table::saveInFile(string fileName, bool tableType) {
     ofstream out;
@@ -409,7 +453,6 @@ bool Table::saveInFile(string fileName, bool tableType) {
     return true;
 }
 
-
 bool Table::logicalDeleteEmployee(int id, string nowOpenedFile) {
     int pos = searchEmployee(id, true);
     if (pos == -1) {
@@ -417,11 +460,10 @@ bool Table::logicalDeleteEmployee(int id, string nowOpenedFile) {
     } else {
         pushBack(tableArr[pos], false);
         delete tableArr[pos];
-        saveInFile("delete"+nowOpenedFile, false);
+        saveInFile("delete" + nowOpenedFile, false);
         saveInFile(nowOpenedFile, true);
         return true;
     }
-
 }
 
 bool Table::physicalDeleteEmployee(int id, string nowOpenedFile) {
@@ -446,11 +488,28 @@ bool Table::recoverDeleteEmployee(int id, string nowOpenedFile) {
         deleteArr[pos]= nullptr;
         saveInFile("delete" + nowOpenedFile, false);
         saveInFile(nowOpenedFile, true);
-        cout<<"done";
+
         return true;
     }
 }
 
+//计算指针数组中所有指针指向对象的工资总值 平均工资
+void Table::calculateWage(Employee **arr) {
+    double sum = 0;
+    double average = 0;
+    int cot = 0;
+    for (int i = 0; i < ARR_SIZE; i++) {
+        if (arr[i] != nullptr) {
+            sum += arr[i]->getRealWage();
+            cot++;
+        }
+    }
+    average = sum / cot;
+    cout.precision(2);
+    cout.setf(ios_base::fixed);
+    cout << "工资总值：" << sum << endl;
+    cout << "平均工资：" << average << endl;
+}
 
 void Table::display(bool tableType) {
     if (tableType) {
@@ -490,6 +549,46 @@ void Table::display(bool tableType) {
 
 Employee **Table::getTableArr() const {
     return tableArr;
+}
+
+int Table::getApacity() const {
+    return apacity;
+}
+
+void Table::display(bool tableType) {
+    if (tableType) {
+        for (int i = 0; i < apacity; i++) {
+            if (tableArr[i] != nullptr) {
+                if (tableArr[i]->isType()) {
+                    RegularEmployee *tmp;
+                    tmp = dynamic_cast<RegularEmployee *>(tableArr[i]);
+                    tmp->displayInfo();
+                    cout << endl;
+                } else {
+                    TemporaryEmployee *tmp;
+                    tmp = dynamic_cast<TemporaryEmployee *>(tableArr[i]);
+                    tmp->displayInfo();
+                    cout << endl;
+                }
+            }
+        }
+    } else {
+        for (int i = 0; i < deleteApacity; i++) {
+            if (deleteArr[i] != nullptr) {
+                if (deleteArr[i]->isType()) {
+                    RegularEmployee *tmp;
+                    tmp = dynamic_cast<RegularEmployee *>(deleteArr[i]);
+                    tmp->displayInfo();
+                    cout << endl;
+                } else {
+                    TemporaryEmployee *tmp;
+                    tmp = dynamic_cast<TemporaryEmployee *>(deleteArr[i]);
+                    tmp->displayInfo();
+                    cout << endl;
+                }
+            }
+        }
+    }
 }
 
 Table::~Table() = default;
