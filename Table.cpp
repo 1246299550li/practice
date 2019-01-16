@@ -96,7 +96,7 @@ bool Table::readFromScreen() {
         p->readInfo();
     }
     pushBack(p, true);
-    cout <<"添加成功\n";
+    cout << "添加成功\n";
 
 }
 
@@ -147,6 +147,9 @@ int Table::searchEmployee(int id, bool tableType) {
 
 Employee **Table::searchEmployee(string name, bool tableType) {
     auto **p = new Employee *[ARR_SIZE];
+    for (int i = 0; i < ARR_SIZE; i++) {
+        p[i] = nullptr;
+    }
     int j = 0;
     if (tableType) {
         for (int i = 0; i < apacity; i++) {
@@ -171,6 +174,9 @@ Employee **Table::searchEmployee(string name, bool tableType) {
 
 Employee **Table::searchEmployee(double realWage, bool tableType) {
     auto **p = new Employee *[ARR_SIZE];
+    for (int i = 0; i < ARR_SIZE; i++) {
+        p[i] = nullptr;
+    }
     int j = 0;
     if (tableType) {
         for (int i = 0; i < apacity; i++) {
@@ -445,6 +451,10 @@ void Table::calculateWage(Employee **arr) {
     average = sum / cot;
     cout << "工资总值：" << sum << endl;
     cout << "平均工资：" << average << endl;
+}
+
+Employee **Table::getTableArr() const {
+    return tableArr;
 }
 
 Table::~Table() = default;

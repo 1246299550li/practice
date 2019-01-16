@@ -64,9 +64,15 @@ void readDataFile() {
         string fileName;
         Employee::checkInput(fileName);
         table = new Table();
-        table->readFromFile(fileName, true);
-        nowOpenedFile = fileName;
+        if (table->readFromFile(fileName, true)) {
+            nowOpenedFile = fileName;
+        } else {
+            delete table;
+            table = nullptr;
+        }
+
     }
+
 }
 
 //3.保存数据文件并关闭
@@ -110,29 +116,136 @@ void saveDataFile() {
 
 //6.添加职工信息
 void insertInfo() {
-    table->readFromScreen();
+    if (table == nullptr) {
+        cout << "未打开文件，请打开后再试\n";
+    } else {
+        table->readFromScreen();
+    }
 }
+
 //7.查询职工信息
 void selectInfo() {
+    if (table == nullptr) {
+        cout << "未打开文件，请打开后再试\n";
+    } else {
+        cout << "请输入查找选项 1.按编号  2.按姓名  3.按实发工资\n";
+        int choice;
+        bool flag = true;
+        Employee **p;
+        while (flag) {
+            Employee::checkInput(choice);
 
+            switch (choice) {
+                case 1: {
+                    cout << "请输入编号\n";
+                    int tmpId;
+                    Employee::checkInput(tmpId);
+                    int pos = table->searchEmployee(tmpId, true);
+                    if (pos == -1) {
+                        cout << "不存在此员工！\n";
+                        return;
+                    }
+                    if ((table->getTableArr())[pos]->isType()) {
+                        dynamic_cast<RegularEmployee *>((table->getTableArr())[pos])->displayInfo();
+                    } else {
+                        dynamic_cast<TemporaryEmployee *>((table->getTableArr())[pos])->displayInfo();
+                    }
+                    return;
+
+                }
+                case 2: {
+                    cout << "请输入姓名\n";
+                    string tmpName;
+                    Employee::checkInput(tmpName);
+                    p = table->searchEmployee(tmpName, true);
+                    cout << "查找完成\n";
+                    flag = false;
+                }
+                    break;
+                case 3: {
+                    cout << "请输入实发工资\n";
+                    double tmpRealWage;
+                    Employee::checkInput(tmpRealWage);
+                    p = table->searchEmployee(tmpRealWage, true);
+                    flag = false;
+                    break;
+                }
+                default: {
+                    cout << "输入信息有误，重新输入\n";
+                }
+
+            }
+        }
+        if (p[0] == nullptr) {
+            cout << "不存在此员工！\n";
+            return;
+        }
+        for (int i = 0; p[i] != nullptr; i++) {
+            if (p[i]->isType()) {
+                dynamic_cast<RegularEmployee *>(p[i])->displayInfo();
+            } else {
+                dynamic_cast<TemporaryEmployee *>(p[i])->displayInfo();
+            }
+        }
+        delete[] p;
+    }
 }
 
 //8.修改职工信息
 void updateInfo() {
 
 }
-int main() {
 
-    outputMenu();
-    newDataFile();
-//    cout << "你好风格士大夫" << endl;
-//    Table t;
-//    t.readFromFile("E:\\new\\1.txt", true);
-//    t.readFromScreen();
-//    system("pause");
-//    t.tableArr[0]->displayInfo();
-//    system("pause");
-//    t.saveInFile("E:\\new\\output.txt", true);
-//    system("pause");
+int main() {
+    while (true) {
+        outputMenu();
+        cout << "请输入选择：";
+        int choice;
+        Employee::checkInput(choice);
+        if (!choice) {
+            break;
+        }
+        switch (choice) {
+            case 1: {
+                newDataFile();
+                break;
+            }
+            case 2: {
+                readDataFile();
+                break;
+            }
+            case 3: {
+                saveDataFile();
+                break;
+            }
+            case 4: {
+                break;
+            }
+            case 5: {
+                break;
+            }
+            case 6: {
+                insertInfo();
+                break;
+            }
+            case 7: {
+                selectInfo();
+                break;
+            }
+            case 8: {
+                break;
+            }
+            case 9: {
+                break;
+            }
+            case 10: {
+                break;
+            }
+            default: {
+                cout << "请输入正确的选项\n";
+                break;
+            }
+        }
+    }
     return 0;
 }

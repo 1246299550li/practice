@@ -27,6 +27,7 @@ public:
     //内存空间扩容
     bool memExtension(bool tableType);
 
+    Employee **getTableArr() const;
 
     //构造器初始化空表
     Table();
