@@ -77,7 +77,6 @@ public:
     //在tableArr表尾增添一个元素
     void pushBack(Employee *employee, bool tableType);
 
-    void display(bool tableType);
 
     ~Table();
 };

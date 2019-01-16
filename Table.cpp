@@ -139,6 +139,7 @@ int Table::searchEmployee(int id, bool tableType) {
     int j = 0;
     if (tableType) {
         for (int i = 0; i < apacity; i++) {
+
             if (tableArr[i] != nullptr) {
                 if (tableArr[i]->getId() == id) {
                     return i;
@@ -435,11 +436,13 @@ bool Table::saveInFile(string fileName, bool tableType) {
                 } else {
                     out << *dynamic_cast<TemporaryEmployee *>(tableArr[i]) << endl;
                 }
-
             }
         }
     } else {
         for (int i = 0; i < deleteApacity; ++i) {
+            cout<<i<<" turn"<<endl;
+            cout<<" apacity:"<<deleteApacity;
+            cout<<endl<<deleteArr;
             if (deleteArr[i] != nullptr) {
                 if (deleteArr[i]->isType()) {
                     out << *dynamic_cast<RegularEmployee *>(deleteArr[i]) << endl;
@@ -455,13 +458,22 @@ bool Table::saveInFile(string fileName, bool tableType) {
 
 bool Table::logicalDeleteEmployee(int id, string nowOpenedFile) {
     int pos = searchEmployee(id, true);
+
     if (pos == -1) {
         return false;
     } else {
         pushBack(tableArr[pos], false);
+        cout<<"done1";
         delete tableArr[pos];
+        cout<<"done2";
+        tableArr[pos]= nullptr;
+        //cout<<"done3";
+        //saveInFile(nowOpenedFile, true);
+        cout<<"done4";
         saveInFile("delete" + nowOpenedFile, false);
-        saveInFile(nowOpenedFile, true);
+
+       // saveInFile(nowOpenedFile, true);
+       // cout<<"done5";
         return true;
     }
 }
@@ -555,40 +567,6 @@ int Table::getApacity() const {
     return apacity;
 }
 
-void Table::display(bool tableType) {
-    if (tableType) {
-        for (int i = 0; i < apacity; i++) {
-            if (tableArr[i] != nullptr) {
-                if (tableArr[i]->isType()) {
-                    RegularEmployee *tmp;
-                    tmp = dynamic_cast<RegularEmployee *>(tableArr[i]);
-                    tmp->displayInfo();
-                    cout << endl;
-                } else {
-                    TemporaryEmployee *tmp;
-                    tmp = dynamic_cast<TemporaryEmployee *>(tableArr[i]);
-                    tmp->displayInfo();
-                    cout << endl;
-                }
-            }
-        }
-    } else {
-        for (int i = 0; i < deleteApacity; i++) {
-            if (deleteArr[i] != nullptr) {
-                if (deleteArr[i]->isType()) {
-                    RegularEmployee *tmp;
-                    tmp = dynamic_cast<RegularEmployee *>(deleteArr[i]);
-                    tmp->displayInfo();
-                    cout << endl;
-                } else {
-                    TemporaryEmployee *tmp;
-                    tmp = dynamic_cast<TemporaryEmployee *>(deleteArr[i]);
-                    tmp->displayInfo();
-                    cout << endl;
-                }
-            }
-        }
-    }
-}
+
 
 Table::~Table() = default;

@@ -174,7 +174,7 @@ void sortByWage() {
                     if (tmpReg != nullptr) {
                         cout << "正式职工：" << setw(10) << tmpReg->getId() << setw(15) << tmpReg->getName() << setw(5)
                              << sex
-                             << setw(30) << tmpReg->getAddress() << setw(10) << tmpReg->getBaseWage()<< setw(10)
+                             << setw(30) << tmpReg->getAddress() << setw(10) << tmpReg->getBaseWage() << setw(10)
                              << tmpReg->getAllowance() << setw(10) << tmpReg->getTax()
                              << setw(10) << tmpReg->getInsurance() << setw(10) << tmpReg->getRealWage() << endl;
                     }
@@ -295,7 +295,8 @@ void updateInfo() {
     } else {
         return;
     }
-void updateInfo() {}
+}
+
 
 void deleteEmployeeInfo() {
     if (table != nullptr) {
@@ -308,7 +309,6 @@ void deleteEmployeeInfo() {
             cin >> option;
             switch (option) {
                 case 0: {
-                    flag = false;
                     return;
                 }
                 case 1: {
@@ -358,7 +358,7 @@ void recoverEmployeeInfo() {
         cout << "-   0.返回上级菜单                         -\n";
         cout << "-   1.恢复职工信息                         -\n";
         bool flag = true;
-        table->readFromFile("delete" + nowOpenedFile,false);
+        table->readFromFile("delete" + nowOpenedFile, false);
         while (flag) {
             int option;
             cin >> option;
@@ -367,13 +367,13 @@ void recoverEmployeeInfo() {
                     return;
                 }
                 case 1: {
-                    flag= false;
+                    flag = false;
                     table->display(false);
                     while (true) {
                         cout << "请输入要恢复的职工的id" << endl;
                         int id;
                         cin >> id;
-                        if (table->recoverDeleteEmployee(id,nowOpenedFile)) {
+                        if (table->recoverDeleteEmployee(id, nowOpenedFile)) {
                             cout << "恢复成功！" << endl;
                             break;
                         } else {
@@ -382,8 +382,8 @@ void recoverEmployeeInfo() {
                     }
                     break;
                 }
-                default:{
-                    cout<<"选项不存在，请重新输入";
+                default: {
+                    cout << "选项不存在，请重新输入";
                 }
             }
         }
