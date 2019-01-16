@@ -96,6 +96,7 @@ bool Table::readFromScreen() {
         p->readInfo();
     }
     pushBack(p, true);
+    cout <<"Ìí¼Ó³É¹¦\n";
 
 }
 
