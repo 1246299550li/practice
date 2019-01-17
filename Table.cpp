@@ -163,6 +163,7 @@ bool Table::readFromScreen() {
     bool type;
     cout << "请输入要添加的职工种类(1表示正式职工 0表示临时职工):";
     Employee::checkInput(type);
+
     Employee *p;
     if (type) {
         p = new RegularEmployee();

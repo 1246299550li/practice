@@ -6,27 +6,31 @@
 
 #IncludeRegexTransform: 
 
+E:/new/Employee.cpp
+Employee.h
+E:/new/Employee.h
+
 E:/new/Employee.h
 string
 -
 iostream
 -
 
-E:/new/RegularEmployee.cpp
-RegularEmployee.h
-E:/new/RegularEmployee.h
-
 E:/new/RegularEmployee.h
 Employee.h
 E:/new/Employee.h
 
+E:/new/Table.cpp
+Table.h
+E:/new/Table.h
+fstream
+-
+algorithm
+-
+
 E:/new/Table.h
 RegularEmployee.h
 E:/new/RegularEmployee.h
-TemporaryEmployee.h
-E:/new/TemporaryEmployee.h
-
-E:/new/TemporaryEmployee.cpp
 TemporaryEmployee.h
 E:/new/TemporaryEmployee.h
 

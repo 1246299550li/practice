@@ -11,11 +11,14 @@ void outputMenu() {
     cout << "-   1.新建数据文件                      -\n";
     cout << "-   2.打开数据文件                      -\n";
     cout << "-   3.保存数据文件并关闭                 -\n";
+
     cout << "-   4.数据统计(工资总额/平均工资)        -\n";
     cout << "-   5.排序输出每个职工实发工资           -\n";
+
     cout << "-   6.添加职工信息                      -\n";
     cout << "-   7.查询职工信息                      -\n";
     cout << "-   8.修改职工信息                      -\n";
+
     cout << "-   9.删除职工信息                      -\n";
     cout << "-   10.恢复职工信息                     -\n";
     cout << "-   11.显示职工信息                     -\n";
@@ -194,6 +197,7 @@ void insertInfo() {
     if (table == nullptr) {
         cout << "未打开文件，请打开后再试\n";
     } else {
+
         table->readFromScreen();
         table->saveInFile(nowOpenedFile, true);
     }
