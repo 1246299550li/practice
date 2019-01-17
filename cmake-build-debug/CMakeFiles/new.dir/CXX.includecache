@@ -12,6 +12,10 @@ string
 iostream
 -
 
+E:/new/RegularEmployee.cpp
+RegularEmployee.h
+E:/new/RegularEmployee.h
+
 E:/new/RegularEmployee.h
 Employee.h
 E:/new/Employee.h
@@ -19,6 +23,10 @@ E:/new/Employee.h
 E:/new/Table.h
 RegularEmployee.h
 E:/new/RegularEmployee.h
+TemporaryEmployee.h
+E:/new/TemporaryEmployee.h
+
+E:/new/TemporaryEmployee.cpp
 TemporaryEmployee.h
 E:/new/TemporaryEmployee.h
 

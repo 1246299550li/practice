@@ -75,7 +75,7 @@ public:
     //按realWage排序tableArr中对象
     void sortByRealWage();
 
-
+    void quickSort(int start, int last);
     ~Table();
 };
 

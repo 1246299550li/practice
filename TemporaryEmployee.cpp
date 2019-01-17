@@ -20,12 +20,18 @@ void TemporaryEmployee::calculateRealWage() {
 
 //显示职工信息
 void TemporaryEmployee::displayInfo() {
+    string sexStr;
+    if (sex) {
+        sexStr = "男";
+    } else {
+        sexStr = "女";
+    }
     cout.precision(2);
     cout.setf(ios_base::fixed);
     cout << "--临时职工--"
          << "\n编号：" << id
          << "   姓名：" << name
-         << "   性别：" << sex
+         << "   性别：" << sexStr
          << "   年龄：" << age
          << "   家庭住址：" << address
          << "   基本职务工资：" << baseWage

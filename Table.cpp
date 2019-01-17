@@ -516,21 +516,54 @@ void Table::calculateWage(Employee **arr) {
     cout << "平均工资：" << average << endl;
 }
 
-void Table::sortByRealWage() {                                         //将总表按实发工资进行排序
-    for (int i = 0; i < apacity; i++) {
-        if (tableArr[i] != nullptr) {
-            double tmpI = getThisRealWage(tableArr[i]);
-            for (int j = i + 1; j < apacity; j++) {
-                if (tableArr[j] != nullptr) {
-                    double tmpJ = getThisRealWage(tableArr[j]);
-                    if (tmpI < tmpJ) {
-                        Employee *t = tableArr[i];
-                        tableArr[i] = tableArr[j];
-                        tableArr[j] = t;
-                    }
-                }
+//将总表按实发工资进行排序
+void Table::sortByRealWage() {
+//    for (int i = 0; i < apacity; i++) {
+//        if (tableArr[i] != nullptr) {
+//            double tmpI = getThisRealWage(tableArr[i]);
+//            for (int j = i + 1; j < apacity; j++) {
+//                if (tableArr[j] != nullptr) {
+//                    double tmpJ = getThisRealWage(tableArr[j]);
+//                    if (tmpI < tmpJ) {
+//                        Employee *t = tableArr[i];
+//                        tableArr[i] = tableArr[j];
+//                        tableArr[j] = t;
+//                    }
+//                }
+//            }
+//        }
+//    }
+    quickSort(0, apacity - 1);
+}
+
+void Table::quickSort(int start, int last) {
+    int i = start;
+    int j = last;
+    while (tableArr[i] == nullptr) {
+        i++;
+    }
+    double temp = getThisRealWage(tableArr[i]);
+    Employee *tmp = tableArr[i];
+    if (i < j) {
+        while (i < j) {
+            while (i < j && (tableArr[j] == nullptr || getThisRealWage(tableArr[j]) >= temp)) {
+                j--;
+            }
+            if (i < j) {
+                tableArr[i] = tableArr[j];
+                i++;
+            }
+            while (i < j && (tableArr[i] == nullptr || temp > getThisRealWage(tableArr[i]))) {
+                i++;
+            }
+            if (i < j) {
+                tableArr[j] = tableArr[i];
+                j--;
             }
         }
+        tableArr[i] = tmp;
+        quickSort(start, i - 1);
+        quickSort(i + 1, last);
     }
 }
 

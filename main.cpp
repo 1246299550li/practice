@@ -171,7 +171,7 @@ void sortByWage() {
                     auto *tmpReg = dynamic_cast<RegularEmployee *>(table->getTableArr()[i]);
                     if (tmpReg != nullptr) {
                         cout << "正式职工：" << setw(5) << tmpReg->getId() << setw(10) << tmpReg->getName() << setw(5)
-                             << sex << setw(20) << tmpReg->getAddress() << setw(10) << tmpReg->getBaseWage() << setw(10)
+                             << sex << setw(25) << tmpReg->getAddress() << setw(10) << tmpReg->getBaseWage() << setw(10)
                              << tmpReg->getAllowance() << setw(10) << tmpReg->getProvidentFund()<< setw(10)<<tmpReg->getPension()
                                 << setw(10) << tmpReg->getTax()<< setw(10) << tmpReg->getInsurance() << setw(10) << tmpReg->getRealWage() << endl;
                     }
@@ -179,7 +179,7 @@ void sortByWage() {
                     auto *tmpTem = dynamic_cast<TemporaryEmployee *>(table->getTableArr()[i]);
                     if (tmpTem != nullptr) {
                         cout << "临时职工：" << setw(5) << tmpTem->getId() << setw(10) << tmpTem->getName() << setw(5)
-                             << sex << setw(20) << tmpTem->getAddress() << setw(10) << tmpTem->getBaseWage()
+                             << sex << setw(25) << tmpTem->getAddress() << setw(10) << tmpTem->getBaseWage()
                              << setw(10) << tmpTem->getBonus() << setw(10) << tmpTem->getTax()
                              << setw(10) << tmpTem->getRealWage() << endl;
                     }
@@ -189,7 +189,7 @@ void sortByWage() {
     }
 }
 
-//6.添加职工信息(有bug)
+//6.添加职工信息
 void insertInfo() {
     if (table == nullptr) {
         cout << "未打开文件，请打开后再试\n";
