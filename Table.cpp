@@ -42,18 +42,23 @@ Employee **Table::getTableArr() const {
 bool Table::memExtension(bool tableType) {
     if (tableType) {
         auto **desMem = new Employee *[size + ARR_INCREMENT];
-
+        for (int i = 0; i < size + ARR_INCREMENT; i++) {
+            desMem[i] = nullptr;
+        }
         for (int i = 0; i < size; i++) {
             desMem[i] = tableArr[i];
         }
+
         delete[] tableArr;
         tableArr = desMem;
         size += ARR_INCREMENT;
         return true;
     } else {
         auto **desMem = new Employee *[deleteSize + ARR_INCREMENT];
-
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < deleteSize + ARR_INCREMENT; i++) {
+            desMem[i] = nullptr;
+        }
+        for (int i = 0; i < deleteSize; i++) {
             desMem[i] = deleteArr[i];
         }
         delete[] deleteArr;

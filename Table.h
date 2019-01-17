@@ -8,7 +8,7 @@
 #include "RegularEmployee.h"
 #include "TemporaryEmployee.h"
 
-const int ARR_SIZE = 150;
+const int ARR_SIZE = 200;
 const int ARR_INCREMENT = 50;
 
 class Table {
