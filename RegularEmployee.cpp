@@ -110,4 +110,12 @@ double RegularEmployee::getRealWage() const {
     return realWage;
 }
 
+double RegularEmployee::getProvidentFund() const {
+    return providentFund;
+}
+
+double RegularEmployee::getPension() const {
+    return pension;
+}
+
 RegularEmployee::~RegularEmployee() = default;

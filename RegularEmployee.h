@@ -43,6 +43,10 @@ public:
 
     void setTax(double tax);
 
+    double getProvidentFund() const;
+
+    double getPension() const;
+
     void setInsurance(double insurance);
 
     double getAllowance() const;

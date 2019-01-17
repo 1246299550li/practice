@@ -13,8 +13,6 @@ iostream
 -
 
 E:/new/RegularEmployee.h
-ostream
--
 Employee.h
 E:/new/Employee.h
 
@@ -31,8 +29,6 @@ Employee.h
 E:/new/Employee.h
 
 E:/new/main.cpp
-iostream
--
 Table.h
 E:/new/Table.h
 iomanip

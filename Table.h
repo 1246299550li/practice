@@ -33,10 +33,11 @@ public:
 
     //内存空间扩容
     bool memExtension(bool tableType);
+
     //在tableArr表尾增添一个元素
     void pushBack(Employee *employee, bool tableType);
 
-    void display(bool tableType);
+    bool display(bool tableType);
 
     //从文件中读入信息
     bool readFromFile(string fileName, bool tableType);
@@ -73,7 +74,6 @@ public:
 
     //按realWage排序tableArr中对象
     void sortByRealWage();
-
 
 
     ~Table();

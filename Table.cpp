@@ -84,8 +84,11 @@ void Table::pushBack(Employee *employee, bool tableType) {
 
 }
 
-void Table::display(bool tableType) {
+bool Table::display(bool tableType) {
     if (tableType) {
+        if (apacity == 0) {
+            return false;
+        }
         for (int i = 0; i < apacity; i++) {
             if (tableArr[i] != nullptr) {
                 if (tableArr[i]->isType()) {
@@ -96,6 +99,9 @@ void Table::display(bool tableType) {
             }
         }
     } else {
+        if (deleteApacity == 0) {
+            return false;
+        }
         for (int i = 0; i < deleteApacity; i++) {
             if (deleteArr[i] != nullptr) {
                 if (deleteArr[i]->isType()) {
@@ -106,6 +112,7 @@ void Table::display(bool tableType) {
             }
         }
     }
+    return true;
 }
 
 bool Table::readFromFile(string fileName, bool tableType) {
@@ -409,12 +416,24 @@ bool Table::logicalDeleteEmployee(int id, string nowOpenedFile) {
         return false;
     } else {
         pushBack(tableArr[pos], false);
+        fstream f;
+        f.open("delete" + nowOpenedFile);
+        if (f.is_open()) {
+            f.close();
+        } else {
+            ofstream oFile("delete" + nowOpenedFile);
+            oFile.close();
+        }
+        readFromFile("delete" + nowOpenedFile, false);
         saveInFile("delete" + nowOpenedFile, false);
-        cout << "运行到此处" <<endl;
-        delete tableArr[pos];
-        cout << "运行到此处" <<endl;
+        for (int i = 0; deleteArr[i] != nullptr; i++) {
+            delete deleteArr[i];
+            deleteArr[i] = nullptr;
+        }
+        deleteApacity = 0;
+        tableArr[pos] = nullptr;
+        cout << "到此处了\n";
         saveInFile(nowOpenedFile, true);
-        cout << "运行到此处" <<endl;
         return true;
     }
 }
@@ -425,6 +444,7 @@ bool Table::physicalDeleteEmployee(int id, string nowOpenedFile) {
         return false;
     } else {
         delete tableArr[pos];
+        tableArr[pos] = nullptr;
         saveInFile(nowOpenedFile, true);
         return true;
     }
@@ -436,30 +456,31 @@ bool Table::recoverDeleteEmployee(int id, string nowOpenedFile) {
         return false;
     } else {
         pushBack(deleteArr[pos], true);
-        delete deleteArr[pos];
+        saveInFile(nowOpenedFile, true);
         deleteArr[pos] = nullptr;
         saveInFile("delete" + nowOpenedFile, false);
-        saveInFile(nowOpenedFile, true);
+        for (int i = 0; i < deleteApacity; i++) {
+            if (i != pos && deleteArr[i] != nullptr) {
+                delete deleteArr[i];
+                deleteArr[i] = nullptr;
+            }
+        }
+
         return true;
     }
 }
 
 bool Table::saveInFile(string fileName, bool tableType) {
     ofstream out;
-    out.open(fileName);
-
+    out.open(fileName, ios::out);
     if (tableType) {
         for (int i = 0; i < apacity; ++i) {
-            cout << apacity << endl;
             if (tableArr[i] != nullptr) {
                 if (tableArr[i]->isType()) {
-                    cout << "yunxing" << endl;
                     out << (*dynamic_cast<RegularEmployee *>(tableArr[i])) << endl;
-                    cout << "yunxing" << endl;
                 } else {
                     out << (*dynamic_cast<TemporaryEmployee *>(tableArr[i])) << endl;
                 }
-
             }
         }
     } else {

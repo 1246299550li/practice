@@ -170,18 +170,16 @@ void sortByWage() {
                 if (table->getTableArr()[i]->isType()) {
                     auto *tmpReg = dynamic_cast<RegularEmployee *>(table->getTableArr()[i]);
                     if (tmpReg != nullptr) {
-                        cout << "正式职工：" << setw(10) << tmpReg->getId() << setw(15) << tmpReg->getName() << setw(5)
-                             << sex
-                             << setw(30) << tmpReg->getAddress() << setw(10) << tmpReg->getBaseWage() << setw(10)
-                             << tmpReg->getAllowance() << setw(10) << tmpReg->getTax()
-                             << setw(10) << tmpReg->getInsurance() << setw(10) << tmpReg->getRealWage() << endl;
+                        cout << "正式职工：" << setw(5) << tmpReg->getId() << setw(10) << tmpReg->getName() << setw(5)
+                             << sex << setw(20) << tmpReg->getAddress() << setw(10) << tmpReg->getBaseWage() << setw(10)
+                             << tmpReg->getAllowance() << setw(10) << tmpReg->getProvidentFund()<< setw(10)<<tmpReg->getPension()
+                                << setw(10) << tmpReg->getTax()<< setw(10) << tmpReg->getInsurance() << setw(10) << tmpReg->getRealWage() << endl;
                     }
                 } else {
                     auto *tmpTem = dynamic_cast<TemporaryEmployee *>(table->getTableArr()[i]);
                     if (tmpTem != nullptr) {
-                        cout << "临时职工：" << setw(10) << tmpTem->getId() << setw(15) << tmpTem->getName() << setw(5)
-                             << sex
-                             << setw(30) << tmpTem->getAddress() << setw(10) << tmpTem->getBaseWage()
+                        cout << "临时职工：" << setw(5) << tmpTem->getId() << setw(10) << tmpTem->getName() << setw(5)
+                             << sex << setw(20) << tmpTem->getAddress() << setw(10) << tmpTem->getBaseWage()
                              << setw(10) << tmpTem->getBonus() << setw(10) << tmpTem->getTax()
                              << setw(10) << tmpTem->getRealWage() << endl;
                     }
@@ -305,7 +303,10 @@ void deleteInfo() {
         while (flag) {
             int option;
             Employee::checkInput(option);
-            table->display(true);
+            if (!table->display(true)) {
+                cout << "无信息\n";
+                return;
+            }
             switch (option) {
                 case 1: {
                     cout << "请输入要移除的职工的id:";
@@ -346,7 +347,10 @@ void recoverInfo() {
         cout << "未打开文件，请打开后再试\n";
     } else {
         table->readFromFile("delete" + nowOpenedFile, false);
-        table->display(false);
+        if (!table->display(false)) {
+            cout << "无信息\n";
+            return;
+        }
         cout << "请输入要恢复的职工的id" << endl;
         int id;
         Employee::checkInput(id);
@@ -363,7 +367,10 @@ void displayInfo() {
     if (table == nullptr) {
         cout << "未打开文件，请打开后再试\n";
     } else {
-        table->display(true);
+
+        if (!table->display(true)) {
+            cout << "无信息\n";
+        }
     }
 }
 
